@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getmate</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS324XkzWyfddSLnfpJzw6elPlctwGjzY&callback=initMap&libraries=&v=weekly"
+        defer></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -109,8 +113,38 @@
             <div class="row">
                 <div class="col-4" id="cardFlex">
                     <div class="card" style="width: 18rem;">
-                            <h5 class="card-title">鬥食十三么</h5>
-                        <img src="*" class="card-img-top" alt="picture">
+                        <h5 class="card-title">鬥食十三么</h5>
+                        <div id="map"></div>
+                        <div class="card-body">
+                            <p class="card-text" id="description">搵人打牌 有意請tg</p>
+                            <p class="card-text" id="participationRate">人數: 5/10</p>
+                            <div class="joinAndBookmark">
+                                <a href="#" class="btn btn-primary">加入</a>
+                                <div class="bookmark"><i class="fas fa-bookmark"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4" id="cardFlex">
+                    <div class="card" style="width: 18rem;">
+                        <h5 class="card-title">鬥食十三么</h5>
+                        <div id="map"></div>
+                        <div class="card-body">
+                            <p class="card-text" id="description">搵人打牌 有意請tg</p>
+                            <p class="card-text" id="participationRate">人數: 5/10</p>
+                            <div class="joinAndBookmark">
+                                <a href="#" class="btn btn-primary">加入</a>
+                                <div class="bookmark"><i class="fas fa-bookmark"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4" id="cardFlex">
+                    <div class="card" style="width: 18rem;">
+                        <h5 class="card-title">鬥食十三么</h5>
+                        <div id="map"></div>
                         <div class="card-body">
                             <p class="card-text" id="description">搵人打牌 有意請tg</p>
                             <p class="card-text" id="participationRate">人數: 5/10</p>
@@ -130,7 +164,12 @@
         <div class="sortingTitle">
             就快成團
         </div>
+
+
     </article>
+
+
+    <div id="map"></div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

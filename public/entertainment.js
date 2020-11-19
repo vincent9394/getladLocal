@@ -42,7 +42,7 @@ let gridChoices = document.querySelectorAll('.gridChoice')
 for (let gridChoice of gridChoices) {
     gridChoice.addEventListener("click", function () {
         gridChoiceFlex.style.display = "none"
-        toggle = false
+        gridtoggle = false
     })
 }
 

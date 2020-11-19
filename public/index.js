@@ -14,7 +14,7 @@ let gridChoices = document.querySelectorAll('.gridChoice')
 for (let gridChoice of gridChoices) {
     gridChoice.addEventListener("click", function () {
         gridChoiceFlex.style.display = "none"
-        toggle = false
+        gridtoggle = false
     })
 }
 
@@ -30,4 +30,13 @@ for (let bookmarkButton of bookmarkButtons) {
         }
     }
     )
+}
+
+let map;
+
+function initMap() {
+  map = new google.maps.Map(document.querySelector("#map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
 }
