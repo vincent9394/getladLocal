@@ -31,5 +31,14 @@
     "typescript": "^4.0.5",
     "xlsx": "^0.16.8"
   },
-  "description": ""
+  "description": "Cohort 12 TW Group1 Project 正式啟動 Vincent ok",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/c12-tw-project1-group1/c12-tw-project1-group1.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://gitlab.com/c12-tw-project1-group1/c12-tw-project1-group1/issues"
+  },
+  "homepage": "https://gitlab.com/c12-tw-project1-group1/c12-tw-project1-group1#readme"
 }
