@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+    background: linear-gradient(90deg,rgb(250, 182, 177, 0.9), rgb(254, 232, 231)  )  ;
 }
 
 .my-sm-0 , .my-sm-0:hover{
@@ -36,6 +36,12 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #263250;
+    transition: 300ms;
+}
+
+.categoryCircle:hover {
+    text-decoration: none;
+    transform: scale(1.05);
 }
 
 .wordInCircle {
@@ -92,10 +98,12 @@ body {
     color: white;
     padding: 2px;
     position: relative;
+    transition: 100ms;
 }
 
 .gridOption:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .gridChoiceFlex {
@@ -116,10 +124,12 @@ body {
     color: white;
     width: 30px;
     height: 30px;
+    transition: 100ms;
 }
 
 .gridChoice:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .gridChoiceItem  {
@@ -130,4 +140,44 @@ body {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+}
+
+#cardFlex {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.card-title {
+    padding: 5px;
+    margin: 5px;
+}
+
+#description {
+    color:rgba(0, 0, 0, 0.55);
+    font-size: 13px;
+}
+
+#participationRate {
+    text-align: end;
+}
+
+.joinAndBookmark {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fa-bookmark {
+    color: #D8D6D9;
+    font-size: 24px;
+    transition: 200ms;
+}
+
+.fa-bookmark:hover {
+    cursor: pointer;
+    transform: scale(1.05);
 }
