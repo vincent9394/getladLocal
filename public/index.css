@@ -1,3 +1,43 @@
-.my-sm-0 {
-    background-color: #14365C;;
+body {
+    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+}
+
+.my-sm-0 , .my-sm-0:hover{
+    background-color: #14365C;
+    color: white;
+    border: none;
+}
+
+.d3Map {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.hkMap {
+    height: 500px;
+    width: 800px;
+    background-color: dimgrey;
+}
+
+.categoryFlexDiv {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.categoryCircle {
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    height: 90px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #263250;
+}
+
+.wordInCircle {
+    color: white;
 }
