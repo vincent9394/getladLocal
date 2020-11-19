@@ -220,3 +220,68 @@ padding: 0;
 float: right;
 height: 5.625rem;
 }
+
+
+/* grid option */
+.centerGridOption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.showGrid {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px;
+}
+
+.gridOption {
+    border-radius: 8px;
+    background-color: rgb(139, 139, 139, 0.8);
+    color: white;
+    padding: 2px;
+    position: relative;
+    transition: 100ms;
+    margin-right: 20px;
+}
+
+.gridOption:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.gridChoiceFlex {
+    display: none;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.gridChoice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    margin: 2px;
+    background-color:rgb(20, 54, 92);
+    color: white;
+    width: 30px;
+    height: 30px;
+    transition: 100ms;
+}
+
+.gridChoice:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.gridChoiceItem  {
+    font-size: 20px;
+}
+
+
+/* end grid option */
