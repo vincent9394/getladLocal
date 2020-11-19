@@ -23,7 +23,7 @@ body {
 .categoryFlexDiv {
     display: flex;
     justify-content: space-around;
-    margin: 20px;
+    margin: 100px;
 }
 
 .categoryCircle {
@@ -45,10 +45,11 @@ body {
 .searchBarFlex {
     display: flex;
     justify-content: center;
+    margin: 100px;
 }
 
 .categoryOption , .searchBar, .searchButton {
-    border: 1px solid black;
+    border: 1px solid #757575;
     background-color: #f5f5f5cb;
     height: 50px;
     padding: 10px;
@@ -75,4 +76,33 @@ body {
 #magnifier:hover {
     transform: scale(1.2);
     cursor: pointer;
+}
+
+.showGrid {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px;
+}
+
+.gridOption {
+    border-radius: 8px;
+    background-color: rgb(139, 139, 139, 0.8);
+    color: white;
+    padding: 2px;
+    position: relative;
+}
+
+.gridOption:hover {
+    cursor: pointer;
+}
+
+.gridChoiceFlex {
+    display: flex;
+    border-radius: 5px;
+}
+
+.gridChoice {
+    padding: 5px;
+    background-color: white;
 }
