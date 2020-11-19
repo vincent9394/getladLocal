@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getmate</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
@@ -67,9 +68,19 @@
             </div>
         </div>
 
-        <div class="searchBarFlex">
-            <select
-        </div>
+        <form class="searchBarFlex">
+            <select class="categoryOption" name="categoryOption">
+                <option value="transportation">交通</option>
+                <option value="entertainment">娛樂</option>
+                <option value="foodieGroup">飲食</option>
+            </select>
+
+            <input type="text" class="searchBar" name="searchBar" placeholder="search">
+
+            <div class="searchButton">
+                <i class="fas fa-search" id="magnifier"></i>
+            </div>
+        </form>
 
     </article>
 
