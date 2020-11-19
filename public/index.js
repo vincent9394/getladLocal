@@ -1,14 +1,17 @@
 let gridtoggle = false
 let gridOption = document.querySelector('.gridOption')
 let gridChoiceFlex = document.querySelector('.gridChoiceFlex')
-let ans = gridOption.addEventListener('click', function () {
+
+
+gridOption.addEventListener('click', function () {
     gridtoggle = !gridtoggle
     if (gridtoggle == false) {
         gridChoiceFlex.style.display = "none"
     } else if (gridtoggle == true) {
         gridChoiceFlex.style.display = "flex"
     }
-})
+}
+)
 
 let gridChoices = document.querySelectorAll('.gridChoice')
 for (let gridChoice of gridChoices) {
@@ -35,8 +38,22 @@ for (let bookmarkButton of bookmarkButtons) {
 let map;
 
 function initMap() {
-  map = new google.maps.Map(document.querySelector("#map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
+    let allMap = document.querySelectorAll("#map")
+    for (let getMap of allMap) {
+        map = new google.maps.Map(getMap, {
+            center: { lat: 22.379812, lng: 114.134938 },
+            zoom: 13,
+        });
+    }
+
+}
+
+let showMoreButtons = document.querySelectorAll('.showMoreButton')
+for (let showMoreButton of showMoreButtons) {
+    showMoreButton.addEventListener("mouseenter", function () {
+        showMoreButton.style.transform = "scale(1.1)"
+    })
+    showMoreButton.addEventListener("mouseleave", function () {
+        showMoreButton.style.transform = "scale(1)"
+    })
 }
