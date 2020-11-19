@@ -30,8 +30,8 @@ body {
     border-radius: 50%;
     box-sizing: border-box;
     border: 1px solid black;
-    height: 90px;
-    width: 90px;
+    height: 150px;
+    width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +40,7 @@ body {
 
 .wordInCircle {
     color: white;
+    font-size: 28px;
 }
 
 .searchBarFlex {
@@ -98,11 +99,35 @@ body {
 }
 
 .gridChoiceFlex {
-    display: flex;
-    border-radius: 5px;
+    display: none;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .gridChoice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
-    background-color: white;
+    border-radius: 50%;
+    box-sizing: border-box;
+    margin: 2px;
+    background-color:rgb(20, 54, 92);
+    color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.gridChoice:hover {
+    cursor: pointer;
+}
+
+.gridChoiceItem  {
+    font-size: 20px;
+}
+
+.sortingTitle {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
 }
