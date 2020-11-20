@@ -94,13 +94,14 @@ body {
 .categoryOption , .searchBar, .searchButton {
     border: 1px solid #757575;
     background-color: #f5f5f5cb;
-    height: 50px;
+    height: 70px;
     padding: 10px;
 }
 
 .categoryOption {
     border-radius: 10px 0 0 10px;
     border-right: none;
+    width: 100px;
 }
 
 .searchBar {
@@ -113,15 +114,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100px;
+}
+
+.searchButton:hover {
+    cursor: pointer;
 }
 
 #magnifier {
     transition: 300ms;
+    font-size: 20px;
 }
 
 #magnifier:hover {
-    transform: scale(1.2);
-    cursor: pointer;
+    transform: scale(1.15);
 }
 
 .boldHr{

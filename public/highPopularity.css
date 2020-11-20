@@ -51,17 +51,18 @@ body {
 .categoryOption , .searchBar, .searchButton {
     border: 1px solid #757575;
     background-color: #f5f5f5cb;
-    height: 50px;
+    height: 70px;
     padding: 10px;
 }
 
 .categoryOption {
     border-radius: 10px 0 0 10px;
     border-right: none;
+    width: 100px;
 }
 
 .searchBar {
-    width: 500px;
+    width: 600px;
 }
 
 .searchButton {
@@ -70,10 +71,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100px;
 }
 
 #magnifier {
     transition: 300ms;
+    font-size: 20px;
 }
 
 #magnifier:hover {
