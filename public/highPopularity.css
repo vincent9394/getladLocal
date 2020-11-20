@@ -42,49 +42,6 @@ body {
     border: none;
 }
 
-.d3Map {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-}
-
-.hkMap {
-    height: 500px;
-    width: 800px;
-    background-color: dimgrey;
-}
-
-.categoryFlexDiv {
-    display: flex;
-    justify-content: space-around;
-    margin: 100px 0 100px 0;
-    flex-wrap: wrap;
-}
-
-.categoryCircle {
-    border-radius: 50%;
-    box-sizing: border-box;
-    border: 1px solid black;
-    height: 150px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #263250;
-    transition: 300ms;
-    margin: 20px;
-}
-
-.categoryCircle:hover {
-    text-decoration: none;
-    transform: scale(1.05);
-}
-
-.wordInCircle {
-    color: white;
-    font-size: 28px;
-}
-
 .searchBarFlex {
     display: flex;
     justify-content: center;
