@@ -1,6 +1,39 @@
 body {
-    background: linear-gradient(90deg,rgb(250, 182, 177, 0.9), rgb(254, 232, 231)) ;
+    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231))  ;
     height: 100vh;
+    /* display: flex; */
+    /* position: relative; */
+}
+.navbar-left{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width:250px;
+}
+
+.navbar {
+    padding: 0!important;
+}
+
+.scrolled-down{
+    transform:translateY(0%); transition: all 0.3s ease-in-out;
+ }
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+}
+
+.pb-4, .py-4 {
+    padding: 15px!important;
 }
 
 .my-sm-0 , .my-sm-0:hover{
@@ -24,7 +57,7 @@ body {
 .categoryFlexDiv {
     display: flex;
     justify-content: space-around;
-    margin: 100px;
+    margin: 100px 0 100px 0;
     flex-wrap: wrap;
 }
 
@@ -89,7 +122,7 @@ body {
 }
 
 .boldHr{
-    border-top: 5px solid black;
+    border-top: 3px solid black;
 }
 
 .centerGridOption {
@@ -156,6 +189,7 @@ body {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+    margin: 30px 0 0 0;
 }
 
 .row {
@@ -235,6 +269,86 @@ html, body {
     cursor: pointer;
 }
 
-.lightHr {
-    border-top: 2px solid black;
+
+
+footer{
+    font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
+-webkit-font-smoothing: antialiased;
+line-height: normal;
+box-sizing: inherit;
+/* display: flex; */
+font-weight: 600;
+font-size: .75rem;
+color: #fff;
+background-color: #D8D6D9;
+z-index: 999;
+/* align-self: flex-end; */
+/* position: absolute; */
+bottom: 0;
+width: 100%;
+}
+.footer-container{
+    font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
+-webkit-font-smoothing: antialiased;
+line-height: normal;
+font-weight: 600;
+font-size: .75rem;
+color: #fff;
+box-sizing: inherit;
+max-width: 100%;
+margin: 0 auto;
+padding: 0;
+}
+.footer-grid {
+    font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
+-webkit-font-smoothing: antialiased;
+line-height: normal;
+font-weight: 600;
+font-size: .75rem;
+color: #fff;
+box-sizing: inherit;
+margin: 0;
+padding: 0;
+display: flex;
+flex-flow: row wrap;
+justify-content: space-between;
+}
+.sidebar{
+    font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
+-webkit-font-smoothing: antialiased;
+line-height: normal;
+font-weight: 600;
+font-size: .75rem;
+color: #fff;
+box-sizing: inherit;
+margin: 0;
+padding: 0;
+}
+.main clearfix{
+    font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
+-webkit-font-smoothing: antialiased;
+line-height: normal;
+font-weight: 600;
+font-size: .75rem;
+color: #fff;
+box-sizing: inherit;
+margin: 0;
+padding: 0;
+width: 100%;
+min-width: 100%;
+display: flex;
+justify-content: space-between;
+}
+.float-right {
+    font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
+-webkit-font-smoothing: antialiased;
+line-height: normal;
+font-weight: 600;
+font-size: .75rem;
+color: #fff;
+box-sizing: inherit;
+margin: 0;
+padding: 0;
+float: right;
+height: 5.625rem;
 }
