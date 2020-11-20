@@ -207,11 +207,21 @@ body {
 .card {
     border-radius: 15px;
     margin: 20px;
+    border: none;
 }
 
 .card-title {
     padding: 5px;
-    margin: 5px;
+    margin: 0px;
+    border-radius: 15px 15px 0 0;
+    box-sizing: border-box;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+h5 {
+    margin: 0;
 }
 
 #description {
@@ -227,6 +237,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.joinButton {
+    background-color: rgb(20, 54, 92);
+    border: none;
 }
 
 .fa-bookmark {

@@ -101,32 +101,35 @@ if ($(window).width() > 992) {
     });
 }
 
-let joinButtonToggle = false
-let joinButtons = document.querySelectorAll('#joinButton')
+let joinButtons = document.querySelectorAll('.joinButton')
 for(let joinButton of joinButtons) {
     joinButton.addEventListener('click', function(event){
         event.preventDefault()
-        joinButtonToggle = !joinButtonToggle
-        if(joinButtonToggle == false) {
+        event.target.toggle = !event.target.toggle
+        if(event.target.toggle == false) {
             joinButton.innerHTML = '加入'
-        } else if(joinButtonToggle == true) {
+        } else if(event.target.toggle == true) {
             joinButton.innerHTML = '已加入'
         }
     })
 }
 
-let bookmarkToggle = false
 let bookmarkButtons = document.querySelectorAll('.fa-bookmark')
 for (let bookmarkButton of bookmarkButtons) {
-    bookmarkButton.addEventListener('click', function () {
-        bookmarkToggle = !bookmarkToggle
-        if (bookmarkToggle == false) {
+    bookmarkButton.addEventListener('click', function (event) {
+        event.target.toggle = !event.target.toggle
+        if (event.target.toggle == false) {
             bookmarkButton.style.color = "#D8D6D9"
-        } else if (bookmarkToggle == true) {
+        } else if (event.target.toggle == true) {
             bookmarkButton.style.color = "#F3C20C"
         }
     }
     )
+}
+
+let cardTitles = document.querySelectorAll('.card-title')
+for(let cardTitle of cardTitles){
+    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
 }
 
 let map;
