@@ -3,7 +3,7 @@ body {
     height: 150vh;
     /* display: flex; */
     position: relative;
-    font-size: 1.75em;
+    font-size: 1em;
 
 }
 @media screen and (min-width: 400px) and (max-width: 700px)  {
@@ -204,7 +204,7 @@ box-sizing: inherit;
 font-weight: 600;
 font-size: .75rem;
 color: #000000;
-background-color: #D8D6D9;
+background-color: #0000004d;
 z-index: 999;
 /* align-self: flex-end; */
 position: absolute;
@@ -279,6 +279,7 @@ height: 5.625rem;
 .copyright, .website-intro{
     color: black;
     font-size: medium;
+    margin-left: 15px;
 }
 
 
