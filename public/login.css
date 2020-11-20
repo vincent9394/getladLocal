@@ -42,6 +42,49 @@ body {
     border: none;
 }
 
+.d3Map {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.hkMap {
+    height: 500px;
+    width: 800px;
+    background-color: dimgrey;
+}
+
+.categoryFlexDiv {
+    display: flex;
+    justify-content: space-around;
+    margin: 100px 0 100px 0;
+    flex-wrap: wrap;
+}
+
+.categoryCircle {
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #263250;
+    transition: 300ms;
+    margin: 20px;
+}
+
+.categoryCircle:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.wordInCircle {
+    color: white;
+    font-size: 28px;
+}
+
 .searchBarFlex {
     display: flex;
     justify-content: center;
@@ -62,7 +105,7 @@ body {
 }
 
 .searchBar {
-    width: 600px;
+    width: 500px;
 }
 
 .searchButton {
@@ -74,14 +117,17 @@ body {
     width: 100px;
 }
 
+.searchButton:hover {
+    cursor: pointer;
+}
+
 #magnifier {
     transition: 300ms;
     font-size: 20px;
 }
 
 #magnifier:hover {
-    transform: scale(1.2);
-    cursor: pointer;
+    transform: scale(1.15);
 }
 
 .boldHr{
@@ -247,18 +293,6 @@ html, body {
     cursor: pointer;
 }
 
-.loadingBar {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.loadingGif {
-    width: 100px;
-    height: 100px;
-    /* border-radius: 50%;
-    box-sizing: border-box; */
-}
 
 
 footer{
@@ -341,4 +375,23 @@ margin: 0;
 padding: 0;
 float: right;
 height: 5.625rem;
+}
+
+.mainTitle{
+    padding:30px;
+    display: flex;
+    justify-content: center;
+    
+
+}
+
+.loginBox{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+.loginBtn{
+    padding: 20 px;
+
 }
