@@ -155,3 +155,4 @@ for (let showMoreButton of showMoreButtons) {
         showMoreButton.style.transform = "scale(1)"
     })
 }
+
