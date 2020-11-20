@@ -7,12 +7,12 @@ if ($(window).width() > 992) {
         if ($(this).scrollTop() > 40) {
             $('#navbar_top').addClass("fixed-top").addClass('scrolled-down');
             // add padding top to show content behind navbar
-            $('body').css('padding-top', $('.navbar').outerHeight() - 50 + 'px');
+            $('body').css('padding-top', $('.navbar').outerHeight() - 70 + 'px');
             // $( ".login" ).remove();
             login.innerHTML = `<div class="navbar-left">
-            GetLad
+            <span class="logo">GETLAD</span>
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     活動選頂
                 </button>
@@ -22,13 +22,13 @@ if ($(window).width() > 992) {
                 </div>
             </div>
         </div>
-        <a class="navbar-brand" href="#">食飯</a>
+        <a class="navbar-brand" href="#">食野</a>
 
 
         <div class="navbar add" id="main_nav">
-        <form class="form-inline my-2 my-lg-0 login">
+        <form class="form-inline my-2 my-lg-0">
 
-            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Login</button>
+            <button class="btn my-2 my-sm-0 login" type="submit">Login</button>
         </form>
             <div class="nav-item dropdown ">
                 <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
@@ -45,7 +45,7 @@ if ($(window).width() > 992) {
         } else {
             $('#navbar_top').removeClass("fixed-top");
             login.innerHTML = `<div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 活動選頂
             </button>
@@ -55,7 +55,7 @@ if ($(window).width() > 992) {
             </div>
         </div>
 
-        <a class="navbar-brand" href="#">食飯</a>
+        <a class="navbar-brand" href="#">娛樂</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -78,6 +78,7 @@ if ($(window).width() > 992) {
     });
 } // end if
 
+//google map API
 let map;
 let infoWindow;
 
@@ -103,3 +104,30 @@ for (let bookmarkButton of bookmarkButtons) {
     }
     )
 }
+//end of google map API
+
+
+//grid option
+let gridtoggle = false
+let gridOption = document.querySelector('.gridOption')
+let gridChoiceFlex = document.querySelector('.gridChoiceFlex')
+
+
+gridOption.addEventListener('click', function () {
+    gridtoggle = !gridtoggle
+    if (gridtoggle == false) {
+        gridChoiceFlex.style.display = "none"
+    } else if (gridtoggle == true) {
+        gridChoiceFlex.style.display = "flex"
+    }
+}
+)
+
+let gridChoices = document.querySelectorAll('.gridChoice')
+for (let gridChoice of gridChoices) {
+    gridChoice.addEventListener("click", function () {
+        gridChoiceFlex.style.display = "none"
+        gridtoggle = false
+    })
+}
+//end of grid option
