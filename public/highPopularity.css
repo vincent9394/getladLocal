@@ -248,20 +248,6 @@ html, body {
     cursor: pointer;
 }
 
-.loadingBar {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.loadingGif {
-    width: 100px;
-    height: 100px;
-    /* border-radius: 50%;
-    box-sizing: border-box; */
-}
-
-
 footer{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
 -webkit-font-smoothing: antialiased;
@@ -342,4 +328,23 @@ margin: 0;
 padding: 0;
 float: right;
 height: 5.625rem;
+}
+
+.loadingBar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: 0.3s ease-in;
+}
+
+.loadingGif {
+    width: 100px;
+    height: 100px;
+    /* border-radius: 50%;
+    box-sizing: border-box; */
+}
+
+.loadingBar.show {
+    opacity: 1;
 }
