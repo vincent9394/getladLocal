@@ -44,6 +44,6 @@ CREATE TABLE join_group (
     id SERIAL PRIMARY KEY,
     event_id INTEGER,
     FOREIGN KEY (event_id) REFERENCES events(id),
-    user_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    participant_id INTEGER,
+    FOREIGN KEY (participant_id) REFERENCES users(id)
 );
