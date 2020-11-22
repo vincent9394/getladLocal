@@ -3,56 +3,8 @@ body {
     height: 100vh;
     /* display: flex; */
     /* position: relative; */
-    font-family: ele;
-}
-@media screen and (min-width: 400px) and (max-width: 700px)  {
-    body{
-        background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
-        height: 150vh;
-        /* display: flex; */
-        position: relative;
-        font-size: small !important;
-    }
-    #navbar_top{
-        padding: 0;
-    }
-    .navbar-container{
-        padding-left: 16px !important;
-        padding-top: 0 !important;
-        /* padding-bottom: 0 !important; */
-        padding-right: 0 !important;
-        display: flex !important;
-        align-content: center !important;
-    }
-    .navbar-left img {
-        width: 50%;
-        height: 50%;
-    }
-    .dropdown {
-        margin-top: 15px;
-    }
-    .add{
-        flex-wrap: nowrap !important;
-        padding: 0 !important;
-        align-items: unset !important;
-    }
-    .login {
-        font-size: small !important;
-    }
-}
-.logo{
-    font-family: Elektora;
-    font-size: 30px;
-}
-.login, .login:hover, .login::selection{
-    background-color: #14365C ;
-    color: white ;
-    border: none ;
-
-    font-size: 24px;
-}
-.toggle, .toggle::selection{
-    border: none !important;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .navbar-left{
     display: flex;
@@ -62,10 +14,14 @@ body {
     width:250px;
 }
 
+.navbar {
+    padding: 0!important;
+}
 
 .scrolled-down{
     transform:translateY(0%); transition: all 0.3s ease-in-out;
  }
+
 .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -77,12 +33,6 @@ body {
     padding-right: 16px;
     width: 100%;
 }
-.navbar-brand{
-    font-size: 24px;
-}
-.dropdown-item{
-    font-size: 24px;
-}
 
 .pb-4, .py-4 {
     padding: 15px!important;
@@ -92,49 +42,6 @@ body {
     background-color: #14365C;
     color: white;
     border: none;
-}
-
-.d3Map {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-}
-
-.hkMap {
-    height: 500px;
-    width: 800px;
-    background-color: dimgrey;
-}
-
-.categoryFlexDiv {
-    display: flex;
-    justify-content: space-around;
-    margin: 100px 0 100px 0;
-    flex-wrap: wrap;
-}
-
-.categoryCircle {
-    border-radius: 50%;
-    box-sizing: border-box;
-    border: 1px solid black;
-    height: 150px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #263250;
-    transition: 300ms;
-    margin: 20px;
-}
-
-.categoryCircle:hover {
-    text-decoration: none;
-    transform: scale(1.05);
-}
-
-.wordInCircle {
-    color: white;
-    font-size: 28px;
 }
 
 .searchBarFlex {
@@ -157,7 +64,7 @@ body {
 }
 
 .searchBar {
-    width: 500px;
+    width: 600px;
 }
 
 .searchButton {
@@ -169,17 +76,14 @@ body {
     width: 100px;
 }
 
-.searchButton:hover {
-    cursor: pointer;
-}
-
 #magnifier {
     transition: 300ms;
     font-size: 20px;
 }
 
 #magnifier:hover {
-    transform: scale(1.15);
+    transform: scale(1.2);
+    cursor: pointer;
 }
 
 .boldHr{
@@ -255,8 +159,9 @@ body {
 
 .row {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
+    width: fit-content;
 }
 
 #cardFlex {
@@ -267,7 +172,7 @@ body {
 
 .card {
     border-radius: 15px;
-    margin: 60px 20px 20px 20px;
+    margin: 60px 20px 60px 20px;
     border: none;
 }
 
@@ -345,91 +250,103 @@ html, body {
     cursor: pointer;
 }
 
-
-
 footer{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-box-sizing: inherit;
-/* display: flex; */
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-background-color: #0000004d;
-z-index: 999;
-/* align-self: flex-end; */
-/* position: absolute; */
-bottom: 0;
-width: 100%;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    box-sizing: inherit;
+    /* display: flex; */
+    font-weight: 600;
+    font-size: .75rem;
+    color: #fff;
+    background-color: #D8D6D9;
+    z-index: 999;
+    /* align-self: flex-end; */
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
 }
 .footer-container{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-max-width: 100%;
-margin: 0 auto;
-padding: 0;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #fff;
+    box-sizing: inherit;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
 }
 .footer-grid {
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #fff;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
-display: flex;
-flex-flow: row wrap;
-justify-content: space-between;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #fff;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
 }
 .sidebar{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #fff;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
 }
 .main clearfix{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
-width: 100%;
-min-width: 100%;
-display: flex;
-justify-content: space-between;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #fff;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 .float-right {
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
-float: right;
-height: 5.625rem;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #fff;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    float: right;
+    height: 5.625rem;
 }
-.copyright, .website-intro{
-    color: black;
-    font-size: medium;
-    margin-left: 15px;
+
+.loadingBar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: 0.3s ease-in;
+}
+
+.loadingGif {
+    width: 100px;
+    height: 100px;
+    /* border-radius: 50%;
+    box-sizing: border-box; */
+}
+
+.loadingBar.show {
+    opacity: 1;
 }

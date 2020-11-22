@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            height: 8em;
+            outline: 1px solid salmon;
+        }
+
+        header {
+            height: 3em;
+            outline: 1px solid skyblue;
+        }
+
+        body,
+        header h1 {
+            margin: 0;
+        }
+
+        main {
+            background-color: tan;
+            max-height: calc(100vh - 3em);
+            overflow-y: auto;
+        }
+
+        .loading {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body onload="loadItems()" onscroll="loadItems()">
+    <header>
+        <h1>title</h1>
+    </header>
+
+    <main>
+        <div class="list">
+        </div>
+        
+        <div class="loading">loading...</div>
+    </main>
+
+    <script src="list.js"></script>
+</body>
+
+</html>

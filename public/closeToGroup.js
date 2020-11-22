@@ -45,7 +45,7 @@ if ($(window).width() > 992) {
                 </div>
             </div>
         </div>
-        <a class="navbar-brand" href="#">熱門活動</a>
+        <a class="navbar-brand" href="#">就快成團</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -78,7 +78,7 @@ if ($(window).width() > 992) {
             </div>
         </div>
 
-        <a class="navbar-brand" href="#">熱門活動</a>
+        <a class="navbar-brand" href="#">就快成團</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -102,13 +102,13 @@ if ($(window).width() > 992) {
 }
 
 let joinButtons = document.querySelectorAll('.joinButton')
-for(let joinButton of joinButtons) {
-    joinButton.addEventListener('click', function(event){
+for (let joinButton of joinButtons) {
+    joinButton.addEventListener('click', function (event) {
         event.preventDefault()
         event.target.toggle = !event.target.toggle
-        if(event.target.toggle == false) {
+        if (event.target.toggle == false) {
             joinButton.innerHTML = '加入'
-        } else if(event.target.toggle == true) {
+        } else if (event.target.toggle == true) {
             joinButton.innerHTML = '已加入'
         }
     })
@@ -128,8 +128,8 @@ for (let bookmarkButton of bookmarkButtons) {
 }
 
 let cardTitles = document.querySelectorAll('.card-title')
-for(let cardTitle of cardTitles){
-    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
+for (let cardTitle of cardTitles) {
+    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
 }
 
 let map;
