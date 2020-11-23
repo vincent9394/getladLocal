@@ -136,13 +136,18 @@ let map;
 
 function initMap() {
     let allMap = document.querySelectorAll("#map")
+    let hkMap = document.querySelector(".hkMap #map")
     for (let getMap of allMap) {
         map = new google.maps.Map(getMap, {
             center: { lat: 22.379812, lng: 114.134938 },
             zoom: 13,
         });
-    }
 
+        map = new google.maps.Map(hkMap, {
+            center: { lat: 22.289437, lng: 113.940938 },
+            zoom: 13,
+        });
+    }
 }
 
 // show more animation

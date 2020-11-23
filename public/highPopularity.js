@@ -166,7 +166,7 @@ let loadingBar = document.querySelector('.loadingBar')
 window.addEventListener('scroll', () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    console.log({ scrollTop, scrollHeight, clientHeight });
+    // console.log({ scrollTop, scrollHeight, clientHeight });
     // clientHeight refers to the area we see ; scrollTop refers to the px we've scrolled ; scrollHeight refers to the sum of both 
     // because scrollTop value is rounded off, scrollHeight has to be minus 5 or more
     if (clientHeight + scrollTop >= scrollHeight - 100) {

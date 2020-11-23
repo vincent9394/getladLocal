@@ -1,9 +1,9 @@
 body {
-    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231))  ;
+    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231));
     height: 100vh;
     /* display: flex; */
     /* position: relative; */
-    font-family: ele;
+    /* font-family: ele; */
 }
 @media screen and (min-width: 400px) and (max-width: 700px)  {
     body{
@@ -94,16 +94,16 @@ body {
     border: none;
 }
 
-.d3Map {
+.hkMap {
     display: flex;
     justify-content: center;
     margin: 10px;
 }
 
-.hkMap {
-    height: 500px;
-    width: 800px;
-    background-color: dimgrey;
+.hkMap #map{
+    border-radius: 15px;
+    height: 78vh;
+    width: 98vw;
 }
 
 .categoryFlexDiv {
@@ -290,11 +290,20 @@ h5 {
     font-size: 13px;
 }
 
+.infoBar {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
 #participationRate {
     text-align: end;
 }
 
-.joinAndBookmark {
+.bottomBar {
     display: flex;
     justify-content: space-between;
     align-items: center;

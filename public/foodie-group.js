@@ -55,7 +55,7 @@ if ($(window).width() > 992) {
             </div>
         </div>
 
-        <a class="navbar-brand" href="#">娛樂</a>
+        <a class="navbar-brand" href="#">食野</a>
 
 
         <div class="navbar add" id="main_nav">
