@@ -4,6 +4,7 @@
 // let gridChoiceFlex = document.querySelector('.gridChoiceFlex')
 
 
+
 // gridOption.addEventListener('click', function () {
 //     gridtoggle = !gridtoggle
 //     if (gridtoggle == false) {
@@ -21,6 +22,7 @@
 //         gridtoggle = false
 //     })
 // }
+
 
 // fixed menu on scroll for desktop
 let login = document.querySelector('.navbar-container')
@@ -160,3 +162,28 @@ for (let showMoreButton of showMoreButtons) {
         showMoreButton.style.transform = "scale(1)"
     })
 }
+
+let rows = document.querySelectorAll('.row')
+
+window.addEventListener('load', function() {
+    console.log('loaded')
+    for(let row of rows) {
+        for(let i = 0 ; i < 3 ; i++)
+        row.innerHTML += `
+        <div id="cardFlex">
+                    <div class="card" style="width: 18rem;">
+                        <h5 class="card-title">鬥食十三么</h5>
+                        <div id="map"></div>
+                        <div class="card-body">
+                            <p class="card-text" id="description"></p>
+                            <p class="card-text" id="participationRate">人數: 5/10</p>
+                            <div class="bottomBar">
+                                <a href="#" class="btn btn-primary joinButton">加入</a>
+                                <div class="bookmark"><i class="fas fa-bookmark"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        `
+    }
+})
