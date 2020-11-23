@@ -6,6 +6,16 @@ body {
     font-size: 1em;
 
 }
+.getlad{
+    font-family: 'Rock Salt', cursive;
+    font-size: xx-large;
+}
+.footer-logo{
+    font-size: xx-large;
+    font-family: 'Rock Salt', cursive;
+    color: black;
+    margin-left: 12px;
+}
 @media screen and (min-width: 400px) and (max-width: 700px)  {
     body{
         background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
@@ -42,8 +52,9 @@ body {
     }
 }
 .logo{
-    font-family: Elektora;
-    font-size: 30px;
+    font-family: 'Rock Salt', cursive;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 .login, .login:hover, .login::selection{
     background-color: #14365C ;
@@ -91,6 +102,9 @@ body {
     max-width: 100%;
     min-width: 100%;
 }
+#magnifier {
+    vertical-align: middle;
+}
 
 .categoryOption , .searchBar, .searchButton {
     border: 1px solid black;
@@ -107,14 +121,15 @@ body {
 
 .searchBar {
     width: 500px;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 0px 0px 0px 0px;
 }
 
 .searchButton {
     display: flex;
     border-radius: 0 10px 10px 0;
     border-left: none;
-    align-content: center;
+    align-items: center;
+
 }
 
 @media screen and (max-width: 796px) {
@@ -161,12 +176,18 @@ body {
     border-radius: 15px;
     height: max-content;
     width: 200px;
-    margin-right: 10px !important;
+    margin: 0px 20px 20px 20px !important;
+    border: none;
 }
 
 .card-title {
     padding: 5px;
-    margin: 5px;
+    margin: 0px;
+    border-radius: 15px 15px 0 0;
+    box-sizing: border-box;
+    color: white;
+    font-weight: bold;
+    text-align: center;
 }
 
 #description {
@@ -183,7 +204,10 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
+.joinButton {
+    background-color: rgb(20, 54, 92);
+    border: none;
+}
 .fa-bookmark {
     color: #D8D6D9;
     font-size: 24px;

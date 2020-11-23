@@ -4,26 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entertainment</title>
+    <title>Foodie-Group</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS324XkzWyfddSLnfpJzw6elPlctwGjzY&callback=initMap">
         </script>
 
-    <link rel="stylesheet" href="./foodie-group.css">
+    <link rel="stylesheet" href="./entertainment.css">
 
 </head>
 
 <body>
     <header>
         <div class="bg-white text-dark py-4 border-bottom d-flex justify-content-between">
-            <div class="container d-flex align-items-center mr-1 ml-1">
-                <img src="./images/logowithoutbg.png">
+            <div class="container d-flex align-items-center mr-1 ml-1 getlad">
+                GETLAD
+                <!-- <img src="./images/logowithoutbg.png"> -->
             </div>
             <form class="form-inline mx-2 my-2 my-lg-0">
                 <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
@@ -43,7 +46,7 @@
                     </div>
                 </div>
 
-                <a class="navbar-brand" href="#">食野</a>
+                <a class="navbar-brand" href="#">食飯</a>
 
 
                 <div class="navbar add" id="main_nav">
@@ -66,7 +69,11 @@
 
     <div class="container">
         <form class="searchBarFlex">
-
+            <select class="categoryOption" name="categoryOption">
+                <option value="transportation">交通</option>
+                <option value="entertainment">娛樂</option>
+                <option value="foodieGroup">飲食</option>
+            </select>
 
             <input type="text" class="searchBar" name="searchBar" placeholder="search">
 
@@ -77,25 +84,25 @@
     </div>
     <!-- todo grid number -->
     <!-- 顯示活動數量 -->
-        <div class="centerGridOption">
-            <div class="showGrid">
-                <div class="gridOption">顯示活動數量</div>
+    <div class="centerGridOption">
+        <div class="showGrid">
+            <div class="gridOption">顯示活動數量</div>
+        </div>
+        <div class="gridChoiceFlex">
+            <div class="gridChoice">
+                <div class="gridChoiceItem">6</div>
             </div>
-            <div class="gridChoiceFlex">
-                <div class="gridChoice">
-                    <div class="gridChoiceItem">6</div>
-                </div>
-                <div class="gridChoice">
-                    <div class="gridChoiceItem">4</div>
-                </div>
-                <div class="gridChoice">
-                    <div class="gridChoiceItem">3</div>
-                </div>
-                <div class="gridChoice">
-                    <div class="gridChoiceItem">2</div>
-                </div>
+            <div class="gridChoice">
+                <div class="gridChoiceItem">4</div>
+            </div>
+            <div class="gridChoice">
+                <div class="gridChoiceItem">3</div>
+            </div>
+            <div class="gridChoice">
+                <div class="gridChoiceItem">2</div>
             </div>
         </div>
+    </div>
     <!-- todo grid number -->
     <div class="container-fluid d-flex justify-content-between my-4 mx-0">
         <div class="google-map mx-5">
@@ -113,7 +120,7 @@
                             <p class="card-text" id="description">搵人打牌 有意請tg</p>
                             <p class="card-text" id="participationRate">人數: 5/10</p>
                             <div class="joinAndBookmark">
-                                <a href="#" class="btn btn-primary">加入</a>
+                                <a href="#" class="btn btn-primary joinButton">加入</a>
                                 <div class="bookmark"><i class="fas fa-bookmark"></i></div>
                             </div>
                         </div>
@@ -125,7 +132,7 @@
                             <p class="card-text" id="description">搵人打牌 有意請tg</p>
                             <p class="card-text" id="participationRate">人數: 5/10</p>
                             <div class="joinAndBookmark">
-                                <a href="#" class="btn btn-primary">加入</a>
+                                <a href="#" class="btn btn-primary joinButton">加入</a>
                                 <div class="bookmark"><i class="fas fa-bookmark"></i></div>
                             </div>
                         </div>
@@ -137,7 +144,7 @@
                             <p class="card-text" id="description">搵人打牌 有意請tg</p>
                             <p class="card-text" id="participationRate">人數: 5/10</p>
                             <div class="joinAndBookmark">
-                                <a href="#" class="btn btn-primary">加入</a>
+                                <a href="#" class="btn btn-primary joinButton">加入</a>
                                 <div class="bookmark"><i class="fas fa-bookmark"></i></div>
                             </div>
                         </div>
@@ -152,21 +159,10 @@
             <div class="footer-grid">
                 <!-- <div class="sidebar"></div> -->
 
-                <div class="float-left"><a class="logo" title="GetLad"><img
-                            src="./images/logowithoutbg.png" alt="GetLad"></a>
+                <div class="float-left"><span class="footer-logo" title="GetLad">GETLAD</span>
                     <div class="copyright">© 2020 GetLad.HK</div>
                     <div class="website-intro">湊腳｜搵食｜搭車｜</div>
                 </div>
-                <!-- <div class="float-right">
-                    <ul class="sns">
-                        <li><a href="https://www.facebook.com/unwirehk/" target="_blank"><img
-                                    src="https://cdn.unwire.hk/wp-content/uploads/2019/06/facebook.svg"></a></li>
-                        <li><a href="https://www.instagram.com/unwirehk/" target="_blank"><img
-                                    src="https://cdn.unwire.hk/wp-content/uploads/2019/06/instagram.svg"></a></li>
-                        <li><a href="https://www.youtube.com/user/unwirehktv" target="_blank"><img
-                                    src="https://cdn.unwire.hk/wp-content/uploads/2019/06/youtube.svg"></a></li>
-                    </ul>
-                </div> -->
 
             </div>
         </div>
