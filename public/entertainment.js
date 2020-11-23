@@ -116,7 +116,7 @@ for (let bookmarkButton of bookmarkButtons) {
     }
     )
 }
-
+// let cardFlex = document.querySelector('#cardFlex')
 let cardTitles = document.querySelectorAll('.card-title')
 for(let cardTitle of cardTitles){
     cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
