@@ -68,15 +68,15 @@
         </div>
 
         <div class="categoryFlexDiv">
-            <a href="transport.html" class="categoryCircle">
+            <form class="categoryCircle">
                 <div class="wordInCircle">夾份搭車</div>
-            </a>
-            <a href="entertainment.html" class="categoryCircle">
+            </form>
+            <form class="categoryCircle">
                 <div class="wordInCircle">搵人一齊玩</div>
-            </a>
-            <a href="foodie-group.html" class="categoryCircle">
+            </form>
+            <form class="categoryCircle">
                 <div class="wordInCircle">一齊約食飯</div>
-            </a>
+            </form>
         </div>
 
         <form class="searchBarFlex">
@@ -124,13 +124,21 @@
         <div class="container-fluid">
 
             <div class="row">
+                
                 <form id="cardFlex">
                     <div class="card" style="width: 18rem;">
                         <h5 class="card-title">鬥食十三么</h5>  <!-- change card-title.innerHTML -->
                         <div id="map"></div>
+                        
                         <div class="card-body">
-                            <p class="card-text" id="description">搵人打牌 有意請tg</p>     <!-- change description.innerHTML -->
-                            <p class="card-text" id="participationRate">人數: 5/10</p>     <!-- change participationRate.innerHTML -->
+                            <p class="card-text" id="description">活動: 尋隊切磋 時間: 19:00 聯絡: 有意請tg: www.google.com</p>     <!-- change description.innerHTML -->
+                            <hr>
+                            <div class="infoBar">
+                                <p class="card-text" id="eventLocation">地點: 柴灣鐵路站</p>
+                                <p class="card-text" id="participationRate">人數: 5/10</p>     <!-- change participationRate.innerHTML -->
+                                <p class="card-text" id="dateAdded">加入日期: 23/11/2020</p>
+                            </div>
+                            <hr>
                             <div class="bottomBar">
                                 <button class="btn btn-primary joinButton">加入</button>
                                 <div class="bookmark"><i class="fas fa-bookmark"></i></div>
@@ -142,9 +150,9 @@
             </div>
         </div>
 
-        <div class="showMore">
+        <form class="showMore">
             <button class="showMoreButton">Show More</button>
-        </div>
+        </form>
 
         <!-- <hr class="boldHr"> -->
 
@@ -158,13 +166,16 @@
                 <div class="card" style="width: 18rem;">
                     <h5 class="card-title">鬥食十三么</h5>  <!-- change card-title.innerHTML -->
                     <div id="map"></div>
+                    
                     <div class="card-body">
-                        <p class="card-text" id="description">活動: 尋隊切磋 時間: 19:00 聯絡: 有意請tg: <a href="www.google.com">www.google.com</a></p>     <!-- change description.innerHTML -->
+                        <p class="card-text" id="description">活動: 尋隊切磋 時間: 19:00 聯絡: 有意請tg: www.google.com</p>     <!-- change description.innerHTML -->
+                        <hr>
                         <div class="infoBar">
                             <p class="card-text" id="eventLocation">地點: 柴灣鐵路站</p>
                             <p class="card-text" id="participationRate">人數: 5/10</p>     <!-- change participationRate.innerHTML -->
                             <p class="card-text" id="dateAdded">加入日期: 23/11/2020</p>
                         </div>
+                        <hr>
                         <div class="bottomBar">
                             <button class="btn btn-primary joinButton">加入</button>
                             <div class="bookmark"><i class="fas fa-bookmark"></i></div>
@@ -173,9 +184,9 @@
                 </div>
             </form>
 
-        <div class="showMore">
+        <form class="showMore">
             <button class="showMoreButton">Show More</button>
-        </div>
+        <form>
 
     </article>
 
