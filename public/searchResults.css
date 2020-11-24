@@ -1,8 +1,71 @@
+/* navbar css */
 body {
-    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231))  ;
-    height: 100vh;
+    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+    height: 150vh;
     /* display: flex; */
-    /* position: relative; */
+    position: relative;
+    font-size: 1em;
+
+}
+.getlad{
+    font-family: 'Rock Salt', cursive;
+    font-size: xx-large;
+}
+.footer-logo{
+    font-size: xx-large;
+    font-family: 'Rock Salt', cursive;
+    color: black;
+    margin-left: 12px;
+}
+@media screen and (min-width: 400px) and (max-width: 700px)  {
+    body{
+        background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+        height: 150vh;
+        /* display: flex; */
+        position: relative;
+        font-size: small !important;
+    }
+    #navbar_top{
+        padding: 0;
+    }
+    .navbar-container{
+        padding-left: 16px !important;
+        padding-top: 0 !important;
+        /* padding-bottom: 0 !important; */
+        padding-right: 0 !important;
+        display: flex !important;
+        align-content: center !important;
+    }
+    .navbar-left img {
+        width: 50%;
+        height: 50%;
+    }
+    .dropdown {
+        margin-top: 15px;
+    }
+    .add{
+        flex-wrap: nowrap !important;
+        padding: 0 !important;
+        align-items: unset !important;
+    }
+    .login {
+        font-size: small !important;
+    }
+}
+.logo{
+    font-family: 'Rock Salt', cursive;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.login, .login:hover, .login::selection{
+    background-color: #14365C ;
+    color: white ;
+    border: none ;
+
+    font-size: 24px;
+}
+.toggle, .toggle::selection{
+    border: none !important;
 }
 .navbar-left{
     display: flex;
@@ -12,14 +75,10 @@ body {
     width:250px;
 }
 
-.navbar {
-    padding: 0!important;
-}
 
 .scrolled-down{
     transform:translateY(0%); transition: all 0.3s ease-in-out;
  }
-
 .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -31,6 +90,14 @@ body {
     padding-right: 16px;
     width: 100%;
 }
+.navbar-brand{
+    font-size: 24px;
+}
+.dropdown-item{
+    font-size: 24px;
+}
+/* end of navbar css */
+
 
 .pb-4, .py-4 {
     padding: 15px!important;
@@ -256,8 +323,8 @@ box-sizing: inherit;
 /* display: flex; */
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
-background-color: #D8D6D9;
+color: #000000;
+background-color: #0000004d;
 z-index: 999;
 /* align-self: flex-end; */
 /* position: absolute; */
@@ -270,7 +337,7 @@ width: 100%;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 max-width: 100%;
 margin: 0 auto;
@@ -296,7 +363,7 @@ justify-content: space-between;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 margin: 0;
 padding: 0;
@@ -307,7 +374,7 @@ padding: 0;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 margin: 0;
 padding: 0;
@@ -322,12 +389,17 @@ justify-content: space-between;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 margin: 0;
 padding: 0;
 float: right;
 height: 5.625rem;
+}
+.copyright, .website-intro{
+    color: black;
+    font-size: medium;
+    margin-left: 15px;
 }
 
 .loadingBar {
