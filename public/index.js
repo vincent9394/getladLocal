@@ -163,27 +163,47 @@ for (let showMoreButton of showMoreButtons) {
     })
 }
 
-let rows = document.querySelectorAll('.row')
 
-window.addEventListener('load', function () {
 
-    console.log('loaded')
-    for (let row of rows) {
-        for (let i = 0; i < 3; i++)
 
-            row.innerHTML += `
+let row = document.querySelector('.row')
+let row2 = document.querySelector('.row2')
+
+
+async function mostBookmarked() {
+    let res = await fetch('/sorting_by_most_bookmarked')
+    console.log(res)
+    if (res.status != 200) {
+        alert('Loading failed, please try again later');
+        return;
+    }
+
+    let sortingResults = await res.json()
+    
+    console.log(sortingResults)
+
+    for (let i = 0; i < sortingResults.length; i++) {
+        let description = sortingResults[i]["description"]
+        let topic = sortingResults[i]["topic"]
+        let location = sortingResults[i]["location"]
+        let created_at = new Date(sortingResults[i]["created_at"]).toLocaleDateString('en-gb')
+        let prerequisite = sortingResults[i]["prerequisite"]
+        let joined = sortingResults[i]["participants"]
+        
+
+        row.innerHTML += `
             <div id="cardFlex">
             <div class="card" style="width: 18rem;">
-                <h5 class="card-title">鬥食十三么</h5>  <!-- change card-title.innerHTML -->
+                <h5 class="card-title">${topic}</h5>  
                 <div id="map"></div>
                 
                 <div class="card-body">
-                    <p class="card-text" id="description">活動: 尋隊切磋 時間: 19:00 聯絡: 有意請tg: www.google.com</p>     <!-- change description.innerHTML -->
+                    <p class="card-text" id="description">${description}</p>
                     <hr>
                     <div class="infoBar">
-                        <p class="card-text" id="eventLocation">地點: 柴灣鐵路站</p>
-                        <p class="card-text" id="participationRate">人數: 5/10</p>     <!-- change participationRate.innerHTML -->
-                        <p class="card-text" id="dateAdded">加入日期: 23/11/2020</p>
+                        <p class="card-text" id="eventLocation">地點: ${location}</p>
+                        <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
+                        <p class="card-text" id="dateAdded">加入日期: ${created_at}</p>
                     </div>
                     <hr>
                     <div class="bottomBar">
@@ -195,6 +215,7 @@ window.addEventListener('load', function () {
         </div>
         `
     }
+
 
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
@@ -217,7 +238,6 @@ window.addEventListener('load', function () {
                 zoom: 13,
             });
         }
-        console.log('init 2')
     }
     initMap()
 
@@ -246,5 +266,119 @@ window.addEventListener('load', function () {
         }
         )
     }
-})
+}
+mostBookmarked()
+
+
+
+
+
+async function mostSuccessfulRate() {
+    let res = await fetch('/sorting_by_successful_rate')
+    console.log(res)
+    if (res.status != 200) {
+        alert('Loading failed, please try again later');
+        return;
+    }
+
+    let sortingResults = await res.json()
+    
+    console.log(sortingResults)
+
+    for (let i = 0; i < sortingResults.length; i++) {
+        let description = sortingResults[i]["description"]
+        let topic = sortingResults[i]["topic"]
+        let location = sortingResults[i]["location"]
+        let created_at = new Date(sortingResults[i]["created_at"]).toLocaleDateString('en-gb')
+        let prerequisite = sortingResults[i]["prerequisite"]
+        let joined = sortingResults[i]["join_count"]
+        
+
+        row2.innerHTML += `
+            <div id="cardFlex">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-title">${topic}</h5>  
+                <div id="map"></div>
+                
+                <div class="card-body">
+                    <p class="card-text" id="description">${description}</p>
+                    <hr>
+                    <div class="infoBar">
+                        <p class="card-text" id="eventLocation">地點: ${location}</p>
+                        <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
+                        <p class="card-text" id="dateAdded">加入日期: ${created_at}</p>
+                    </div>
+                    <hr>
+                    <div class="bottomBar">
+                        <button class="btn btn-primary joinButton">加入</button>
+                        <div class="bookmark"><i class="fas fa-bookmark"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+    }
+
+
+    let cardTitles = document.querySelectorAll('.card-title')
+    for (let cardTitle of cardTitles) {
+        cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+    }
+
+
+    let map;
+    function initMap() {
+        let allMap = document.querySelectorAll("#map")
+        let hkMap = document.querySelector(".hkMap #map")
+        for (let getMap of allMap) {
+            map = new google.maps.Map(getMap, {
+                center: { lat: 22.379812, lng: 114.134938 },
+                zoom: 13,
+            });
+
+            map = new google.maps.Map(hkMap, {
+                center: { lat: 22.289437, lng: 113.940938 },
+                zoom: 13,
+            });
+        }
+    }
+    initMap()
+
+
+    // Poor remedy for bookmark and join (event.target.switch)
+    let joinButtons = document.querySelectorAll('.joinButton')
+    for (let joinButton of joinButtons) {
+        joinButton.addEventListener('click', function (event) {
+            event.preventDefault()
+            event.target.switch = !event.target.switch
+            if (event.target.switch == false) {
+                joinButton.innerHTML = '加入'
+            } else if (event.target.switch == true) {
+                joinButton.innerHTML = '已加入'
+            }
+        })
+    }
+
+    let bookmarkButtons = document.querySelectorAll('.fa-bookmark')
+    for (let bookmarkButton of bookmarkButtons) {
+        bookmarkButton.addEventListener('click', function (event) {
+            event.target.switch = !event.target.switch
+            if (event.target.switch == false) {
+                bookmarkButton.style.color = "#D8D6D9"
+            } else if (event.target.switch == true) {
+                bookmarkButton.style.color = "#F3C20C"
+            }
+        }
+        )
+    }
+}
+mostSuccessfulRate()
+
+
+
+
+
+
+// 22.374694798443553, 114.11224341931789
+// 22.371509234096262, 114.11900558723549
 
