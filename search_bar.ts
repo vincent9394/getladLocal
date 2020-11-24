@@ -50,20 +50,21 @@ searchRoute.get('/searchResults', async (req, res) => {
         // console.log(categoryOption);
         
 
-        res.redirect('/searchResults.html?categoryOption=' + req.query.categoryOption + '&q=' + req.query.q);
+        // res.redirect('/searchResults.html?categoryOption=' + req.query.categoryOption + '&q=' + req.query.q);
         // const notes = await client.query('SELECT * FROM events where event_type_id = $1 AND topic::text ILIKE $2',['categoryOption','%req.query.q%'])
-        const notes = await client.query('SELECT * FROM events WHERE topic ILIKE $1' ,['%'+req.query.q +'%'] )
-        res.json(notes.rows)
         // console.log(notes.rows);
         
         
-
+        const notes = await client.query('SELECT * FROM events WHERE topic ILIKE $1' ,['%'+req.query.q +'%'] )
+        res.json(notes.rows)
+        
+        
     }
     else {
         // serve normal search form, user just came into the search page
         return res.render('main/search');
     }
-
+    
     // console.log(req.body);
-
+    
 })
