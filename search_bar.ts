@@ -18,6 +18,8 @@ import bodyParser from 'body-parser'
 export let searchRoute = express.Router();
 searchRoute.use(bodyParser.urlencoded({ extended: true }))
 searchRoute.use(bodyParser.json())
+
+
 //search bar in category page (ajax)
 searchRoute.get('/search-entertainment', async (req, res) => {
     // const participantNumber = (await client.query('SELECT *, (SELECT count(*) FROM join_group where event_id = events.id) as join_group FROM events;')).rows
@@ -34,37 +36,27 @@ searchRoute.get('/search-foodie-group', async (req, res) => {
 });
 
 
-//search bar in main page (form submission)
-// searchRoute.post('/searchResults', async function (req, res, next) {
-//     console.log('herehi');
+//search bar in main page 
+// :id placholder
+searchRoute.get('/searchResults/', async (req, res) => {
+    console.log(req.query);
     
-//     res.redirect('/searchResults.html?categoryOption=' + req.body.categoryOption + '&q=' + req.body.q);
-
-// });
-searchRoute.get('/searchResults', async (req, res) => {
     if (req.query.q) {
-        // console.log(req.query.q);
-        // console.log(req.query.categoryOption?.toString());
-        // const categoryOptionString: any = req.query.categoryOption?.toString()
-        // const categoryOption = parseInt(categoryOptionString)
-        // console.log(categoryOption);
-        
-
-        // res.redirect('/searchResults.html?categoryOption=' + req.query.categoryOption + '&q=' + req.query.q);
-        // const notes = await client.query('SELECT * FROM events where event_type_id = $1 AND topic::text ILIKE $2',['categoryOption','%req.query.q%'])
-        // console.log(notes.rows);
+        console.log(req.query.q);
+        console.log(req.query.categoryOption);
+        console.log('get here');
         
         
-        const notes = await client.query('SELECT * FROM events WHERE topic ILIKE $1' ,['%'+req.query.q +'%'] )
+        const notes = await client.query('SELECT * FROM events WHERE topic ILIKE $1 AND event_type_id = $2' ,['%'+req.query.q +'%' , req.query.categoryOption] )
         res.json(notes.rows)
+        console.log(notes.rows);
+        
         
         
     }
     else {
-        // serve normal search form, user just came into the search page
-        return res.render('main/search');
+       res.send('404');
     }
     
-    // console.log(req.body);
     
 })

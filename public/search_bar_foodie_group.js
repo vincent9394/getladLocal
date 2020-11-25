@@ -26,7 +26,6 @@ const loadEvents = async () => {
 const displayEvents = (events) => {
     const htmlString = events
         .map((event) => {
-            console.log(event.topic);
             return `
             <div class="card">
                         <h5 class="card-title">${event.topic}</h5>

@@ -3,7 +3,7 @@ body {
     background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
     height: 150vh;
     /* display: flex; */
-    position: relative;
+    /* position: relative; */
     font-size: 1em;
 
 }

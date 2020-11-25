@@ -104,13 +104,13 @@ if ($(window).width() > 992) {
 }
 
 let joinButtons = document.querySelectorAll('.joinButton')
-for(let joinButton of joinButtons) {
-    joinButton.addEventListener('click', function(event){
+for (let joinButton of joinButtons) {
+    joinButton.addEventListener('click', function (event) {
         event.preventDefault()
         event.target.toggle = !event.target.toggle
-        if(event.target.toggle == false) {
+        if (event.target.toggle == false) {
             joinButton.innerHTML = '加入'
-        } else if(event.target.toggle == true) {
+        } else if (event.target.toggle == true) {
             joinButton.innerHTML = '已加入'
         }
     })
@@ -130,8 +130,8 @@ for (let bookmarkButton of bookmarkButtons) {
 }
 
 let cardTitles = document.querySelectorAll('.card-title')
-for(let cardTitle of cardTitles){
-    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
+for (let cardTitle of cardTitles) {
+    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
 }
 
 let map;
@@ -165,11 +165,11 @@ for (let showMoreButton of showMoreButtons) {
 
 let rows = document.querySelectorAll('.row')
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     console.log('loaded')
-    for(let row of rows) {
-        for(let i = 0 ; i < 3 ; i++)
-        row.innerHTML += `
+    for (let row of rows) {
+        for (let i = 0; i < 3; i++)
+            row.innerHTML += `
         <div id="cardFlex">
                     <div class="card" style="width: 18rem;">
                         <h5 class="card-title">鬥食十三么</h5>
@@ -187,3 +187,5 @@ window.addEventListener('load', function() {
         `
     }
 })
+
+
