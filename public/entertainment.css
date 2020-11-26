@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231));
     height: 150vh;
     /* display: flex; */
     position: relative;
@@ -47,16 +47,16 @@ body {
         padding: 0 !important;
         align-items: unset !important;
     }
-    .login {
+    .login, .logout, .loginEdit{
         font-size: small !important;
     }
 }
 .logo{
     font-family: 'Rock Salt', cursive;
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 30px;
+    margin-bottom: 5px;
 }
-.login, .login:hover, .login::selection{
+.login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection,.loginEdit, .loginEdit:hover, .loginEdit::selection{
     background-color: #14365C ;
     color: white ;
     border: none ;

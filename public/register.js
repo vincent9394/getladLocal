@@ -49,9 +49,9 @@ if ($(window).width() > 992) {
 
 
         <div class="navbar add" id="main_nav">
-        <form class="form-inline my-2 my-lg-0 login" action="/login.html">
+        <form class="form-inline my-2 my-lg-0 login">
 
-            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit" >Login</button>
+            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Login</button>
         </form>
             <div class="nav-item dropdown ">
                 <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
@@ -102,13 +102,13 @@ if ($(window).width() > 992) {
 }
 
 let joinButtons = document.querySelectorAll('.joinButton')
-for (let joinButton of joinButtons) {
-    joinButton.addEventListener('click', function (event) {
+for(let joinButton of joinButtons) {
+    joinButton.addEventListener('click', function(event){
         event.preventDefault()
         event.target.toggle = !event.target.toggle
-        if (event.target.toggle == false) {
+        if(event.target.toggle == false) {
             joinButton.innerHTML = '加入'
-        } else if (event.target.toggle == true) {
+        } else if(event.target.toggle == true) {
             joinButton.innerHTML = '已加入'
         }
     })
@@ -128,8 +128,8 @@ for (let bookmarkButton of bookmarkButtons) {
 }
 
 let cardTitles = document.querySelectorAll('.card-title')
-for (let cardTitle of cardTitles) {
-    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+for(let cardTitle of cardTitles){
+    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
 }
 
 let map;
@@ -157,29 +157,21 @@ for (let showMoreButton of showMoreButtons) {
 }
 
 
-const loginForm = document.querySelector("#login-form")
-loginForm.addEventListener('submit', async function (event) {
-    event.preventDefault()
-    const res = await fetch('/login', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: loginForm.querySelector('input[name=username]').value,
-            password: loginForm.querySelector('input[name=password]').value
-
-        })
+const registerForm = document.querySelector("#registerform")
+registerForm.addEventListener('submit', async function (event) {
+  event.preventDefault()
+  const res = await fetch('./register', {
+    method: "POST",
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify ({    
+        username: registerForm.querySelector('input[name=username]').value,
+         password: registerForm.querySelector('input[name=password]').value
+       
     })
-    const json = await res.json();// << 轉化啲 response body (本身係 string) 做 JSON
-    console.log(json.result);
-    if (json.result) {
-        alert('success')
-        login = true
-        window.location.replace('./index.html')
-    } else {
-        alert('wrong pw')
-
-    }
 })
+})
+
+
 

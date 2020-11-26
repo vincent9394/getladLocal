@@ -8,6 +8,8 @@ function navbarTopic(){
                 navbarBrand.innerHTML = `GETLAD`
             } else if (location.pathname === `/my-page.html`) {
                 navbarBrand.innerHTML = `我的活動`
+            } else if (location.pathname === `/transport.html`) {
+                navbarBrand.innerHTML = `搭車`
             } 
 }
 
@@ -174,3 +176,20 @@ footer.innerHTML = `<div class="footer-container">
 
 </div>
 </div>`
+
+
+async function checkRole() {
+    // let res = await fetch('/username')
+    // let username = await res.json()
+    let logins = document.querySelectorAll('.login')
+    let username = 'user'
+    document.body.classList.remove('is-loading')            // why need is-loading if it is the same as is-guest ??
+    if (username) {
+        document.body.classList.add('is-member')
+        document.body.classList.remove('is-guest')
+    } else {
+        document.body.classList.remove('is-member')
+        document.body.classList.add('is-guest')
+    }
+}
+checkRole()

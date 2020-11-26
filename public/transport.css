@@ -1,10 +1,70 @@
 body {
-    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231));
     height: 150vh;
     /* display: flex; */
     position: relative;
-    font-size: 1.75rem;
+    font-size: 1em;
 
+}
+.getlad{
+    font-family: 'Rock Salt', cursive;
+    font-size: xx-large;
+}
+.footer-logo{
+    font-size: xx-large;
+    font-family: 'Rock Salt', cursive;
+    color: black;
+    margin-left: 12px;
+}
+@media screen and (min-width: 400px) and (max-width: 700px)  {
+    body{
+        background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+        height: 150vh;
+        /* display: flex; */
+        position: relative;
+        font-size: small !important;
+    }
+    #navbar_top{
+        padding: 0;
+    }
+    .navbar-container{
+        padding-left: 16px !important;
+        padding-top: 0 !important;
+        /* padding-bottom: 0 !important; */
+        padding-right: 0 !important;
+        display: flex !important;
+        align-content: center !important;
+    }
+    .navbar-left img {
+        width: 50%;
+        height: 50%;
+    }
+    .dropdown {
+        margin-top: 15px;
+    }
+    .add{
+        flex-wrap: nowrap !important;
+        padding: 0 !important;
+        align-items: unset !important;
+    }
+    .login, .logout, .loginEdit{
+        font-size: small !important;
+    }
+}
+.logo{
+    font-family: 'Rock Salt', cursive;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+.login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection,.loginEdit, .loginEdit:hover, .loginEdit::selection{
+    background-color: #14365C ;
+    color: white ;
+    border: none ;
+
+    font-size: 24px;
+}
+.toggle, .toggle::selection{
+    border: none !important;
 }
 .navbar-left{
     display: flex;
@@ -29,13 +89,21 @@ body {
     padding-right: 16px;
     width: 100%;
 }
-
+.navbar-brand{
+    font-size: 24px;
+}
+.dropdown-item{
+    font-size: 24px;
+}
 .searchBarFlex {
     display: flex;
     justify-content: center;
     margin-top: 20px;
     max-width: 100%;
     min-width: 100%;
+}
+#magnifier {
+    vertical-align: middle;
 }
 
 .categoryOption , .searchBar, .searchButton {
@@ -53,14 +121,15 @@ body {
 
 .searchBar {
     width: 500px;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 0px 0px 0px 0px;
 }
 
 .searchButton {
     display: flex;
     border-radius: 0 10px 10px 0;
     border-left: none;
-    align-content: center;
+    align-items: center;
+
 }
 
 @media screen and (max-width: 796px) {
@@ -71,7 +140,9 @@ body {
 .google-map {
     display: flex;
     height: 70vh;
-    align-items: center;
+    /* position: sticky;
+    left: 2px; */
+    align-items: flex-start;
     flex: 1;
     max-width: 100%;
 }
@@ -87,8 +158,10 @@ body {
 #map {
     height: 50%;
     min-height: 500px;
-    width: 100%;
-    margin: 20px;
+    width: 50%;
+    position: fixed !important;
+    z-index: 900;
+    /* margin: 20px; */
   }
 
   #cardFlex {
@@ -105,12 +178,18 @@ body {
     border-radius: 15px;
     height: max-content;
     width: 200px;
-    margin-right: 10px !important;
+    margin: 0px 20px 20px 20px !important;
+    border: none;
 }
 
 .card-title {
     padding: 5px;
-    margin: 5px;
+    margin: 0px;
+    border-radius: 15px 15px 0 0;
+    box-sizing: border-box;
+    color: white;
+    font-weight: bold;
+    text-align: center;
 }
 
 #description {
@@ -127,7 +206,10 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
+.joinButton {
+    background-color: rgb(20, 54, 92);
+    border: none;
+}
 .fa-bookmark {
     color: #D8D6D9;
     font-size: 24px;
@@ -147,11 +229,11 @@ box-sizing: inherit;
 /* display: flex; */
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
-background-color: #D8D6D9;
+color: #000000;
+background-color: #0000004d;
 z-index: 999;
 /* align-self: flex-end; */
-position: absolute;
+/* position: absolute; */
 bottom: 0;
 width: 100%;
 }
@@ -161,7 +243,7 @@ width: 100%;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 max-width: 100%;
 margin: 0 auto;
@@ -187,7 +269,7 @@ justify-content: space-between;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 margin: 0;
 padding: 0;
@@ -198,7 +280,7 @@ padding: 0;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 margin: 0;
 padding: 0;
@@ -213,12 +295,17 @@ justify-content: space-between;
 line-height: normal;
 font-weight: 600;
 font-size: .75rem;
-color: #fff;
+color: #000000;
 box-sizing: inherit;
 margin: 0;
 padding: 0;
 float: right;
 height: 5.625rem;
+}
+.copyright, .website-intro{
+    color: black;
+    font-size: medium;
+    margin-left: 15px;
 }
 
 
