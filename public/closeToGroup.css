@@ -198,7 +198,7 @@ h5 {
     text-align: end;
 }
 
-.joinAndBookmark {
+.bottomBar {
     display: flex;
     justify-content: space-between;
     align-items: center;

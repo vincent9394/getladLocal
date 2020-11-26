@@ -55,7 +55,7 @@ if ($(window).width() > 992) {
             </div>
         </div>
 
-        <a class="navbar-brand" href="#">娛樂</a>
+        <a class="navbar-brand" href="#">食野</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -88,9 +88,21 @@ function initMap() {
         zoom: 5,
     });
     
+    //end of google map API
 }
 
-
+let joinButtons = document.querySelectorAll('.joinButton')
+for(let joinButton of joinButtons) {
+    joinButton.addEventListener('click', function(event){
+        event.preventDefault()
+        event.target.toggle = !event.target.toggle
+        if(event.target.toggle == false) {
+            joinButton.innerHTML = '加入'
+        } else if(event.target.toggle == true) {
+            joinButton.innerHTML = '已加入'
+        }
+    })
+}
 let buttonToggle = false
 let bookmarkButtons = document.querySelectorAll('.fa-bookmark')
 for (let bookmarkButton of bookmarkButtons) {
@@ -104,8 +116,11 @@ for (let bookmarkButton of bookmarkButtons) {
     }
     )
 }
-//end of google map API
 
+let cardTitles = document.querySelectorAll('.card-title')
+for(let cardTitle of cardTitles){
+    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
+}
 
 //grid option
 let gridtoggle = false
@@ -131,3 +146,4 @@ for (let gridChoice of gridChoices) {
     })
 }
 //end of grid option
+

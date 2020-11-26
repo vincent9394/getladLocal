@@ -166,7 +166,7 @@ let loadingBar = document.querySelector('.loadingBar')
 window.addEventListener('scroll', () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    console.log({ scrollTop, scrollHeight, clientHeight });
+    // console.log({ scrollTop, scrollHeight, clientHeight });
     // clientHeight refers to the area we see ; scrollTop refers to the px we've scrolled ; scrollHeight refers to the sum of both 
     // because scrollTop value is rounded off, scrollHeight has to be minus 5 or more
     if (clientHeight + scrollTop >= scrollHeight - 100) {
@@ -185,7 +185,7 @@ function showContent() {
                                     <div class="card-body">
                                         <p class="card-text" id="description">搵人打牌 有意請tg</p>
                                         <p class="card-text" id="participationRate">人數: 5/10</p>
-                                        <div class="joinAndBookmark">
+                                        <div class="bottomBar">
                                             <a href="#" class="btn btn-primary joinButton">加入</a>
                                             <div class="bookmark"><i class="fas fa-bookmark"></i></div>
                                         </div>
