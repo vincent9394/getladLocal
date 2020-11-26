@@ -1,3 +1,17 @@
+function navbarTopic(){
+    const navbarBrand = document.querySelector('.navbar-topic')
+            if (location.pathname === `/entertainment.html`) {
+                navbarBrand.innerHTML = `娛樂`
+            } else if (location.pathname === `/foodie-group.html`) {
+                navbarBrand.innerHTML = '搵飯腳'
+            } else if (location.pathname === `/`) {
+                navbarBrand.innerHTML = `GETLAD`
+            } else if (location.pathname === `/my-page.html`) {
+                navbarBrand.innerHTML = `我的活動`
+            }
+}
+
+
 //////header
 const header = document.querySelector('header')
 header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex justify-content-between">
@@ -23,7 +37,7 @@ header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex jus
         </div>
     </div>
 
-    <a class="navbar-brand" href="#">娛樂</a>
+    <div class="navbar-brand"><span class="navbar-topic"></span></div>
 
 
     <div class="navbar add" id="main_nav">
@@ -46,9 +60,10 @@ header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex jus
 
 
 
+const navbarBrand = document.querySelector('.navbar-topic')
 
 ///////////////// fixed menu on scroll for desktop
-let login = document.querySelector('.navbar-container')
+const login = document.querySelector('.navbar-container')
 
 if ($(window).width() > 480) {
     $(window).scroll(function () {
@@ -70,7 +85,7 @@ if ($(window).width() > 480) {
                 </div>
             </div>
         </div>
-        <a class="navbar-brand" href="#">娛樂</a>
+        <div class="navbar-brand"><span class="navbar-topic"></span></div>
 
 
         <div class="navbar add" id="main_nav">
@@ -91,6 +106,7 @@ if ($(window).width() > 480) {
                 </div>
             </div>
         </div>`
+        navbarTopic()
         } else {
             $('#navbar_top').removeClass("fixed-top");
             login.innerHTML = `<div class="dropdown">
@@ -104,7 +120,7 @@ if ($(window).width() > 480) {
             </div>
         </div>
 
-        <a class="navbar-brand" href="#">娛樂</a>
+        <div class="navbar-brand"><span class="navbar-topic"></span></div>
 
 
         <div class="navbar add" id="main_nav">
@@ -121,6 +137,7 @@ if ($(window).width() > 480) {
                 </div>
             </div>
         </div>`
+        navbarTopic()
             // $( ".login" ).remove();
             // remove padding top from body
             $('body').css('padding-top', '0');
@@ -129,6 +146,7 @@ if ($(window).width() > 480) {
 }
 /////// end 
 
+navbarTopic()
 
 
 //////footer
