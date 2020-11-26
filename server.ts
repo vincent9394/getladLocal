@@ -1,6 +1,7 @@
 import express from 'express'
 import {searchRoute} from './search_bar'
 import {sortingRoute} from './sorting'
+import {createEventRoute} from './createEvent'
 
 
 let app = express()
@@ -8,6 +9,7 @@ let app = express()
 app.use(express.static('public'))
 app.use(searchRoute)
 app.use(sortingRoute)
+app.use(createEventRoute)
 
 
 let port = 8080

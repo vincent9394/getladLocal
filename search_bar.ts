@@ -39,24 +39,11 @@ searchRoute.get('/search-foodie-group', async (req, res) => {
 //search bar in main page 
 // :id placholder
 searchRoute.get('/searchResults/', async (req, res) => {
-    console.log(req.query);
-    
     if (req.query.q) {
-        console.log(req.query.q);
-        console.log(req.query.categoryOption);
-        console.log('get here');
-        
-        
-        const notes = await client.query('SELECT * FROM events WHERE topic ILIKE $1 AND event_type_id = $2' ,['%'+req.query.q +'%' , req.query.categoryOption] )
+        const notes = await client.query('SELECT * FROM events WHERE topic ILIKE $1 AND event_type_id = $2', ['%' + req.query.q + '%', req.query.categoryOption])
         res.json(notes.rows)
-        console.log(notes.rows);
-        
-        
-        
     }
     else {
-       res.send('404');
+        res.send('404');
     }
-    
-    
 })
