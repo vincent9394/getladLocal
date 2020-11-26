@@ -199,11 +199,13 @@ async function mostBookmarked() {
         let description = sortingResults[i]["description"]
         let topic = sortingResults[i]["topic"]
         let location = sortingResults[i]["location"]
-        let created_at = new Date(sortingResults[i]["created_at"]).toLocaleDateString('en-gb')
         let prerequisite = sortingResults[i]["prerequisite"]
         let joined = sortingResults[i]["participants"]
         let joinButton = bottomResults[i]["join_group_id"]
         let bookmarkButton = bottomResults[i]["bookmark_id"]
+        let eventDate = new Date(sortingResults[i]["date"]).toLocaleDateString('en-hk')
+        let eventId = sortingResults[i]["id"]
+
         console.log(joinButton)
 
         row.innerHTML += `
@@ -218,7 +220,7 @@ async function mostBookmarked() {
                     <div class="infoBar">
                         <p class="card-text" id="eventLocation">地點: ${location}</p>
                         <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
-                        <p class="card-text" id="dateAdded">加入日期: ${created_at}</p>
+                        <p class="card-text" id="dateAdded">活動日期: ${eventDate}</p>
                     </div>
                     <hr>
                     <form action="/bottomBar" method="POST" class="bottomBarForm">
@@ -227,7 +229,11 @@ async function mostBookmarked() {
                         <button class="btn btn-primary unjoinButton" ${joinButton == null ? "hidden" : ""}>已加入</button>
                         <div class="bookmark" ${bookmarkButton ? "hidden" : ""}><i class="fas fa-bookmark"></i></div>
                         <div class="unbookmark" ${bookmarkButton == null ? "hidden" : ""}><i class="fas fa-bookmark"></i></div>
-                        <input type="hidden" >
+                        <input type="hidden" name="joinButton" value="${joinButton}">
+                        <input type="hidden" name="unjoinButton" value="${"null"}">
+                        <input type="hidden" name="bookmark" value="${bookmarkButton}">
+                        <input type="hidden" name="unbookmark" value="${"null"}">
+                        <input type="hidden" name="eventId" value="${eventId}">
                     </div>
                     </form>
                 </div>

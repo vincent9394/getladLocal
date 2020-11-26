@@ -8,8 +8,15 @@ import {bottomBarRoute} from './bottomBar'
 
 
 
-
 let app = express()
+
+app.use((req,res,next)=> {
+    req['session'] = {
+        user: 15
+    } as any
+    next()
+})
+
 
 console.log(app);
 app.use(express.static('public'))

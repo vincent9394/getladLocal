@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 export const bottomBarRoute = express.Router();
 
 bottomBarRoute.post('/bottomBar', async (req, res) => {
-    let checkUserJoiningRecord = await client.query(`SELECT * FROM join_group where participant_id = ? and event_id = ?`)
+    let checkUserJoiningRecord = await client.query(`SELECT * FROM join_group where participant_id ? and event_id ?`)
     if (checkUserJoiningRecord.rows.length == 0) {
         let insertJoinRecord = await client.query('INSERT into join_group (event_id, participant_id) VALUES ($1, $2)', [req.body, req.body])
         if (insertJoinRecord.rows.length >= 0) {
