@@ -8,7 +8,7 @@ function navbarTopic(){
                 navbarBrand.innerHTML = `GETLAD`
             } else if (location.pathname === `/my-page.html`) {
                 navbarBrand.innerHTML = `我的活動`
-            }
+            } 
 }
 
 
@@ -22,12 +22,14 @@ header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex jus
 <form class="form-inline mx-2 my-2 my-lg-0">
     <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
     <button class="btn login my-2 my-sm-0" type="submit">Login</button>
+    <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
 </form>
 </div>
 <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
 <div class="navbar-container">
+
     <div class="dropdown">
-        <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
+        <button class="btn loginEdit dropdown-toggle" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             活動選頂
         </button>
@@ -36,6 +38,8 @@ header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex jus
             <a class="dropdown-item" href="#">編輯活動</a>
         </div>
     </div>
+
+
 
     <div class="navbar-brand"><span class="navbar-topic"></span></div>
 
@@ -47,7 +51,7 @@ header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex jus
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="my-page.html">我的活動</a>
+            <a class="dropdown-item myEvent" href="my-page.html">我的活動</a>
             <a class="dropdown-item" href="entertainment.html">娛樂</a>
             <a class="dropdown-item" href="transport.html">交通</a>
             <a class="dropdown-item" href="foodie-group.html">食飯</a>
@@ -74,16 +78,20 @@ if ($(window).width() > 480) {
             // $( ".login" ).remove();
             login.innerHTML = `<div class="navbar-left">
             <span class="logo">GETLAD</span>
+
             <div class="dropdown">
-                <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    活動選頂
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createEventModal">開新活動</a>
-                    <a class="dropdown-item" href="#">編輯活動</a>
-                </div>
-            </div>
+        <button class="btn loginEdit dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            活動選頂
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createEventModal">開新活動</a>
+            <a class="dropdown-item" href="#">編輯活動</a>
+        </div>
+    </div>
+
+    
+            
         </div>
         <div class="navbar-brand"><span class="navbar-topic"></span></div>
 
@@ -92,6 +100,7 @@ if ($(window).width() > 480) {
         <form class="form-inline my-2 my-lg-0">
 
             <button class="btn my-2 my-sm-0 login" type="submit">Login</button>
+            <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
         </form>
             <div class="nav-item dropdown ">
                 <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
@@ -99,7 +108,7 @@ if ($(window).width() > 480) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="my-page.html">我的活動</a>
+                <a class="dropdown-item myEvent" href="my-page.html">我的活動</a>
                 <a class="dropdown-item" href="entertainment.html">娛樂</a>
                 <a class="dropdown-item" href="transport.html">交通</a>
                 <a class="dropdown-item" href="foodie-group.html">食飯</a>
@@ -110,7 +119,7 @@ if ($(window).width() > 480) {
         } else {
             $('#navbar_top').removeClass("fixed-top");
             login.innerHTML = `<div class="dropdown">
-            <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
+            <button class="btn loginEdit dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 活動選頂
             </button>
@@ -119,6 +128,9 @@ if ($(window).width() > 480) {
                 <a class="dropdown-item" href="#">編輯活動</a>
             </div>
         </div>
+
+
+        
 
         <div class="navbar-brand"><span class="navbar-topic"></span></div>
 
@@ -130,7 +142,7 @@ if ($(window).width() > 480) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="my-page.html">我的活動</a>
+                    <a class="dropdown-item myEvent" href="my-page.html">我的活動</a>
                     <a class="dropdown-item" href="entertainment.html">娛樂</a>
                     <a class="dropdown-item" href="transport.html">交通</a>
                     <a class="dropdown-item" href="foodie-group.html">食飯</a>

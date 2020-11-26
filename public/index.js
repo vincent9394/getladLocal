@@ -25,84 +25,84 @@
 
 
 // fixed menu on scroll for desktop
-let login = document.querySelector('.navbar-container')
+// let login = document.querySelector('.navbar-container')
 
-if ($(window).width() > 992) {
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 40) {
-            $('#navbar_top').addClass("fixed-top").addClass('scrolled-down');
-            // add padding top to show content behind navbar
-            $('body').css('padding-top', $('.navbar').outerHeight() - 70 + 'px');
-            // $( ".login" ).remove();
-            login.innerHTML = `<div class="navbar-left">
-            <span class="logo">GETLAD</span>
-            <div class="dropdown">
-                <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    活動選頂
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">開新活動</a>
-                    <a class="dropdown-item" href="#">編輯活動</a>
-                </div>
-            </div>
-        </div>
-        <a class="navbar-brand" href="#">GetLad</a>
-
-
-        <div class="navbar add" id="main_nav">
-        <form class="form-inline my-2 my-lg-0">
-
-            <button class="btn my-2 my-sm-0 login" type="submit">Login</button>
-            <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
-        </form>
-            <div class="nav-item dropdown ">
-                <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">娛樂</a>
-                    <a class="dropdown-item" href="#">交通</a>
-                    <a class="dropdown-item" href="#">食飯</a>
-                </div>
-            </div>
-        </div>`
-        } else {
-            $('#navbar_top').removeClass("fixed-top");
-            login.innerHTML = `<div class="dropdown">
-            <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                活動選頂
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">開新活動</a>
-                <a class="dropdown-item" href="#">編輯活動</a>
-            </div>
-        </div>
-
-        <a class="navbar-brand" href="#">GetLad</a>
+// if ($(window).width() > 992) {
+//     $(window).scroll(function () {
+//         if ($(this).scrollTop() > 40) {
+//             $('#navbar_top').addClass("fixed-top").addClass('scrolled-down');
+//             // add padding top to show content behind navbar
+//             $('body').css('padding-top', $('.navbar').outerHeight() - 70 + 'px');
+//             // $( ".login" ).remove();
+//             login.innerHTML = `<div class="navbar-left">
+//             <span class="logo">GETLAD</span>
+//             <div class="dropdown">
+//                 <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
+//                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+//                     活動選頂
+//                 </button>
+//                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+//                     <a class="dropdown-item" href="#">開新活動</a>
+//                     <a class="dropdown-item" href="#">編輯活動</a>
+//                 </div>
+//             </div>
+//         </div>
+//         <a class="navbar-brand" href="#">GetLad</a>
 
 
-        <div class="navbar add" id="main_nav">
-            <div class="nav-item dropdown ">
-                <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">娛樂</a>
-                    <a class="dropdown-item" href="#">交通</a>
-                    <a class="dropdown-item" href="#">食飯</a>
-                </div>
-            </div>
-        </div>`
-            // $( ".login" ).remove();
-            // remove padding top from body
-            $('body').css('padding-top', '0');
-        }
-    });
-}
+//         <div class="navbar add" id="main_nav">
+//         <form class="form-inline my-2 my-lg-0">
+
+//             <button class="btn my-2 my-sm-0 login" type="submit">Login</button>
+//             <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
+//         </form>
+//             <div class="nav-item dropdown ">
+//                 <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
+//                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+//                     <span class="navbar-toggler-icon"></span>
+//                 </button>
+//                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+//                     <a class="dropdown-item" href="#">娛樂</a>
+//                     <a class="dropdown-item" href="#">交通</a>
+//                     <a class="dropdown-item" href="#">食飯</a>
+//                 </div>
+//             </div>
+//         </div>`
+//         } else {
+//             $('#navbar_top').removeClass("fixed-top");
+//             login.innerHTML = `<div class="dropdown">
+//             <button class="btn login dropdown-toggle" type="button" id="dropdownMenuButton"
+//                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+//                 活動選頂
+//             </button>
+//             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+//                 <a class="dropdown-item" href="#">開新活動</a>
+//                 <a class="dropdown-item" href="#">編輯活動</a>
+//             </div>
+//         </div>
+
+//         <a class="navbar-brand" href="#">GetLad</a>
+
+
+//         <div class="navbar add" id="main_nav">
+//             <div class="nav-item dropdown ">
+//                 <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
+//                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+//                     <span class="navbar-toggler-icon"></span>
+//                 </button>
+//                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+//                     <a class="dropdown-item" href="#">娛樂</a>
+//                     <a class="dropdown-item" href="#">交通</a>
+//                     <a class="dropdown-item" href="#">食飯</a>
+//                 </div>
+//             </div>
+//         </div>`
+//             // $( ".login" ).remove();
+//             // remove padding top from body
+//             $('body').css('padding-top', '0');
+//         }
+//     });
+// }
 
 let joinButtons = document.querySelectorAll('.joinButton')
 for (let joinButton of joinButtons) {
@@ -227,6 +227,7 @@ async function mostBookmarked() {
                         <button class="btn btn-primary unjoinButton" ${joinButton == null ? "hidden" : ""}>已加入</button>
                         <div class="bookmark" ${bookmarkButton ? "hidden" : ""}><i class="fas fa-bookmark"></i></div>
                         <div class="unbookmark" ${bookmarkButton == null ? "hidden" : ""}><i class="fas fa-bookmark"></i></div>
+                        <input type="hidden" >
                     </div>
                     </form>
                 </div>
@@ -417,6 +418,7 @@ mostSuccessfulRate()
 async function checkRole() {
     // let res = await fetch('/username')
     // let username = await res.json()
+    let logins = document.querySelectorAll('.login')
     let username = 'user'
     document.body.classList.remove('is-loading')            // why need is-loading if it is the same as is-guest ??
     if (username) {

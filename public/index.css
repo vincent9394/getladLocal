@@ -5,6 +5,22 @@ body {
     /* position: relative; */
     /* font-family: ele; */
 }
+
+.getlad{
+    font-family: 'Rock Salt', cursive;
+    font-size: xx-large;
+}
+.footer-logo{
+    font-size: xx-large;
+    font-family: 'Rock Salt', cursive;
+    color: black;
+    margin-left: 12px;
+}
+
+#navbar_top {
+    z-index: 999;
+}
+
 @media screen and (min-width: 400px) and (max-width: 700px)  {
     body{
         background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
@@ -15,6 +31,7 @@ body {
     }
     #navbar_top{
         padding: 0;
+        z-index: 999;
     }
     .navbar-container{
         padding-left: 16px !important;
@@ -36,15 +53,16 @@ body {
         padding: 0 !important;
         align-items: unset !important;
     }
-    .login, .logout {
+    .login, .logout, .loginEdit {
         font-size: small !important;
     }
 }
 .logo{
-    font-family: Elektora;
-    font-size: 30px;
+    font-family: 'Rock Salt', cursive;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
-.login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection{
+.login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection, .loginEdit, .loginEdit:hover, .loginEdit::selection{
     background-color: #14365C ;
     color: white ;
     border: none ;
@@ -80,7 +98,7 @@ body {
 .navbar-brand{
     font-size: 24px;
 }
-.dropdown-item{
+.dropdown-item, .myEvent{
     font-size: 24px;
 }
 
@@ -459,7 +477,7 @@ footer{
 
 
 /* innerHTML css */
-.is-loading .logout, .is-guest .logout {
+.is-loading .logout, .is-guest .logout, .is-loading .loginEdit, .is-guest .loginEdit, .is-loading .myEvent, .is-guest .myEvent{
     display: none;
 }
 
