@@ -5,6 +5,22 @@ body {
     /* position: relative; */
     /* font-family: ele; */
 }
+
+.getlad{
+    font-family: 'Rock Salt', cursive;
+    font-size: xx-large;
+}
+.footer-logo{
+    font-size: xx-large;
+    font-family: 'Rock Salt', cursive;
+    color: black;
+    margin-left: 12px;
+}
+
+#navbar_top {
+    z-index: 999;
+}
+
 @media screen and (min-width: 400px) and (max-width: 700px)  {
     body{
         background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
@@ -15,6 +31,7 @@ body {
     }
     #navbar_top{
         padding: 0;
+        z-index: 999;
     }
     .navbar-container{
         padding-left: 16px !important;
@@ -36,15 +53,16 @@ body {
         padding: 0 !important;
         align-items: unset !important;
     }
-    .login {
+    .login, .logout, .loginEdit {
         font-size: small !important;
     }
 }
 .logo{
-    font-family: Elektora;
-    font-size: 30px;
+    font-family: 'Rock Salt', cursive;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
-.login, .login:hover, .login::selection{
+.login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection, .loginEdit, .loginEdit:hover, .loginEdit::selection{
     background-color: #14365C ;
     color: white ;
     border: none ;
@@ -80,7 +98,7 @@ body {
 .navbar-brand{
     font-size: 24px;
 }
-.dropdown-item{
+.dropdown-item, .myEvent{
     font-size: 24px;
 }
 
@@ -315,15 +333,26 @@ h5 {
     border: none;
 }
 
+.unjoinButton {
+    background-color: rgb(4, 102, 214);
+    border: none;
+}
+
 .fa-bookmark {
     color: #D8D6D9;
     font-size: 24px;
     transition: 200ms;
 }
 
-.fa-bookmark:hover {
+.fa-bookmark:hover, .unbookmark .fa-bookmark:hover {
     cursor: pointer;
     transform: scale(1.05);
+}
+
+.unbookmark .fa-bookmark {
+    color: #F3C20C;
+    font-size: 24px;
+    transition: 200ms;
 }
 
 #map {
@@ -360,87 +389,119 @@ html, body {
 
 footer{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-box-sizing: inherit;
-/* display: flex; */
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-background-color: #0000004d;
-z-index: 999;
-/* align-self: flex-end; */
-/* position: absolute; */
-bottom: 0;
-width: 100%;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    box-sizing: inherit;
+    /* display: flex; */
+    font-weight: 600;
+    font-size: .75rem;
+    color: #000000;
+    background-color: #0000004d;
+    z-index: 999;
+    /* align-self: flex-end; */
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
 }
 .footer-container{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-max-width: 100%;
-margin: 0 auto;
-padding: 0;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #000000;
+    box-sizing: inherit;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
 }
 .footer-grid {
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #fff;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
-display: flex;
-flex-flow: row wrap;
-justify-content: space-between;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #fff;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
 }
 .sidebar{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #000000;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
 }
 .main clearfix{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
-width: 100%;
-min-width: 100%;
-display: flex;
-justify-content: space-between;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #000000;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 .float-right {
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
--webkit-font-smoothing: antialiased;
-line-height: normal;
-font-weight: 600;
-font-size: .75rem;
-color: #000000;
-box-sizing: inherit;
-margin: 0;
-padding: 0;
-float: right;
-height: 5.625rem;
+    -webkit-font-smoothing: antialiased;
+    line-height: normal;
+    font-weight: 600;
+    font-size: .75rem;
+    color: #000000;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    float: right;
+    height: 5.625rem;
 }
 .copyright, .website-intro{
     color: black;
     font-size: medium;
     margin-left: 15px;
 }
+
+
+
+/* innerHTML css */
+.is-loading .logout, .is-guest .logout, .is-loading .loginEdit, .is-guest .loginEdit, .is-loading .myEvent, .is-guest .myEvent{
+    display: none;
+}
+
+
+
+.is-member .login {
+    display: none;
+}
+
+
+.is-loading .joinButton, .is-loading .unjoinButton, .is-loading .bookmark, .is-loading .unbookmark {
+    display: none;
+}
+
+
+
+.is-guest .joinButton, .is-guest .unjoinButton, .is-guest .bookmark, .is-guest .unbookmark {
+    display: none;
+}
+
+
+
+.is-member .joinButton, .is-member .unjoinButton, .is-member .bookmark, .is-member .unbookmark {
+    display: block;
+}
+
+

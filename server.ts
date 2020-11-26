@@ -8,6 +8,10 @@ import grant from 'grant';
 import { client } from './db';
 import bcrypt from 'bcryptjs';
 import expressSession from 'express-session';
+import {bottomBarRoute} from './bottomBar'
+
+
+
 
 
 let app = express()
@@ -20,10 +24,21 @@ app.use(expressSession({
 
 
 
+app.use((req,res,next)=> {
+    req['session'] = {
+        user: 15
+    } as any
+    next()
+})
+
+
+console.log(app);
 app.use(express.static('public'))
 app.use(searchRoute)
 app.use(sortingRoute)
 app.use(createEventRoute)
+app.use(bottomBarRoute)
+
 
 
 let port = 8080

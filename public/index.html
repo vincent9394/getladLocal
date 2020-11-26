@@ -14,22 +14,26 @@
     <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS324XkzWyfddSLnfpJzw6elPlctwGjzY&callback=initMap">
         </script>
-    <!-- <script defer
-    src="https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
-    +Mountain+View,+CA&key=AIzaSyBS324XkzWyfddSLnfpJzw6elPlctwGjzY">
-    </script> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
+<body class="is-loading">
     <header>
-        <div class="bg-white text-dark py-4 border-bottom d-flex justify-content-between">
+        <!-- <div class="bg-white text-dark py-4 border-bottom d-flex justify-content-between">
             <div class="container d-flex align-items-center mr-1 ml-1">
                 <img src="./images/logowithoutbg.png">
             </div>
+<<<<<<< HEAD
             <form class="form-inline mx-2 my-2 my-lg-0" action="/login.html">
                 <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
                 <button class="btn login my-2 my-sm-0" type="submit">Login</button>
+=======
+            <form class="form-inline mx-2 my-2 my-lg-0">
+                <button class="btn login my-2 my-sm-0 " type="submit">Login</button>
+                <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
+>>>>>>> 0663e3d6fd12c1c68afcb810595b15f471c3867e
             </form>
         </div>
         <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
@@ -61,10 +65,89 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </div> -->
+        <!-- </nav> -->
 
     </header>
+    <!-- Modal -->
+    <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="createEvent">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">建立活動</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="categoryOption" class="col-form-label">揀類型：</label>
+                            <select id="categoryOption" name="categoryOption">
+                                <option name="transportation" value="1">交通</option>
+                                <option name="entertainment" value="2">娛樂</option>
+                                <option name="foodieGroup" value="3">飲食</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">活動名:</label>
+                            <input name='topic' type="text" class="form-control" id="topic" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-form-label">形容吓個活動:</label>
+                            <textarea name="description" class="form-control" id="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="prerequisite" class="col-form-label">人數:</label>
+                            <input name='prerequisite' type="number" class="form-control" id="prerequisite" min="2"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="col-form-label">地點:</label>
+                            <input name='location' type="text" class="form-control" id="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date" class="col-form-label">日期:</label>
+                            <input type="date" name="date" required pattern="\d{4}-\d{2}-\d{2}">
+                        </div>
+                        <div class="form-group">
+                            <label for="time" class="col-form-label">時間:</label>
+                            <input id="time" type="time" name="time" required pattern="[0-9]{2}:[0-9]{2}">
+                        </div>
+                        <div class="form-group">
+                            <p class="col-form-label">本人參唔參加？</p>
+                            <div>
+                                <input type="radio" id="join" name="join-group" value="1" checked>
+                                <label for="join">參加</label>
+
+                                <input type="radio" id="no-join" name="join-group" value="0">
+                                <label for="no-join">唔參加</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">唔開</button>
+                        <button type="submit" class="btn btn-primary">開團！</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="success-create-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    成功開團!
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- end of Modal -->
 
     <article>
         <div class="hkMap">
@@ -205,9 +288,8 @@
 
 
     <footer class="footer">
-        <div class="footer-container">
+        <!-- <div class="footer-container">
             <div class="footer-grid">
-                <!-- <div class="sidebar"></div> -->
 
                 <div class="float-left"><a class="logo" title="GetLad"><img src="./images/logowithoutbg.png"
                             alt="GetLad"></a>
@@ -216,7 +298,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
     </footer>
 
 
@@ -232,6 +314,8 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
     <script src="index.js"></script>
+    <script src="navbarAndFooter.js"></script>
+    <script src="createEvent.js"></script>
 </body>
 
 </html>
