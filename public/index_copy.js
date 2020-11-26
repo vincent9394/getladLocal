@@ -4,6 +4,7 @@
 // let gridChoiceFlex = document.querySelector('.gridChoiceFlex')
 
 
+
 // gridOption.addEventListener('click', function () {
 //     gridtoggle = !gridtoggle
 //     if (gridtoggle == false) {
@@ -21,6 +22,7 @@
 //         gridtoggle = false
 //     })
 // }
+
 
 // fixed menu on scroll for desktop
 let login = document.querySelector('.navbar-container')
@@ -45,7 +47,7 @@ if ($(window).width() > 992) {
                 </div>
             </div>
         </div>
-        <a class="navbar-brand" href="#">搜尋結果</a>
+        <a class="navbar-brand" href="#">GetLad</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -78,7 +80,7 @@ if ($(window).width() > 992) {
             </div>
         </div>
 
-        <a class="navbar-brand" href="#">搜尋結果</a>
+        <a class="navbar-brand" href="#">GetLad</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -99,16 +101,16 @@ if ($(window).width() > 992) {
             $('body').css('padding-top', '0');
         }
     });
-} // end if
+}
 
 let joinButtons = document.querySelectorAll('.joinButton')
-for(let joinButton of joinButtons) {
-    joinButton.addEventListener('click', function(event){
+for (let joinButton of joinButtons) {
+    joinButton.addEventListener('click', function (event) {
         event.preventDefault()
         event.target.toggle = !event.target.toggle
-        if(event.target.toggle == false) {
+        if (event.target.toggle == false) {
             joinButton.innerHTML = '加入'
-        } else if(event.target.toggle == true) {
+        } else if (event.target.toggle == true) {
             joinButton.innerHTML = '已加入'
         }
     })
@@ -128,21 +130,26 @@ for (let bookmarkButton of bookmarkButtons) {
 }
 
 let cardTitles = document.querySelectorAll('.card-title')
-for(let cardTitle of cardTitles){
-    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
+for (let cardTitle of cardTitles) {
+    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
 }
 
 let map;
 
 function initMap() {
     let allMap = document.querySelectorAll("#map")
+    let hkMap = document.querySelector(".hkMap #map")
     for (let getMap of allMap) {
         map = new google.maps.Map(getMap, {
             center: { lat: 22.379812, lng: 114.134938 },
             zoom: 13,
         });
-    }
 
+        map = new google.maps.Map(hkMap, {
+            center: { lat: 22.289437, lng: 113.940938 },
+            zoom: 13,
+        });
+    }
 }
 
 // show more animation
@@ -155,5 +162,30 @@ for (let showMoreButton of showMoreButtons) {
         showMoreButton.style.transform = "scale(1)"
     })
 }
+
+let rows = document.querySelectorAll('.row')
+
+window.addEventListener('load', function () {
+    console.log('loaded')
+    for (let row of rows) {
+        for (let i = 0; i < 3; i++)
+            row.innerHTML += `
+        <div id="cardFlex">
+                    <div class="card" style="width: 18rem;">
+                        <h5 class="card-title">鬥食十三么</h5>
+                        <div id="map"></div>
+                        <div class="card-body">
+                            <p class="card-text" id="description"></p>
+                            <p class="card-text" id="participationRate">人數: 5/10</p>
+                            <div class="bottomBar">
+                                <a href="#" class="btn btn-primary joinButton">加入</a>
+                                <div class="bookmark"><i class="fas fa-bookmark"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        `
+    }
+})
 
 

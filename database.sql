@@ -22,7 +22,7 @@ CREATE TABLE events (
     creator_id INTEGER,
     FOREIGN KEY (creator_id) REFERENCES users(id),
     description TEXT,
-    date DATE,
+    date TIMESTAMP,
     location VARCHAR(255),
     topic VARCHAR(255),
     prerequisite INTEGER,
