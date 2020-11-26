@@ -55,7 +55,7 @@ createEventRoute.post('/createEvent', async (req, res) => {
         await client.query('INSERT INTO join_group(event_id) VALUES ($1)', [
             parseInt(eventID.rows[0].id)
         ])
-        console.log(eventID.rows);
+        console.log("added eventID:" + eventID.rows);
     }
     //with user id//
     // if (req.body?.joinGroup == 1) {
