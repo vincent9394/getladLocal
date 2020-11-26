@@ -6,7 +6,7 @@ CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     login_name VARCHAR(255),
-    password VARCHAR(15),
+    password VARCHAR(255),
     isAdmin BOOL,
     created_at TIMESTAMP,
     last_login TIMESTAMP
