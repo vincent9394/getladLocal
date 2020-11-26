@@ -8,6 +8,8 @@ function navbarTopic(){
                 navbarBrand.innerHTML = `GETLAD`
             } else if (location.pathname === `/my-page.html`) {
                 navbarBrand.innerHTML = `我的活動`
+            } else if (location.pathname === `/transport.html`) {
+                navbarBrand.innerHTML = `搭車`
             } 
 }
 

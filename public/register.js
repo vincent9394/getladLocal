@@ -49,9 +49,9 @@ if ($(window).width() > 992) {
 
 
         <div class="navbar add" id="main_nav">
-        <form class="form-inline my-2 my-lg-0 login" action="/login.html">
+        <form class="form-inline my-2 my-lg-0 login">
 
-            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit" >Login</button>
+            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Login</button>
         </form>
             <div class="nav-item dropdown ">
                 <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
@@ -157,10 +157,10 @@ for (let showMoreButton of showMoreButtons) {
 }
 
 
-const loginForm = document.querySelector("#loginform")
-    loginForm.addEventListener('submit', async function (event) {
+const registerForm = document.querySelector("#registerform")
+registerForm.addEventListener('submit', async function (event) {
   event.preventDefault()
-  const res = await fetch('./login', {
+  const res = await fetch('./register', {
     method: "POST",
     headers: {
         'Content-Type': 'application/json'
@@ -171,4 +171,7 @@ const loginForm = document.querySelector("#loginform")
        
     })
 })
+
+
+
 
