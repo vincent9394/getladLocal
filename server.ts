@@ -12,7 +12,7 @@ dotenv.config();
 import grant from 'grant';
 import { client } from './db';
 import bcrypt from 'bcryptjs';
-// import expressSession from 'express-session';
+import expressSession from 'express-session';
 
 
 
@@ -21,12 +21,12 @@ import bcrypt from 'bcryptjs';
 
 let app = express()
 
-app.use((req,res,next)=> {
-    req['session'] = {
-        user: 15
-    } as any
-    next()
-})
+// app.use((req,res,next)=> {
+//     req['session'] = {
+//         user: 15
+//     } as any
+//     next()
+// })
 
 app.use(expressSession({
     secret: 'Tecky cohort-12 group-1',
@@ -69,6 +69,7 @@ app.post('/login', async (req, res) => {
         if (await bcrypt.compare(req.body.password, users[0].password)){
             req.session['user'] = users[0].id
             res.json({result: true})
+            console.log(users[0].id)
             
         } else {
             res.json({result:false})
