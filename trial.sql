@@ -167,3 +167,6 @@ WITH
         and 
         join_count < events.prerequisite
     ORDER BY percent desc LIMIT 5;
+
+
+    SELECT * FROM join_group where participant_id = 15 and event_id = 26;

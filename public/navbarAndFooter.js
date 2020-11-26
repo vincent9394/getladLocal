@@ -182,7 +182,8 @@ async function checkRole() {
     // let res = await fetch('/username')
     // let username = await res.json()
     let logins = document.querySelectorAll('.login')
-    let username = 'user'
+    let res = await fetch('/session')
+    let username = await res.json()
     document.body.classList.remove('is-loading')            // why need is-loading if it is the same as is-guest ??
     if (username) {
         document.body.classList.add('is-member')
