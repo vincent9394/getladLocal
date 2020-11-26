@@ -26,21 +26,16 @@ const loadEvents = async () => {
 const displayEvents = (events) => {
     const htmlString = events
         .map((event) => {
-            return `<div class="card" style="width: 18rem;">
-            <h5 class="card-title">${event.topic}</h5> <!-- change card-title.innerHTML -->
-    
+            return ` <div class="card">
+            <h5 class="card-title">${event.topic}</h5>
             <div class="card-body">
                 <p class="card-text" id="description">${event.description}</p>
-                <!-- change description.innerHTML -->
-                <hr>
-                <div class="infoBar">
-                    <p class="card-text" id="eventLocation">地點: ${event.location}</p>
-                    <p class="card-text" id="participationRate">人數: {participantNumber}/${event.prerequisite}</p>
-                    <!-- change participationRate.innerHTML -->
-                    <p class="card-text" id="dateAdded">活動日期: ${new Date(event.date).toLocaleDateString('en-hk')}</p>
+                <p class="card-text" id="participationRate">人數: {participantNumber}/${event.prerequisite}</p>
+                <p class="card-text" id="dateAdded">活動日期: ${new Date(event.date).toLocaleDateString('en-hk')}</p>
+                <div class="joinAndBookmark">
+                    <a href="#" class="btn btn-primary joinButton">加入</a>
+                    <div class="bookmark"><i class="fas fa-bookmark"></i></div>
                 </div>
-                <hr>
-                
             </div>
         </div>
         `;

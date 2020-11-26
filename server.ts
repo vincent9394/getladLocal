@@ -13,13 +13,15 @@ import grant from 'grant';
 import { client } from './db';
 import bcrypt from 'bcryptjs';
 import expressSession from 'express-session';
-
+import bodyParser from 'body-parser'
 
 
 
 
 
 let app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // app.use((req,res,next)=> {
 //     req['session'] = {
@@ -28,21 +30,18 @@ let app = express()
 //     next()
 // })
 
-app.use(expressSession({
+const sessionMiddleware = expressSession({
     secret: 'Tecky cohort-12 group-1',
     saveUninitialized:true,
     resave:true
-}));
-
+});
+app.use(sessionMiddleware)
 
 
 
 
 app.use(express.static('public'))
-app.use(searchRoute)
-app.use(sortingRoute)
-app.use(createEventRoute)
-app.use(bottomBarRoute)
+
 
 
 
@@ -59,25 +58,33 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-    console.log(req.body)
     const users = (await client.query('SELECT * FROM users WHERE login_name = $1', [
         req.body.username
     ])).rows;
-    if (users.length == 0 || req.session == null){
+    
+    
+    if (users.length == 0 ){
         res.json({result:false})
+        
     } else {
-        if (await bcrypt.compare(req.body.password, users[0].password)){
+        console.log('correct user id');
+        // if (await bcrypt.compare(req.body.password, users[0].password)){
             req.session['user'] = users[0].id
             res.json({result: true})
             console.log(users[0].id)
             
-        } else {
-            res.json({result:false})
-        }
+        // } else {
+        //     res.json({result:false})
+        // }
 
     }
 
 })
+
+app.use(searchRoute)
+app.use(sortingRoute)
+app.use(createEventRoute)
+app.use(bottomBarRoute)
 
 // app.post('/login', async (req, res) => {
 //     console.log(req.body)
