@@ -9,8 +9,8 @@ dotenv.config()
 
 const client = new Client({
     database: process.env.DB_NAME,
-    user: process.env.DB_USERNAME_ADMIN,
-    password: process.env.DB_PASSWORD_ADMIN
+    user: process.env.DB_ADMIN_USERNAME,
+    password: process.env.DB_ADMIN_PASSWORD
 })
 
 const workbook = xlsx.readFile('./ExcelTables/GetLad.xlsx')

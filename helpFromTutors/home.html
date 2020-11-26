@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <title>Event Land</title>
+    <style>
+        .is-loading .guest,
+        .is-loading .member {
+            display: none;
+        }
+
+        .is-member .guest {
+            display: none;
+        }
+
+        .is-guest .member {
+            display: none;
+        }
+
+        .event {
+            display: inline-block;
+            border: 1px solid black;
+            margin: 0.5em;
+            padding: 0.5em;
+        }
+    </style>
+</head>
+
+<body class="is-loading">
+
+    <h1>Home Page</h1>
+    <div class="guest">
+        <button>Login</button>
+        <button>Signup</button>
+    </div>
+
+    <div class="events">
+        
+    </div>
+
+    <script>
+        async function loadEvents() {
+
+            let events = await [
+                { title: 'xxx', joined: 1 },
+                { title: 'ttt', joined: 0 },
+                { title: 'yyy', joined: 0 },
+                { title: 'zzz', joined: 1 },
+                { title: 'hhh', joined: 1 },
+            ]
+            let html = ''
+            for (let event of events) {
+                html += `
+<div class="event">
+    <h2>${event.title}</h2>
+    <button class="member" ${event.joined ? 'hidden' : ''}>Join</button>
+    <div class="member" ${!event.joined ? 'hidden' : ''}>Already join</div>
+</div>
+        `
+            }
+            document.querySelector('.events').innerHTML = html
+        }
+        loadEvents()
+
+        async function checkRole() {
+            // let res = await fetch('/username')
+            // let username = await res.json()
+            let username = await 'alice'
+            document.body.classList.remove('is-loading')
+            if (username) {
+                document.body.classList.add('is-member')
+                document.body.classList.remove('is-guest')
+            } else {
+                document.body.classList.remove('is-member')
+                document.body.classList.add('is-guest')
+            }
+        }
+        checkRole()
+
+        let joinButtons = document.querySelectorAll('.joinButton')
+    for (let joinButton of joinButtons) {
+
+        joinButton.addEventListener('click', function (event) {
+            event.preventDefault()
+            event.target.toggle = !event.target.toggle
+            if (event.target.toggle == false) {
+                joinButton.innerHTML = '已加入'
+            } else if (event.target.toggle == true) {
+                joinButton.innerHTML = '加入'
+            }
+        })
+
+    }
+
+    let anotherJoinButtons = document.querySelectorAll('.joinButton')
+    for (let anotherJoinButton of anotherJoinButtons) {
+
+        anotherJoinButton.addEventListener('click', function (event) {
+            event.preventDefault()
+            event.target.toggle = !event.target.toggle
+            if (event.target.toggle == false) {
+                anotherJoinButton.innerHTML = '已加入'
+            } else if (event.target.toggle == true) {
+                anotherJoinButton.innerHTML = '加入'
+            }
+        })
+
+    }
+    </script>
+</body>
+
+</html>

@@ -66,3 +66,11 @@ where
 ORDER BY percent desc
 ;
 
+
+
+SELECT * FROM events LEFT OUTER JOIN join_group on events.id = join_group.event_id WHERE join_group.participant_id = req.session.user.id ORDER BY events.date desc;
+SELECT * FROM events LEFT OUTER JOIN join_group on events.id = join_group.event_id WHERE join_group.participant_id = 24 ORDER BY events.date desc;
+
+
+SELECT * FROM events LEFT OUTER JOIN bookmark on events.id = bookmark.event_id WHERE bookmark.user_id = req.session.user.id ORDER BY events.date desc;
+SELECT * FROM events LEFT OUTER JOIN bookmark on events.id = bookmark.event_id WHERE bookmark.user_id = 23 ORDER BY events.date desc;
