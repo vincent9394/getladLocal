@@ -2,19 +2,31 @@ import express from 'express'
 import {searchRoute} from './search_bar'
 import {sortingRoute} from './sorting'
 import {createEventRoute} from './createEvent'
+import {bottomBarRoute} from './bottomBar'
+
+
 import dotenv from 'dotenv';
+
+
 dotenv.config();
 import grant from 'grant';
 import { client } from './db';
 import bcrypt from 'bcryptjs';
-import expressSession from 'express-session';
-import {bottomBarRoute} from './bottomBar'
+// import expressSession from 'express-session';
+
 
 
 
 
 
 let app = express()
+
+app.use((req,res,next)=> {
+    req['session'] = {
+        user: 15
+    } as any
+    next()
+})
 
 app.use(expressSession({
     secret: 'Tecky cohort-12 group-1',
@@ -24,12 +36,6 @@ app.use(expressSession({
 
 
 
-app.use((req,res,next)=> {
-    req['session'] = {
-        user: 15
-    } as any
-    next()
-})
 
 
 app.use(express.static('public'))
@@ -40,10 +46,6 @@ app.use(bottomBarRoute)
 
 
 
-let port = 8080
-app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}/`)
-})
 
 
 
@@ -56,39 +58,39 @@ app.post('/register', async (req, res) => {
     res.redirect('/index')
 })
 
-// app.post('/login', async (req, res) => {
-//     console.log(req.body)
-//     const users = (await client.query('SELECT * FROM users WHERE login_name = $1', [
-//         req.body.username
-//     ])).rows;
-//     if (users.length == 0 || req.session == null){
-//         res.json({result:false})
-//     } else {
-//         if (await bcrypt.compare(req.body.password, users[0].password)){
-//             req.session['user'] = users[0].id
-//             res.json({result: true})
-//         } else {
-//             res.json({result:false})
-//         }
-
-//     }
-
-// })
-
 app.post('/login', async (req, res) => {
     console.log(req.body)
-    const users = ( await client.query('SELECT * FROM users WHERE login_name = $1 and password = $2', [
-        req.body.username,
-        req.body.password
+    const users = (await client.query('SELECT * FROM users WHERE login_name = $1', [
+        req.body.username
     ])).rows;
-    if (users.length == 0 ){
-                 res.json({result:false})
-         } else{
-           
-    res.redirect('/index.html');
-}
+    if (users.length == 0 || req.session == null){
+        res.json({result:false})
+    } else {
+        if (await bcrypt.compare(req.body.password, users[0].password)){
+            req.session['user'] = users[0].id
+            res.json({result: true})
+            
+        } else {
+            res.json({result:false})
+        }
+
+    }
+
 })
 
+// app.post('/login', async (req, res) => {
+//     console.log(req.body)
+//     const users = ( await client.query('SELECT * FROM users WHERE login_name = $1 and password = $2', [
+//         req.body.username,
+//         req.body.password
+//     ])).rows;
+//     if (users.length == 0 ){
+//                  res.json({result:false})
+//          } else{
+           
+//     res.redirect('/index.html');
+// }
+// })
 
 
 
@@ -106,5 +108,11 @@ const grantExpress = grant.express({
     },
   });
   app.use(grantExpress as express.RequestHandler);
+
+
+  let port = 8080
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}/`)
+})
 
 
