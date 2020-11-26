@@ -1,0 +1,44 @@
+@media screen and (min-width: 400px) and (max-width: 700px)  {
+    .login, .logout, .loginEdit{
+        font-size: small !important;
+    }
+    .logo{
+        margin-bottom: 0;
+    }
+}
+.login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection,.loginEdit, .loginEdit:hover, .loginEdit::selection{
+    background-color: #14365C ;
+    color: white ;
+    border: none ;
+
+    font-size: 24px;
+}
+
+
+/* innerHTML css */
+.is-loading .logout, .is-guest .logout, .is-loading .loginEdit, .is-guest .loginEdit, .is-loading .myEvent, .is-guest .myEvent{
+    display: none;
+}
+
+
+
+.is-member .login {
+    display: none;
+}
+
+
+.is-loading .joinButton, .is-loading .unjoinButton, .is-loading .bookmark, .is-loading .unbookmark {
+    display: none;
+}
+
+
+
+.is-guest .joinButton, .is-guest .unjoinButton, .is-guest .bookmark, .is-guest .unbookmark {
+    display: none;
+}
+
+
+
+.is-member .joinButton, .is-member .unjoinButton, .is-member .bookmark, .is-member .unbookmark {
+    display: block;
+}

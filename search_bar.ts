@@ -47,3 +47,18 @@ searchRoute.get('/searchResults/', async (req, res) => {
         res.send('404');
     }
 })
+
+
+//for my page
+searchRoute.get('/joined', async (req, res) => {
+    console.log('joined by:' + req.session['user']);
+    const notes = await client.query('SELECT * FROM join_group JOIN events on events.id = join_group.event_id WHERE participant_id = $1', [req.session['user']])
+    res.json(notes.rows);
+});
+searchRoute.get('/bookmarked', async (req, res) => {
+
+    console.log('bookmarked by:' + req.session['user']);
+
+    const notes = await client.query('SELECT * FROM bookmark JOIN events on events.id = bookmark.event_id WHERE user_id = $1', [req.session['user']])
+    res.json(notes.rows);
+});
