@@ -4,12 +4,18 @@ import {sortingRoute} from './sorting'
 import {createEventRoute} from './createEvent'
 
 
+
+
+
+
 let app = express()
 
+console.log(app);
 app.use(express.static('public'))
 app.use(searchRoute)
 app.use(sortingRoute)
 app.use(createEventRoute)
+
 
 
 let port = 8080
