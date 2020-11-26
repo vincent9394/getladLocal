@@ -1,3 +1,5 @@
+
+
 ///////////////// fixed menu on scroll for desktop
 // let login = document.querySelector('.add')
 let login = document.querySelector('.navbar-container')
@@ -22,7 +24,7 @@ if ($(window).width() > 992) {
                 </div>
             </div>
         </div>
-        <a class="navbar-brand" href="#">娛樂</a>
+        <a class="navbar-brand" href="#">交通</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -55,7 +57,7 @@ if ($(window).width() > 992) {
             </div>
         </div>
 
-        <a class="navbar-brand" href="#">娛樂</a>
+        <a class="navbar-brand" href="#">交通</a>
 
 
         <div class="navbar add" id="main_nav">
@@ -129,3 +131,24 @@ for (let gridChoice of gridChoices) {
     })
 }
 //end of grid option
+
+
+// $.get('/header.html', {}, function(response) { 
+//     $('#header').html(response);
+//   });
+
+// $.get('/footer.html', {}, function(response) { 
+//     $('#footer').append(response);
+//   });
+
+//   $(document).ready(function(){
+//     $( "#header" ).load( "/header.html" );
+//    });  
+
+
+$(document).ready(function(){
+      
+    $("#header").load("header.html");
+    $("#footer").load("footer.html");
+ 
+ });
