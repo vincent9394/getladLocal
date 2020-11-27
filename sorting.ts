@@ -75,9 +75,9 @@ sortingRoute.get('/if_joined_and_bookmarked', async (req, res) => {
     join_group.id as join_group_id,
     bookmark.id as bookmark_id 
     FROM most_bookmarked_events 
-    left outer join bookmark on bookmark.user_id = 20 and bookmark.event_id = most_bookmarked_events.id
+    left outer join bookmark on bookmark.user_id = $1 and bookmark.event_id = most_bookmarked_events.id
     left outer join join_group on most_bookmarked_events.id = join_group.event_id  
-    and join_group.participant_id = 20
+    and join_group.participant_id = $1
     GROUP BY most_bookmarked_events.id, 
     most_bookmarked_events.date, 
     join_group_id,
@@ -88,7 +88,7 @@ ORDER BY
     most_bookmarked_events.date DESC
 LIMIT 3
     ;
-    `)  
+    `,[req.session['user']])  
     res.json(joinAndBookmark.rows)
 })
 
@@ -113,7 +113,7 @@ sortingRoute.get('/sorting_by_successful_rate', async (req, res) => {
             ( SELECT count(*) 
               FROM join_group 
               where join_group.event_id = events.id
-              and join_group.participant_id = 15) as has_joined
+              and join_group.participant_id = $1) as has_joined
             FROM events 
         ),
         my_bookmarked_events AS (
@@ -122,7 +122,7 @@ sortingRoute.get('/sorting_by_successful_rate', async (req, res) => {
             ( SELECT count(*) 
               FROM bookmark
               where bookmark.event_id = events.id
-              and bookmark.user_id = 15) as has_bookmarked
+              and bookmark.user_id = $1) as has_bookmarked
             FROM events 
         )
     SELECT 
@@ -148,7 +148,7 @@ sortingRoute.get('/sorting_by_successful_rate', async (req, res) => {
     events.prerequisite > 0
         and 
         join_count < events.prerequisite
-    ORDER BY percent desc LIMIT 3;`)
+    ORDER BY percent desc LIMIT 3;`, [req.session['user']])
     res.json(sortingResult.rows)
 })
 

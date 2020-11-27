@@ -338,18 +338,18 @@ h5 {
     border: none;
 }
 
-.fa-bookmark {
+.bookmark .fa-bookmark {
     color: #D8D6D9;
     font-size: 24px;
     transition: 200ms;
 }
 
-.fa-bookmark:hover, .unbookmark .fa-bookmark:hover {
+.bookmark .fa-bookmark:hover, .unBookmark .fa-bookmark:hover {
     cursor: pointer;
     transform: scale(1.05);
 }
 
-.unbookmark .fa-bookmark {
+.unBookmark .fa-bookmark {
     color: #F3C20C;
     font-size: 24px;
     transition: 200ms;

@@ -183,9 +183,9 @@ footer.innerHTML = `<div class="footer-container">
 async function checkRole() {
     // let res = await fetch('/username')
     // let username = await res.json()
-    let logins = document.querySelectorAll('.login')
+    // let logins = document.querySelectorAll('.login')
     let res = await fetch('/session')
-    let username = await res.json()
+    let username = await res.text() + ""
     document.body.classList.remove('is-loading')            // why need is-loading if it is the same as is-guest ??
     if (username) {
         document.body.classList.add('is-member')
