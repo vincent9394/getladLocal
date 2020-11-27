@@ -5,6 +5,7 @@ import {createEventRoute} from './createEvent'
 import {bottomBarRoute} from './bottomBar'
 
 
+
 import dotenv from 'dotenv';
 
 
@@ -22,6 +23,7 @@ import bodyParser from 'body-parser'
 let app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
 
 // app.use((req,res,next)=> {
 //     req['session'] = {
@@ -85,6 +87,7 @@ app.use(searchRoute)
 app.use(sortingRoute)
 app.use(createEventRoute)
 app.use(bottomBarRoute)
+
 
 // app.post('/login', async (req, res) => {
 //     console.log(req.body)

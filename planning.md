@@ -48,3 +48,4 @@ export async function loadMemos(): Promise<Memo[]> {
   await saveSetting(settings);
   return memos;
 }
+
