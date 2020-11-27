@@ -13,7 +13,7 @@ export const bottomBarRoute = express.Router();
 
 
 bottomBarRoute.get('/session', async (req, res) => {
-        res.json(req.session['user'])
+    res.json(req.session['user'])
 })
 
 

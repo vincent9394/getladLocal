@@ -160,20 +160,23 @@
             </a>
         </div>
 
-        <form class="searchBarFlex">
+        <!-- to be merged search bar-->
+        <form action="/searchResults.html" method="GET" id="search" class="searchBarFlex">
             <select class="categoryOption" name="categoryOption">
-                <option value="transportation">交通</option>
-                <option value="entertainment">娛樂</option>
-                <option value="foodieGroup">飲食</option>
+                <option name="transportation" value="1">交通</option>
+                <option name="entertainment" value="2">娛樂</option>
+                <option name="foodieGroup" value="3">飲食</option>
             </select>
 
-            <input type="text" class="searchBar" name="searchBar" placeholder="search">
+            <input type="text" class="searchBar" name="q" placeholder="搜尋活動"">
 
-            <div class="searchButton">
-                <i class="fas fa-search" id="magnifier"></i>
-            </div>
+            
+            <button type=" submit" class="searchButton">
+            <i class="fas fa-search" id="magnifier"></i>
+            </button>
         </form>
-
+        <!-- to be merged -->
+        
         <!-- <hr class="boldHr"> -->
 
         <!-- 顯示活動數量 -->
