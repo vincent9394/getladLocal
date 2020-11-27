@@ -18,7 +18,7 @@ function navbarTopic(){
 const header = document.querySelector('header')
 header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex justify-content-between">
 <div class="container d-flex align-items-center mr-1 ml-1 getlad">
-    GETLAD
+    <a href="./index.html" class="getlad" >GETLAD</a>
     <!-- <img src="./images/logowithoutbg.png"> -->
 </div>
 <form class="form-inline mx-2 my-2 my-lg-0">
@@ -79,7 +79,7 @@ if ($(window).width() > 480) {
             $('body').css('padding-top', $('.navbar').outerHeight() - 70 + 'px');
             // $( ".login" ).remove();
             login.innerHTML = `<div class="navbar-left">
-            <span class="logo">GETLAD</span>
+            <a class="logo" href="./index.html">GETLAD</a>
 
             <div class="dropdown">
         <button class="btn loginEdit dropdown-toggle" type="button" id="dropdownMenuButton"

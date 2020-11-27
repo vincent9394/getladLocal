@@ -46,28 +46,28 @@ for(let cardTitle of cardTitles){
     cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
 }
 
-//grid option
-let gridtoggle = false
-let gridOption = document.querySelector('.gridOption')
-let gridChoiceFlex = document.querySelector('.gridChoiceFlex')
+// //grid option
+// let gridtoggle = false
+// let gridOption = document.querySelector('.gridOption')
+// let gridChoiceFlex = document.querySelector('.gridChoiceFlex')
 
 
-gridOption.addEventListener('click', function () {
-    gridtoggle = !gridtoggle
-    if (gridtoggle == false) {
-        gridChoiceFlex.style.display = "none"
-    } else if (gridtoggle == true) {
-        gridChoiceFlex.style.display = "flex"
-    }
-}
-)
+// gridOption.addEventListener('click', function () {
+//     gridtoggle = !gridtoggle
+//     if (gridtoggle == false) {
+//         gridChoiceFlex.style.display = "none"
+//     } else if (gridtoggle == true) {
+//         gridChoiceFlex.style.display = "flex"
+//     }
+// }
+// )
 
-let gridChoices = document.querySelectorAll('.gridChoice')
-for (let gridChoice of gridChoices) {
-    gridChoice.addEventListener("click", function () {
-        gridChoiceFlex.style.display = "none"
-        gridtoggle = false
-    })
-}
-//end of grid option
+// let gridChoices = document.querySelectorAll('.gridChoice')
+// for (let gridChoice of gridChoices) {
+//     gridChoice.addEventListener("click", function () {
+//         gridChoiceFlex.style.display = "none"
+//         gridtoggle = false
+//     })
+// }
+// //end of grid option
 
