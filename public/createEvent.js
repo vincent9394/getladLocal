@@ -33,3 +33,57 @@ createEvent.addEventListener('submit', async (event) => {
         alert('錯誤')
     }
 })
+
+
+////delete event
+const deleteEventContent = document.querySelector("#deleteEvents")
+
+
+
+async function deleteEvents() {
+    const deleteEventForm = document.querySelector('#deleteEventForm')
+    const loadDeleteEvents = async () => {
+        const res = await fetch('/showDeleteEvent');
+        searchResults = await res.json();
+        await displayDeleteEvents(searchResults);
+
+    };
+    const displayDeleteEvents = (events) => {
+        const htmlString = events
+            .map((event) => {
+                return ` <option class="deleteEventOptions" name="${event.topic}" value="${event.id}" data-id="${event.id}">${event.topic}</option>
+        `;
+            })
+            .join('');
+
+        deleteEventContent.innerHTML = htmlString;
+    };
+    await loadDeleteEvents();
+
+
+    deleteEventForm.addEventListener('submit', async (event) => {
+        const deleteEventOption = await deleteEventForm.querySelector('select[name=deleteEvents]').value;
+        console.log(deleteEventOption);
+        event.preventDefault();
+
+        console.log(deleteEventOption);
+        const res = await fetch('/deleteEvent/' + deleteEventOption, {
+            method: 'DELETE',
+        })
+        const json = await res.json();
+        if (json.result) {
+            $('#deleteEventModal').modal('hide')
+            $('#success-delete-event').modal('show')
+
+
+        } else {
+            alert('錯誤')
+        }
+        await loadDeleteEvents();
+    })
+
+
+
+
+}
+deleteEvents()

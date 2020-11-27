@@ -18,14 +18,16 @@ function navbarTopic(){
 const header = document.querySelector('header')
 header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex justify-content-between">
 <div class="container d-flex align-items-center mr-1 ml-1 getlad">
-    <a href="./index.html" class="getlad" >GETLAD</a>
+    <a href="./index.html" class="getlad" style="text-decoration: none; color: black;" >GETLAD</a>
     <!-- <img src="./images/logowithoutbg.png"> -->
 </div>
-<form class="form-inline mx-2 my-2 my-lg-0">
+<div class="form-inline mx-2 my-2 my-lg-0">
     <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+    <form action="/login.html" method="GET">
     <button class="btn login my-2 my-sm-0" type="submit">Login</button>
+    </form>
     <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
-</form>
+</div>
 </div>
 <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
 <div class="navbar-container">
@@ -37,7 +39,7 @@ header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex jus
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createEventModal">開新活動</a>
-            <a class="dropdown-item" href="#">編輯活動</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteEventModal">刪除活動</a>
         </div>
     </div>
 
@@ -79,7 +81,7 @@ if ($(window).width() > 480) {
             $('body').css('padding-top', $('.navbar').outerHeight() - 70 + 'px');
             // $( ".login" ).remove();
             login.innerHTML = `<div class="navbar-left">
-            <a class="logo" href="./index.html">GETLAD</a>
+            <a class="logo" href="./index.html" style="text-decoration: none; color: black;" >GETLAD</a>
 
             <div class="dropdown">
         <button class="btn loginEdit dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -88,7 +90,7 @@ if ($(window).width() > 480) {
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createEventModal">開新活動</a>
-            <a class="dropdown-item" href="#">編輯活動</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteEventModal">刪除活動</a>
         </div>
     </div>
 
@@ -127,7 +129,7 @@ if ($(window).width() > 480) {
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createEventModal">開新活動</a>
-                <a class="dropdown-item" href="#">編輯活動</a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteEventModal">刪除活動</a>
             </div>
         </div>
 
