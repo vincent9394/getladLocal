@@ -6,9 +6,11 @@ body {
     font-size: 1em;
 
 }
-.getlad{
+.getlad, .getlad:hover{
     font-family: 'Rock Salt', cursive;
     font-size: xx-large;
+    color: black;
+    text-decoration-line: none;
 }
 .footer-logo{
     font-size: xx-large;
@@ -51,10 +53,12 @@ body {
         font-size: small !important;
     }
 }
-.logo{
+.logo, .logo:hover{
     font-family: 'Rock Salt', cursive;
     font-size: 30px;
     margin-bottom: 5px;
+    color: black;
+    text-decoration-line: none;
 }
 .login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection,.loginEdit, .loginEdit:hover, .loginEdit::selection{
     background-color: #14365C ;
