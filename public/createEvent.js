@@ -27,8 +27,10 @@ createEvent.addEventListener('submit', async (event) => {
     if (json.result) {
         $('#createEventModal').modal('hide')
         $('#success-create-event').modal('show')
-
-
+        setTimeout(function(){// wait for 5 secs(2)
+            location.reload(); // then reload the page.(3)
+       }, 5000);
+        
     } else {
         alert('錯誤')
     }
@@ -74,8 +76,11 @@ async function deleteEvents() {
         if (json.result) {
             $('#deleteEventModal').modal('hide')
             $('#success-delete-event').modal('show')
-
-
+            setTimeout(function(){// wait for 5 secs(2)
+                location.reload(); // then reload the page.(3)
+           }, 5000);
+            
+            
         } else {
             alert('錯誤')
         }
