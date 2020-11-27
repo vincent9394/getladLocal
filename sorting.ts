@@ -99,14 +99,32 @@ LIMIT 3
 sortingRoute.get('/sorting_by_successful_rate', async (req, res) => {
     let sortingResult = await client.query(`
     WITH 
-    most_joined_events AS (
-        SELECT 
-        id, 
-        ( SELECT count(*) 
-          FROM join_group 
-          where join_group.event_id = events.id ) as join_count
-        FROM events 
-    )
+        most_joined_events AS (
+            SELECT 
+            id, 
+            ( SELECT count(*) 
+              FROM join_group 
+              where join_group.event_id = events.id ) as join_count
+            FROM events 
+        ), 
+        my_joined_events AS (
+            SELECT 
+            id, 
+            ( SELECT count(*) 
+              FROM join_group 
+              where join_group.event_id = events.id
+              and join_group.participant_id = 15) as has_joined
+            FROM events 
+        ),
+        my_bookmarked_events AS (
+            SELECT 
+            id, 
+            ( SELECT count(*) 
+              FROM bookmark
+              where bookmark.event_id = events.id
+              and bookmark.user_id = 15) as has_bookmarked
+            FROM events 
+        )
     SELECT 
         events.id, 
         events.creator_id, 
@@ -119,14 +137,18 @@ sortingRoute.get('/sorting_by_successful_rate', async (req, res) => {
         events.created_at, 
         events.updated_at,
         join_count,
+        has_joined,
+        has_bookmarked,
         (join_count * 100 / events.prerequisite) as percent  
     FROM events
     inner join most_joined_events on most_joined_events.id = events.id
+    inner join my_joined_events on my_joined_events.id = events.id
+    inner join my_bookmarked_events on my_bookmarked_events.id = events.id 
     where 
     events.prerequisite > 0
         and 
         join_count < events.prerequisite
-    ORDER BY percent desc LIMIT 5;`)
+    ORDER BY percent desc LIMIT 3;`)
     res.json(sortingResult.rows)
 })
 

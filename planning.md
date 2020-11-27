@@ -20,3 +20,31 @@ Join button routine
 
 4. Situation 1.2: if there is A record of the user joining that event
     clicking the `unJoinButton` should connect to the server & the server will respond `client.query('DELETE FROM join_group where event_id = ? and particpant_id = ?')`
+
+\
+export async function loadMemos(): Promise<Memo[]> {
+  let res = await fetch('/sorting_by_most_bookmarked');
+  let results = await res.json()
+  let ids = new Set();
+  let settings = await loadSetting();
+  // for loop on each memo (index)
+  for (let i = 0; i < memos.length; i++) {
+    let memo = memos[i];
+    // assign id if it's absent
+    if (!memo.id) {
+      memo.id = i + 1;
+    }
+    // re-assign id if it's duplicated
+    if (ids.has(memo.id)) {
+      memo.id = i + 1;
+    }
+    // mark the id as "used"
+    ids.add(memo.id);
+    // update the last memo id in settings
+    if (memo.id > settings.lastMemoId) {
+      settings.lastMemoId = memo.id;
+    }
+  }
+  await saveSetting(settings);
+  return memos;
+}
