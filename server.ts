@@ -83,6 +83,20 @@ app.post('/login', async (req, res) => {
 
 })
 
+app.post('/logout', async (req, res) => {
+   console.log("logout server");
+  
+   console.log("1"+ req.session)
+   console.log("2"+req.session)
+   
+    req.session.destroy(function (err) {
+        res.redirect('/'); //Inside a callback… bulletproof!
+       });
+   // res.redirect('/index')
+     console.log("3"+req.session)
+})
+
+
 app.use(searchRoute)
 app.use(sortingRoute)
 app.use(createEventRoute)

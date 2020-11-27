@@ -125,7 +125,7 @@ for (let bookmarkButton of bookmarkButtons) {
         } else if (event.target.toggle == true) {
             bookmarkButton.style.color = "#F3C20C"
         }
-    }
+      }
     )
 }
 
