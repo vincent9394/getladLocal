@@ -26,8 +26,9 @@ header.innerHTML = `<div class="bg-white text-dark py-4 border-bottom d-flex jus
     <form action="/login.html" method="GET">
     <button class="btn login my-2 my-sm-0" type="submit">Login</button>
     </form>
+    <form  id="logout-form">
     <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
-</div>
+    </form>
 </div>
 <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
 <div class="navbar-container">
@@ -101,11 +102,15 @@ if ($(window).width() > 480) {
 
 
         <div class="navbar add" id="main_nav">
-        <form class="form-inline my-2 my-lg-0">
-
-            <button class="btn my-2 my-sm-0 login" type="submit">Login</button>
-            <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
+        <div class="form-inline mx-2 my-2 my-lg-0">
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <form action="/login.html" method="GET">
+        <button class="btn login my-2 my-sm-0" type="submit">Login</button>
         </form>
+        <form id="logout-form">
+        <button class="btn my-2 my-sm-0 logout" type="submit">Logout</button>
+        </form>
+    </div>
             <div class="nav-item dropdown ">
                 <button class="nav-link bg-white border-0" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -178,6 +183,44 @@ footer.innerHTML = `<div class="footer-container">
 
 </div>
 </div>`
+
+
+const logoutForm= document.querySelector("#logout-form")
+   
+logoutForm.addEventListener('submit', async function (event) {
+    event.preventDefault()
+    console.log("logout press")
+    const res = await fetch('/logout', {
+        method: "POST"
+              
+
+        });
+    console.log('submit logout res:', res.status, res.statusText);
+    window.location.replace('./index.html')   
+
+
+})
+
+// logoutForm.addEventListener('submit', async (event) => {
+//     console.log('detected submit form event');
+//     event.preventDefault();
+//     console.log('cancelled form submit');
+//     let formData = new FormData(logoutForm);
+//     let res = await fetch(logoutForm.action, {
+//       method: logoutForm.method,
+//       body: formData,
+//     });
+//     console.log('submit logout res:', res.status, res.statusText);
+//     if (res.redirected) {
+//       console.log('redirect to:', res.url);
+//       window.location.href = res.url;
+//       return;
+//     }
+//     let text = await res.text();
+//     console.log('submit logout result:', text);
+//     logoutMsgBox.classList.add('error');
+//     logoutMsgBox.textContent = text;
+//   });
 
 
 async function checkRole() {
