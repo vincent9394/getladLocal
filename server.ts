@@ -84,16 +84,11 @@ app.post('/login', async (req, res) => {
 })
 
 app.post('/logout', async (req, res) => {
-   console.log("logout server");
-  
-   console.log("1"+ req.session)
-   console.log("2"+req.session)
-   
+   console.log("logout server");  
     req.session.destroy(function (err) {
         res.redirect('/'); //Inside a callback… bulletproof!
        });
-   // res.redirect('/index')
-     console.log("3"+req.session)
+
 })
 
 
