@@ -3,7 +3,7 @@ import {searchRoute} from './search_bar'
 import {sortingRoute} from './sorting'
 import {createEventRoute} from './createEvent'
 import {bottomBarRoute} from './bottomBar'
-
+import {googleMapRoute} from './googleMap'
 
 
 import dotenv from 'dotenv';
@@ -87,6 +87,7 @@ app.use(searchRoute)
 app.use(sortingRoute)
 app.use(createEventRoute)
 app.use(bottomBarRoute)
+app.use(googleMapRoute)
 
 
 // app.post('/login', async (req, res) => {

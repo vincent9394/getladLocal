@@ -1,52 +1,115 @@
 
-// let joinButtons = document.querySelectorAll('.joinButton')
-// for (let joinButton of joinButtons) {
-//     joinButton.addEventListener('click', function (event) {
-//         event.preventDefault()
-//         event.target.toggle = !event.target.toggle
-//         if (event.target.toggle == false) {
-//             joinButton.innerHTML = '加入'
-//         } else if (event.target.toggle == true) {
-//             joinButton.innerHTML = '已加入'
-//         }
-//     })
-// }
-
-// let bookmarkButtons = document.querySelectorAll('.fa-bookmark')
-// for (let bookmarkButton of bookmarkButtons) {
-//     bookmarkButton.addEventListener('click', function (event) {
-//         event.target.toggle = !event.target.toggle
-//         if (event.target.toggle == false) {
-//             bookmarkButton.style.color = "#D8D6D9"
-//         } else if (event.target.toggle == true) {
-//             bookmarkButton.style.color = "#F3C20C"
-//         }
-//     }
-//     )
-// }
-
-// let cardTitles = document.querySelectorAll('.card-title')
-// for (let cardTitle of cardTitles) {
-//     cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
-// }
-
 let map;
-
 function initMap() {
-    let allMap = document.querySelectorAll("#map")
-    let hkMap = document.querySelector(".hkMap #map")
-    for (let getMap of allMap) {
-        map = new google.maps.Map(getMap, {
-            center: { lat: 22.379812, lng: 114.134938 },
-            zoom: 13,
-        });
+}
 
-        map = new google.maps.Map(hkMap, {
-            center: { lat: 22.289437, lng: 113.940938 },
-            zoom: 13,
+async function googleMapWithPin() {
+    let res = await fetch('/allPin')
+    if (res.status != 200) {
+        alert('Loading failed, please try again later');
+        return;
+    }
+
+    let pinResults = await res.json()
+    let hkMapDiv = document.querySelector(".hkMap")
+    hkMapDiv.innerHTML += `
+    <div id="map"></div>
+    `
+
+    let latitudes = []
+    let longitudes = []
+
+    for (let i = 0; i < pinResults.length; i++) {
+        let allLocations = pinResults[i]["location"]
+        let locations = allLocations.split('\n')
+        for (let location of locations) {
+            // console.log(location)
+
+            await new Promise((resolve) => {
+                setTimeout(resolve, 0.001)
+            })
+
+            axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                params: {
+                    address: location,
+                    key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+                }
+            })
+                .then(function (response) {
+                    // Log full response
+                    // console.log(response)
+
+                    let latitude = response.data.results[0].geometry.location.lat;
+                    let longitude = response.data.results[0].geometry.location.lng;
+
+                    latitudes.push(latitude)
+                    longitudes.push(longitude)
+
+                    // let marker = new google.maps.Marker({
+                    //     position: { lat: latitude, lng: longitude },
+                    //     map: map,
+                    // });
+                })
+        }
+    }
+
+    let hkMap = document.querySelector(".hkMap #map")
+    map = new google.maps.Map(hkMap, {
+        center: { lat: 22.317001, lng: 114.169934 },
+        zoom: 12,
+    });
+    for (let i = 0; i < latitudes.length; i++) {
+        const marker = new google.maps.Marker({
+            position: { lat: latitudes[i], lng: longitudes[i] },
+            map: map,
         });
     }
+
 }
+googleMapWithPin()
+
+
+// async function addMarker() {
+//     let res = await fetch('/allPin')
+//     if (res.status != 200) {
+//         alert('Loading failed, please try again later');
+//         return;
+//     }
+
+//     let pinResults = await res.json()
+
+//     for (let i = 0; i < pinResults.length; i++) {
+//         let allLocations = pinResults[i]["location"]
+//         let locations = allLocations.split('\n')
+//         for (let location of locations) {
+//             // console.log(location)
+
+//             await new Promise((resolve) => {
+//                 setTimeout(resolve, 100)
+//             })
+
+//             axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+//                 params: {
+//                     address: location,
+//                     key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+//                 }
+//             })
+//                 .then(function (response) {
+//                     // Log full response
+//                     // console.log(response)
+
+//                     let latitude = response.data.results[0].geometry.location.lat;
+//                     let longitude = response.data.results[0].geometry.location.lng;
+
+//                     const marker = new google.maps.Marker({
+//                         position: { lat: latitude, lng: longitude },
+//                         map: map,
+//                     });
+//                 })
+//         }
+//     }
+// }
+
 
 // show more animation
 let showMoreButtons = document.querySelectorAll('.showMoreButton')
@@ -143,31 +206,60 @@ async function mostBookmarked() {
 
         console.log(joinButton)
 
-        row.innerHTML += `
-            <div id="cardFlex${eventId}">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title">${topic}</h5>  
-                <div id="map"></div>
-                
-                <div class="card-body">
-                    <p class="card-text" id="description">${description}</p>
-                    <hr>
-                    <div class="infoBar">
-                        <p class="card-text" id="eventLocation">地點: ${location}</p>
-                        <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
-                        <p class="card-text" id="dateAdded">活動日期: ${eventDate}</p>
-                    </div>
-                    <hr>
-                    <div class="bottomBar">
-                        <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
-                        <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
-                        <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
-                        <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
-                    </div>
-                </div>
+        let div = document.createElement("div")
+        div.id = `cardFlex${eventId}`
+        div.innerHTML = `
+        <div class="card" style="width: 18rem;">
+        <h5 class="card-title">${topic}</h5>  
+        <div id="map"></div>
+        
+        <div class="card-body">
+            <p class="card-text" id="description">${description}</p>
+            <hr>
+            <div class="infoBar">
+                <p class="card-text" id="eventLocation">地點: ${location}</p>
+                <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
+                <p class="card-text" id="dateAdded">活動日期: ${eventDate}</p>
+            </div>
+            <hr>
+            <div class="bottomBar">
+                <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
+                <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
+                <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
+                <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
             </div>
         </div>
+    </div>
         `
+
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: location,
+                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+            }
+        })
+            .then(function (response) {
+                // Log full response
+                // console.log(response)
+
+                let latitude = response.data.results[0].geometry.location.lat;
+                let longitude = response.data.results[0].geometry.location.lng;
+
+                let getMap = div.querySelector('#map')
+                map = new google.maps.Map(getMap, {
+                    center: { lat: latitude, lng: longitude },
+                    zoom: 13,
+                });
+
+                const marker = new google.maps.Marker({
+                    position: { lat: latitude, lng: longitude },
+                    map: map,
+                });
+            })
+
+
+
+        row.appendChild(div)
     }
 
 
@@ -180,23 +272,23 @@ async function mostBookmarked() {
     }
 
 
-    let map;
-    function initMap() {
-        let allMap = document.querySelectorAll("#map")
-        let hkMap = document.querySelector(".hkMap #map")
-        for (let getMap of allMap) {
-            map = new google.maps.Map(getMap, {
-                center: { lat: 22.379812, lng: 114.134938 },
-                zoom: 13,
-            });
+    // let map;
+    // function initMap() {
+    //     let allMap = document.querySelectorAll("#map")
+    //     let hkMap = document.querySelector(".hkMap #map")
+    //     for (let getMap of allMap) {
+    //         map = new google.maps.Map(getMap, {
+    //             center: { lat: 22.379812, lng: 114.134938 },
+    //             zoom: 13,
+    //         });
 
-            map = new google.maps.Map(hkMap, {
-                center: { lat: 22.289437, lng: 113.940938 },
-                zoom: 13,
-            });
-        }
-    }
-    initMap()
+    //         map = new google.maps.Map(hkMap, {
+    //             center: { lat: 22.289437, lng: 113.940938 },
+    //             zoom: 13,
+    //         });
+    //     }
+    // }
+    // initMap()
 
 
     let joinButtons = document.querySelectorAll('.joinButton')
@@ -336,31 +428,60 @@ async function mostSuccessfulRate() {
         console.log(joinButton)
 
 
-        row2.innerHTML += `
-            <div id="cardFlex${eventId}">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title">${topic}</h5>  
-                <div id="map"></div>
-                
-                <div class="card-body">
-                    <p class="card-text" id="description">${description}</p>
-                    <hr>
-                    <div class="infoBar">
-                        <p class="card-text" id="eventLocation">地點: ${location}</p>
-                        <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
-                        <p class="card-text" id="dateAdded">加入日期: ${eventDate}</p>
-                    </div>
-                    <hr>
-                    <div class="bottomBar">
-                        <button class="btn btn-primary joinButton" ${joinButton > 0 ? "hidden" : ""} onclick = "sendJoinInfoRow2(${eventId})">加入</button>
-                        <button class="btn btn-primary unJoinButton" ${joinButton == 0 ? "hidden" : ""} onclick = "sendUnjoinInfoRow2(${eventId})">已加入</button>
-                        <div class="bookmark" ${bookmarkButton > 0 ? "hidden" : ""} onclick = "sendBookmarkInfoRow2(${eventId})"><i class="fas fa-bookmark"></i></div>
-                        <div class="unBookmark" ${bookmarkButton == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfoRow2(${eventId})"><i class="fas fa-bookmark"></i></div>
-                    </div>
-                </div>
+        let div = document.createElement("div")
+        div.id = `cardFlex${eventId}`
+        div.innerHTML = `
+        <div class="card" style="width: 18rem;">
+        <h5 class="card-title">${topic}</h5>  
+        <div id="map"></div>
+        
+        <div class="card-body">
+            <p class="card-text" id="description">${description}</p>
+            <hr>
+            <div class="infoBar">
+                <p class="card-text" id="eventLocation">地點: ${location}</p>
+                <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
+                <p class="card-text" id="dateAdded">活動日期: ${eventDate}</p>
+            </div>
+            <hr>
+            <div class="bottomBar">
+                <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
+                <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
+                <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
+                <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
             </div>
         </div>
+    </div>
         `
+
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: location,
+                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+            }
+        })
+            .then(function (response) {
+                // Log full response
+                // console.log(response)
+
+                let latitude = response.data.results[0].geometry.location.lat;
+                let longitude = response.data.results[0].geometry.location.lng;
+
+                let getMap = div.querySelector('#map')
+                map = new google.maps.Map(getMap, {
+                    center: { lat: latitude, lng: longitude },
+                    zoom: 13,
+                });
+
+                const marker = new google.maps.Marker({
+                    position: { lat: latitude, lng: longitude },
+                    map: map,
+                });
+            })
+
+
+
+        row2.appendChild(div)
     }
 
 
@@ -370,23 +491,23 @@ async function mostSuccessfulRate() {
     }
 
 
-    let map;
-    function initMap() {
-        let allMap = document.querySelectorAll("#map")
-        let hkMap = document.querySelector(".hkMap #map")
-        for (let getMap of allMap) {
-            map = new google.maps.Map(getMap, {
-                center: { lat: 22.379812, lng: 114.134938 },
-                zoom: 13,
-            });
+    // let map;
+    // function initMap() {
+    //     let allMap = document.querySelectorAll("#map")
+    //     let hkMap = document.querySelector(".hkMap #map")
+    //     for (let getMap of allMap) {
+    //         map = new google.maps.Map(getMap, {
+    //             center: { lat: 22.379812, lng: 114.134938 },
+    //             zoom: 13,
+    //         });
 
-            map = new google.maps.Map(hkMap, {
-                center: { lat: 22.289437, lng: 113.940938 },
-                zoom: 13,
-            });
-        }
-    }
-    initMap()
+    //         map = new google.maps.Map(hkMap, {
+    //             center: { lat: 22.289437, lng: 113.940938 },
+    //             zoom: 13,
+    //         });
+    //     }
+    // }
+    // initMap()
 
 
     let row2JoinButtons = document.querySelectorAll('.joinButton')

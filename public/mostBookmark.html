@@ -12,10 +12,11 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS324XkzWyfddSLnfpJzw6elPlctwGjzY&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g&callback=initMap">
         </script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="mostBookmark.css">
 </head>
 
@@ -103,19 +104,22 @@
 
     <article>
 
-        <form class="searchBarFlex">
+        <!-- to be merged search bar-->
+        <form action="/searchResults.html" method="GET" id="search" class="searchBarFlex">
             <select class="categoryOption" name="categoryOption">
-                <option value="transportation">交通</option>
-                <option value="entertainment">娛樂</option>
-                <option value="foodieGroup">飲食</option>
+                <option name="transportation" value="1">交通</option>
+                <option name="entertainment" value="2">娛樂</option>
+                <option name="foodieGroup" value="3">飲食</option>
             </select>
 
-            <input type="text" class="searchBar" name="searchBar" placeholder="search">
+            <input type="text" class="searchBar" name="q" placeholder="搜尋活動">
 
-            <div class="searchButton">
-                <i class="fas fa-search" id="magnifier"></i>
-            </div>
+            
+            <button type=" submit" class="searchButton">
+            <i class="fas fa-search" id="magnifier"></i>
+            </button>
         </form>
+        <!-- to be merged -->
 
     
 
@@ -157,7 +161,7 @@
         crossorigin="anonymous"></script>
     <script src="mostBookmark.js"></script>
     <script src="navbarAndFooter.js"></script>
-    <script src="createEvent.js"></script>
+    <!-- <script src="createEvent.js"></script> -->
 </body>
 
 </html>

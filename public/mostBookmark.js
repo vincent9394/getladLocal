@@ -1,24 +1,4 @@
 
-   let map;
-
-   function initMap() {
-       let allMap = document.querySelectorAll("#map")
-       let hkMap = document.querySelector(".hkMap #map")
-       for (let getMap of allMap) {
-           map = new google.maps.Map(getMap, {
-               center: { lat: 22.379812, lng: 114.134938 },
-               zoom: 13,
-           });
-   
-           map = new google.maps.Map(hkMap, {
-               center: { lat: 22.289437, lng: 113.940938 },
-               zoom: 13,
-           });
-       }
-   }
-   initMap()
-
-
 let row = document.querySelector('.row')
 
 async function sendJoinInfo(eventId) {
@@ -65,15 +45,30 @@ async function sendUnbookmarkInfo(eventId) {
     await res.json();
 }
 
+
+let loading = false
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Separation is important ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 async function mostBookmarked() {
-    let res = await fetch('/sorting_by_most_bookmarked')
+
+    if(loading) {
+        return
+    }
+
+    loading = true 
+
+    await new Promise((resolve)=>{
+        setTimeout(resolve,300)
+    })
+
+    let res = await fetch('/sorting_by_most_bookmarked_mostBookmark_html')
     console.log(res)
     if (res.status != 200) {
         alert('Loading failed, please try again later');
         return;
     }
 
-    let bottomRes = await fetch('/if_joined_and_bookmarked')
+    let bottomRes = await fetch('/if_joined_and_bookmarked_mostBookmark_html')
     console.log(bottomRes)
     if (res.status != 200) {
         alert('Loading failed, please try again later');
@@ -98,35 +93,71 @@ async function mostBookmarked() {
         let eventDate = new Date(sortingResults[i]["date"]).toLocaleDateString('en-hk')
         let eventId = sortingResults[i]["id"]
 
+
         console.log(joinButton)
 
-        row.innerHTML += `
-            <div id="cardFlex${eventId}">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title">${topic}</h5>  
-                <div id="map"></div>
-                
-                <div class="card-body">
-                    <p class="card-text" id="description">${description}</p>
-                    <hr>
-                    <div class="infoBar">
-                        <p class="card-text" id="eventLocation">地點: ${location}</p>
-                        <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
-                        <p class="card-text" id="dateAdded">活動日期: ${eventDate}</p>
-                    </div>
-                    <hr>
-                    <div class="bottomBar">
-                        <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
-                        <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
-                        <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
-                        <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
-                    </div>
-                </div>
+        let div = document.createElement("div")
+        div.id = `cardFlex${eventId}`
+        div.innerHTML = `
+        <div class="card" style="width: 18rem;">
+        <h5 class="card-title">${topic}</h5>  
+        <div id="map"></div>
+        
+        <div class="card-body">
+            <p class="card-text" id="description">${description}</p>
+            <hr>
+            <div class="infoBar">
+                <p class="card-text" id="eventLocation">地點: ${location}</p>
+                <p class="card-text" id="participationRate">人數: ${joined}/${prerequisite}</p>    
+                <p class="card-text" id="dateAdded">活動日期: ${eventDate}</p>
+            </div>
+            <hr>
+            <div class="bottomBar">
+                <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
+                <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
+                <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
+                <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
             </div>
         </div>
+    </div>
         `
-    }
 
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+        params:{
+          address:location,
+          key:'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+        }
+      })
+      .then(function(response){
+        // Log full response
+        console.log(response)
+
+        let latitude = response.data.results[0].geometry.location.lat;
+        let longitude = response.data.results[0].geometry.location.lng;
+
+        let getMap = div.querySelector('#map')
+        map = new google.maps.Map(getMap, {
+            center: { lat: latitude, lng: longitude },
+            zoom: 13,
+        });
+
+        const marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+          });
+      })
+
+        
+
+        row.appendChild(div)
+        // let getMap = div.querySelector('#map')
+        // map = new google.maps.Map(getMap, {
+        //     center: { lat: 22.379812, lng: 114.134938 },
+        //     zoom: 13,
+        // });
+    
+}
+    // row.innerHTML = html
 
 
 
@@ -137,23 +168,17 @@ async function mostBookmarked() {
     }
 
 
-    let map;
-    function initMap() {
-        let allMap = document.querySelectorAll("#map")
-        let hkMap = document.querySelector(".hkMap #map")
-        for (let getMap of allMap) {
-            map = new google.maps.Map(getMap, {
-                center: { lat: 22.379812, lng: 114.134938 },
-                zoom: 13,
-            });
-
-            map = new google.maps.Map(hkMap, {
-                center: { lat: 22.289437, lng: 113.940938 },
-                zoom: 13,
-            });
-        }
-    }
-    initMap()
+    // let map;
+    // function initMap() {
+    //     let allMap = document.querySelectorAll("#map")
+    //     for (let getMap of allMap) {
+    //         map = new google.maps.Map(getMap, {
+    //             center: { lat: 22.379812, lng: 114.134938 },
+    //             zoom: 13,
+    //         });
+    //     }
+    // }
+    // initMap()
 
 
     let joinButtons = document.querySelectorAll('.joinButton')
@@ -217,6 +242,8 @@ async function mostBookmarked() {
         }
         )
     }
+    loadingBar.classList.remove('show')
+    loading = false
 }
 mostBookmarked()
 
@@ -232,53 +259,53 @@ let loadingBar = document.querySelector('.loadingBar')
 window.addEventListener('scroll', () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    
+
 
     // console.log({ scrollTop, scrollHeight, clientHeight });
     // clientHeight refers to the area we see ; scrollTop refers to the px we've scrolled ; scrollHeight refers to the sum of both 
     // because scrollTop value is rounded off, scrollHeight has to be minus 5 or more
     if (clientHeight + scrollTop >= scrollHeight - 100) {
-       showLoading();
-       
-        initMap()
+        showLoading();
     }
 
-    
+
 });
 
 // This requires both the server and database to be set up to make it workable.
 async function showContent() {
    await mostBookmarked()
-   
-   let map;
-
-   function initMap() {
-       let allMap = document.querySelectorAll("#map")
-       let hkMap = document.querySelector(".hkMap #map")
-       for (let getMap of allMap) {
-           map = new google.maps.Map(getMap, {
-               center: { lat: 22.379812, lng: 114.134938 },
-               zoom: 13,
-           });
-   
-           map = new google.maps.Map(hkMap, {
-               center: { lat: 22.289437, lng: 113.940938 },
-               zoom: 13,
-           });
-       }
-   }
-   initMap()
-
     //remove animation when loaded
-    loadingBar.classList.remove('show')
+    // 
 }
 
-async function showLoading() {
+function showLoading() {
     // animation when loading
     loadingBar.classList.add('show');
-    setTimeout(showContent, 300)
+    // setTimeout(() => {
+        showContent()
+
+    // }, 500)
 }
 
+
+
+
+
+// function showLoading() {
+//     // animation when loading
+//     loadingBar.classList.add('show');
+//     setTimeout(()=>{
+//         loadingBar.classList.remove('show')
+//         inner()
+//     }, 300)
+
+
+//     // showContent()
+// }
+
+// function inner() {
+//     mostBookmarked()
+// }
 
 
 
