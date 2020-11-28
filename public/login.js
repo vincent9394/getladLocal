@@ -174,7 +174,7 @@ loginForm.addEventListener('submit', async function (event) {
     const json = await res.json();// << 轉化啲 response body (本身係 string) 做 JSON
     console.log(json.result);
     if (json.result) {
-        alert('success')
+        alert('Login success')
         login = true
         window.location.replace('./index.html')
     } else {
@@ -182,4 +182,5 @@ loginForm.addEventListener('submit', async function (event) {
 
     }
 })
+
 

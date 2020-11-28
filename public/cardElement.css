@@ -1,0 +1,46 @@
+.infoBar {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#participationRate {
+    text-align: end;
+}
+
+.bottomBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.joinButton {
+    background-color: rgb(20, 54, 92);
+    border: none;
+}
+
+.unjoinButton {
+    background-color: rgb(4, 102, 214);
+    border: none;
+}
+
+.bookmark .fa-bookmark {
+    color: #D8D6D9;
+    font-size: 24px;
+    transition: 200ms;
+}
+
+.bookmark .fa-bookmark:hover, .unBookmark .fa-bookmark:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.unBookmark .fa-bookmark {
+    color: #F3C20C;
+    font-size: 24px;
+    transition: 200ms;
+}
