@@ -12,6 +12,10 @@ body {
     width:250px;
 }
 
+#navbar_top {
+    z-index: 99;
+}
+
 .navbar {
     padding: 0!important;
 }

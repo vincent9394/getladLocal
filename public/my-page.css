@@ -17,6 +17,11 @@ body {
     color: black;
     margin-left: 12px;
 }
+
+#navbar_top {
+    z-index: 99;
+}
+
 @media screen and (min-width: 400px) and (max-width: 700px)  {
     body{
         background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
