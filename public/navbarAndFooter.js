@@ -14,6 +14,8 @@ function navbarTopic() {
         navbarBrand.innerHTML = `熱門活動`
     } else if (location.pathname === `/mostJoined.html`) {
         navbarBrand.innerHTML = `就快成團`
+    } else if (location.pathname === `/index.html`) {
+        navbarBrand.innerHTML = `GETLAD`
     }
 }
 

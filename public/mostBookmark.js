@@ -53,14 +53,14 @@ let loading = false
 let count = 0
 async function mostBookmarked() {
 
-    if(loading) {
+    if (loading) {
         return
     }
 
-    loading = true 
+    loading = true
 
-    await new Promise((resolve)=>{
-        setTimeout(resolve,300)
+    await new Promise((resolve) => {
+        setTimeout(resolve, 300)
     })
 
     let res = await fetch(`/mostBookmark_initial?counter=${count}`)
@@ -117,32 +117,32 @@ async function mostBookmarked() {
     </div>
         `
 
-        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
-        params:{
-          address:location,
-          key:'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
-        }
-      })
-      .then(function(response){
-        // Log full response
-        // console.log(response)
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: location,
+                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+            }
+        })
+            .then(function (response) {
+                // Log full response
+                // console.log(response)
 
-        let latitude = response.data.results[0].geometry.location.lat;
-        let longitude = response.data.results[0].geometry.location.lng;
+                let latitude = response.data.results[0].geometry.location.lat;
+                let longitude = response.data.results[0].geometry.location.lng;
 
-        let getMap = div.querySelector('#map')
-        map = new google.maps.Map(getMap, {
-            center: { lat: latitude, lng: longitude },
-            zoom: 12,
-        });
+                let getMap = div.querySelector('#map')
+                map = new google.maps.Map(getMap, {
+                    center: { lat: latitude, lng: longitude },
+                    zoom: 12,
+                });
 
-        const marker = new google.maps.Marker({
-            position: { lat: latitude, lng: longitude },
-            map: map,
-          });
-      })
+                const marker = new google.maps.Marker({
+                    position: { lat: latitude, lng: longitude },
+                    map: map,
+                });
+            })
 
-        
+
 
         row.appendChild(div)
         // let getMap = div.querySelector('#map')
@@ -150,13 +150,13 @@ async function mostBookmarked() {
         //     center: { lat: 22.379812, lng: 114.134938 },
         //     zoom: 13,
         // });
-    
-}
+
+    }
     // row.innerHTML = html
 
 
-count++
-console.log(count)
+    count++
+    console.log(count)
 
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
@@ -257,8 +257,6 @@ let loadingBar = document.querySelector('.loadingBar')
 window.addEventListener('scroll', () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-
-
     // console.log({ scrollTop, scrollHeight, clientHeight });
     // clientHeight refers to the area we see ; scrollTop refers to the px we've scrolled ; scrollHeight refers to the sum of both 
     // because scrollTop value is rounded off, scrollHeight has to be minus 5 or more
@@ -270,13 +268,13 @@ window.addEventListener('scroll', () => {
 
 // This requires both the server and database to be set up to make it workable.
 async function showContent() {
-   await mostBookmarked()    
+    await mostBookmarked()
 }
 
 function showLoading() {
     // animation when loading
     loadingBar.classList.add('show');
-        showContent()
+    showContent()
 }
 
 
@@ -331,7 +329,7 @@ function showLoading() {
 //         <div class="card" style="width: 18rem;">
 //         <h5 class="card-title">${topic}</h5>  
 //         <div id="map"></div>
-        
+
 //         <div class="card-body">
 //             <p class="card-text" id="description">${description}</p>
 //             <hr>
@@ -376,7 +374,7 @@ function showLoading() {
 //           });
 //       })
 
-        
+
 
 //         row.appendChild(div)
 //         // let getMap = div.querySelector('#map')
@@ -384,7 +382,7 @@ function showLoading() {
 //         //     center: { lat: 22.379812, lng: 114.134938 },
 //         //     zoom: 13,
 //         // });
-           
+
 // }
 //     // row.innerHTML = html
 
