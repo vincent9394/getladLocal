@@ -13,7 +13,7 @@ body {
 }
 
 #navbar_top {
-    z-index: 99;
+    z-index: 1000;
 }
 
 .navbar {
