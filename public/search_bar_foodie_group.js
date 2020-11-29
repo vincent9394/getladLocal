@@ -2,19 +2,21 @@ const cardFlex = document.querySelector("#cardFlex")
 const searchBar = document.querySelector('.searchBar');
 
 let searchResults = [];
-
-
 searchBar.addEventListener('keyup', (e) => {
+    // console.log(searchResults);
     const searchString = e.target.value.toLowerCase();
 
     const filteredEvents = searchResults.filter((event) => {
+        
         return (
             event.topic.toLowerCase().includes(searchString)
             // event.house.toLowerCase().includes(searchString)
         );
     });
+    // console.log(filteredEvents);
     displayEvents(filteredEvents);
 });
+
 
 //foodie group search page
 async function sendJoinInfoRow2(eventId) {
@@ -63,8 +65,9 @@ async function sendUnbookmarkInfoRow2(eventId) {
 const loadEvents = async () => {
     const res = await fetch('/search-foodie-group');
     searchResults = await res.json();
+    // console.log(searchResults);
     displayEvents(searchResults);
-
+    
 };
 const displayEvents = (events) => {
     const htmlString = events
@@ -97,6 +100,7 @@ const displayEvents = (events) => {
     for (let cardTitle of cardTitles) {
         cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
+
     let row2JoinButtons = document.querySelectorAll('.joinButton')
     for (let row2JoinButton of row2JoinButtons) {
 
@@ -163,4 +167,5 @@ const displayEvents = (events) => {
 };
 loadEvents();
 //end of entertainment search page
+
 
