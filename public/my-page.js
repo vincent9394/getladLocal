@@ -6,29 +6,73 @@ for (let cardTitle of cardTitles) {
 //google map API
 let map;
 let infoWindow;
-
-// function initMap() {
-//     map = new google.maps.Map(document.getElementById("map"), {
-//         center: { lat: -34.397, lng: 150.644 },
-//         zoom: 5,
-//     });
-
-// }
 function initMap() {
-    let allMap = document.querySelectorAll("#map")
-    let hkMap = document.querySelector(".hkMap #map")
-    for (let getMap of allMap) {
-        map = new google.maps.Map(getMap, {
-            center: { lat: 22.379812, lng: 114.134938 },
-            zoom: 13,
-        });
-
-        map = new google.maps.Map(hkMap, {
-            center: { lat: 22.289437, lng: 113.940938 },
-            zoom: 13,
-        });
-    }
 }
+
+async function googleMapWithPin() {
+    let res = await fetch('/allPin')
+    if (res.status != 200) {
+        alert('Loading failed, please try again later');
+        return;
+    }
+
+    let pinResults = await res.json()
+
+
+    let latitudes = []
+    let longitudes = []
+
+    for (let i = 0; i < pinResults.length; i++) {
+        let allLocations = pinResults[i]["location"]
+        let locations = allLocations.split('\n')
+        for (let location of locations) {
+            // console.log(location)
+
+            await new Promise((resolve) => {
+                setTimeout(resolve, 0.001)
+            })
+
+            axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                params: {
+                    address: location,
+                    key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+                }
+            })
+                .then(function (response) {
+                    // Log full response
+                    // console.log(response)
+
+                    let latitude = response.data.results[0].geometry.location.lat;
+                    let longitude = response.data.results[0].geometry.location.lng;
+
+                    latitudes.push(latitude)
+                    longitudes.push(longitude)
+
+                    // let marker = new google.maps.Marker({
+                    //     position: { lat: latitude, lng: longitude },
+                    //     map: map,
+                    // });
+                })
+        }
+    }
+
+    // let hkMap = document.querySelector(".hkMap #map")
+    // map = new google.maps.Map(hkMap, {
+    //     center: { lat: 22.317001, lng: 114.169934 },
+    //     zoom: 12,
+    // });
+    // for (let i = 0; i < latitudes.length; i++) {
+    //     const marker = new google.maps.Marker({
+    //         position: { lat: latitudes[i], lng: longitudes[i] },
+    //         map: map,
+    //     });
+    // }
+
+}
+googleMapWithPin()
+
+
+
 //end of google map API
 
 // show more animation
@@ -49,9 +93,6 @@ const bookmarked = document.querySelector(".bookmarked")
 let joinShow = false
 let bookmarkShow = false
 
-
-
-let searchResults = [];
 
 
 const loadJoined = async () => {
@@ -92,36 +133,48 @@ const displayEvents = (events) => {
         </div>
     </div>
     `;
+
         })
         .join('');
-    if(joinShow === true){
-        joined.innerHTML = htmlString;   
-        
+    if (joinShow === true) {
+        joined.innerHTML = htmlString
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: location,
+                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+            }
+        })
+            .then(function (response) {
+                // Log full response
+                // console.log(response)
+                // if(response.data.results[0] != undefined){
+                console.log(response.data.results[0]);
+                let latitude = response.data.results[0].geometry.location.lat;
+                let longitude = response.data.results[0].geometry.location.lng;
+
+                let getMap = document.querySelector('#map')
+                map = new google.maps.Map(getMap, {
+                    center: { lat: latitude, lng: longitude },
+                    zoom: 13,
+                });
+
+                const marker = new google.maps.Marker({
+                    position: { lat: latitude, lng: longitude },
+                    map: map,
+                });
+                // }
+            })
+            ;
+
     }
-    if (bookmarkShow === true){
+    if (bookmarkShow === true) {
         bookmarked.innerHTML = htmlString;
     }
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
         cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
-    let map;
-    function initMap() {
-        let allMap = document.querySelectorAll("#map")
-        let hkMap = document.querySelector(".hkMap #map")
-        for (let getMap of allMap) {
-            map = new google.maps.Map(getMap, {
-                center: { lat: 22.379812, lng: 114.134938 },
-                zoom: 13,
-            });
 
-            map = new google.maps.Map(hkMap, {
-                center: { lat: 22.289437, lng: 113.940938 },
-                zoom: 13,
-            });
-        }
-    }
-    initMap()
 };
 
 loadJoined();
