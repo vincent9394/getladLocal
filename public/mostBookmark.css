@@ -340,7 +340,7 @@ h5 {
     border: none;
 }
 
-.unjoinButton {
+.unJoinButton {
     background-color: rgb(4, 102, 214);
     border: none;
 }
@@ -495,19 +495,19 @@ footer{
 }
 
 
-.is-loading .joinButton, .is-loading .unjoinButton, .is-loading .bookmark, .is-loading .unbookmark {
+.is-loading .joinButton, .is-loading .unJoinButton, .is-loading .bookmark, .is-loading .unBookmark {
     display: none;
 }
 
 
 
-.is-guest .joinButton, .is-guest .unjoinButton, .is-guest .bookmark, .is-guest .unbookmark {
+.is-guest .joinButton, .is-guest .unJoinButton, .is-guest .bookmark, .is-guest .unBookmark {
     display: none;
 }
 
 
 
-.is-member .joinButton, .is-member .unjoinButton, .is-member .bookmark, .is-member .unbookmark {
+.is-member .joinButton, .is-member .unJoinButton, .is-member .bookmark, .is-member .unBookmark {
     display: block;
 }
 

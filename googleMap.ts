@@ -13,3 +13,4 @@ googleMapRoute.get('/allPin', async (req, res) => {
 `)
         res.json(allPin.rows)
     })
+

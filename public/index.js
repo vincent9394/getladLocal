@@ -69,48 +69,6 @@ async function googleMapWithPin() {
 googleMapWithPin()
 
 
-// async function addMarker() {
-//     let res = await fetch('/allPin')
-//     if (res.status != 200) {
-//         alert('Loading failed, please try again later');
-//         return;
-//     }
-
-//     let pinResults = await res.json()
-
-//     for (let i = 0; i < pinResults.length; i++) {
-//         let allLocations = pinResults[i]["location"]
-//         let locations = allLocations.split('\n')
-//         for (let location of locations) {
-//             // console.log(location)
-
-//             await new Promise((resolve) => {
-//                 setTimeout(resolve, 100)
-//             })
-
-//             axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-//                 params: {
-//                     address: location,
-//                     key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
-//                 }
-//             })
-//                 .then(function (response) {
-//                     // Log full response
-//                     // console.log(response)
-
-//                     let latitude = response.data.results[0].geometry.location.lat;
-//                     let longitude = response.data.results[0].geometry.location.lng;
-
-//                     const marker = new google.maps.Marker({
-//                         position: { lat: latitude, lng: longitude },
-//                         map: map,
-//                     });
-//                 })
-//         }
-//     }
-// }
-
-
 // show more animation
 let showMoreButtons = document.querySelectorAll('.showMoreButton')
 for (let showMoreButton of showMoreButtons) {
@@ -173,14 +131,12 @@ async function sendUnbookmarkInfo(eventId) {
 
 async function mostBookmarked() {
     let res = await fetch('/sorting_by_most_bookmarked')
-    console.log(res)
     if (res.status != 200) {
         alert('Loading failed, please try again later');
         return;
     }
 
     let bottomRes = await fetch('/if_joined_and_bookmarked')
-    console.log(bottomRes)
     if (res.status != 200) {
         alert('Loading failed, please try again later');
         return;
@@ -188,10 +144,6 @@ async function mostBookmarked() {
 
     let bottomResults = await bottomRes.json()
     let sortingResults = await res.json()
-
-    console.log(bottomResults)
-    console.log(sortingResults)
-
 
     for (let i = 0; i < sortingResults.length; i++) {
         let description = sortingResults[i]["description"]
@@ -203,8 +155,6 @@ async function mostBookmarked() {
         let bookmarkButton = bottomResults[i]["bookmark_id"]
         let eventDate = new Date(sortingResults[i]["date"]).toLocaleDateString('en-hk')
         let eventId = sortingResults[i]["id"]
-
-        console.log(joinButton)
 
         let div = document.createElement("div")
         div.id = `cardFlex${eventId}`
@@ -263,32 +213,10 @@ async function mostBookmarked() {
     }
 
 
-
-
-
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
         cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
-
-
-    // let map;
-    // function initMap() {
-    //     let allMap = document.querySelectorAll("#map")
-    //     let hkMap = document.querySelector(".hkMap #map")
-    //     for (let getMap of allMap) {
-    //         map = new google.maps.Map(getMap, {
-    //             center: { lat: 22.379812, lng: 114.134938 },
-    //             zoom: 13,
-    //         });
-
-    //         map = new google.maps.Map(hkMap, {
-    //             center: { lat: 22.289437, lng: 113.940938 },
-    //             zoom: 13,
-    //         });
-    //     }
-    // }
-    // initMap()
 
 
     let joinButtons = document.querySelectorAll('.joinButton')
@@ -405,15 +333,12 @@ async function sendUnbookmarkInfoRow2(eventId) {
 
 async function mostSuccessfulRate() {
     let res = await fetch('/sorting_by_successful_rate')
-    console.log(res)
     if (res.status != 200) {
         alert('Loading failed, please try again later');
         return;
     }
 
     let sortingResults = await res.json()
-
-    console.log(sortingResults)
 
     for (let i = 0; i < sortingResults.length; i++) {
         let description = sortingResults[i]["description"]
@@ -425,7 +350,6 @@ async function mostSuccessfulRate() {
         let eventId = sortingResults[i]["id"]
         let joinButton = sortingResults[i]["has_joined"]
         let bookmarkButton = sortingResults[i]["has_bookmarked"]
-        console.log(joinButton)
 
 
         let div = document.createElement("div")
@@ -445,10 +369,10 @@ async function mostSuccessfulRate() {
             </div>
             <hr>
             <div class="bottomBar">
-                <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
-                <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
-                <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
-                <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
+                <button class="btn btn-primary joinButton" ${joinButton>0 ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
+                <button class="btn btn-primary unJoinButton" ${joinButton == 0 ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
+                <div class="bookmark" ${bookmarkButton>0 ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
+                <div class="unBookmark" ${bookmarkButton == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
             </div>
         </div>
     </div>
@@ -479,8 +403,6 @@ async function mostSuccessfulRate() {
                 });
             })
 
-
-
         row2.appendChild(div)
     }
 
@@ -489,25 +411,6 @@ async function mostSuccessfulRate() {
     for (let cardTitle of cardTitles) {
         cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
-
-
-    // let map;
-    // function initMap() {
-    //     let allMap = document.querySelectorAll("#map")
-    //     let hkMap = document.querySelector(".hkMap #map")
-    //     for (let getMap of allMap) {
-    //         map = new google.maps.Map(getMap, {
-    //             center: { lat: 22.379812, lng: 114.134938 },
-    //             zoom: 13,
-    //         });
-
-    //         map = new google.maps.Map(hkMap, {
-    //             center: { lat: 22.289437, lng: 113.940938 },
-    //             zoom: 13,
-    //         });
-    //     }
-    // }
-    // initMap()
 
 
     let row2JoinButtons = document.querySelectorAll('.joinButton')
@@ -579,5 +482,22 @@ mostSuccessfulRate()
 
 
 
+    // let map;
+    // function initMap() {
+    //     let allMap = document.querySelectorAll("#map")
+    //     let hkMap = document.querySelector(".hkMap #map")
+    //     for (let getMap of allMap) {
+    //         map = new google.maps.Map(getMap, {
+    //             center: { lat: 22.379812, lng: 114.134938 },
+    //             zoom: 13,
+    //         });
+
+    //         map = new google.maps.Map(hkMap, {
+    //             center: { lat: 22.289437, lng: 113.940938 },
+    //             zoom: 13,
+    //         });
+    //     }
+    // }
+    // initMap()
 
 
