@@ -14,9 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS324XkzWyfddSLnfpJzw6elPlctwGjzY&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g&callback=initMap">
         </script>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./entertainment.css">
     <link rel="stylesheet" href="./cardElement.css">
     <link rel="stylesheet" href="./loginElement.css">
@@ -26,125 +26,125 @@
 <body class="is-loading">
     <header></header>
 
-        <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <form id="createEvent">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">建立活動</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="categoryOption" class="col-form-label">揀類型：</label>
-                        <select id="categoryOption" name="categoryOption">
-                            <option name="transportation" value="1">交通</option>
-                            <option name="entertainment" value="2">娛樂</option>
-                            <option name="foodieGroup" value="3">飲食</option>
-                        </select>
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="createEvent">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">建立活動</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">活動名:</label>
-                        <input name='topic' type="text" class="form-control" id="topic" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="col-form-label">形容吓個活動:</label>
-                        <textarea name="description" class="form-control" id="description" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="prerequisite" class="col-form-label">人數:</label>
-                        <input name='prerequisite' type="number" class="form-control" id="prerequisite" min="2"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label for="location" class="col-form-label">地點:</label>
-                        <input name='location' type="text" class="form-control" id="location" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="date" class="col-form-label">日期:</label>
-                        <input type="date" name="date" required pattern="\d{4}-\d{2}-\d{2}">
-                    </div>
-                    <div class="form-group">
-                        <label for="time" class="col-form-label">時間:</label>
-                        <input id="time" type="time" name="time" required pattern="[0-9]{2}:[0-9]{2}">
-                    </div>
-                    <div class="form-group">
-                        <p class="col-form-label">本人參唔參加？</p>
-                        <div>
-                            <input type="radio" id="join" name="join-group" value="1" checked>
-                            <label for="join">參加</label>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="categoryOption" class="col-form-label">揀類型：</label>
+                            <select id="categoryOption" name="categoryOption">
+                                <option name="transportation" value="1">交通</option>
+                                <option name="entertainment" value="2">娛樂</option>
+                                <option name="foodieGroup" value="3">飲食</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">活動名:</label>
+                            <input name='topic' type="text" class="form-control" id="topic" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-form-label">形容吓個活動:</label>
+                            <textarea name="description" class="form-control" id="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="prerequisite" class="col-form-label">人數:</label>
+                            <input name='prerequisite' type="number" class="form-control" id="prerequisite" min="2"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="col-form-label">地點:</label>
+                            <input name='location' type="text" class="form-control" id="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date" class="col-form-label">日期:</label>
+                            <input type="date" name="date" required pattern="\d{4}-\d{2}-\d{2}">
+                        </div>
+                        <div class="form-group">
+                            <label for="time" class="col-form-label">時間:</label>
+                            <input id="time" type="time" name="time" required pattern="[0-9]{2}:[0-9]{2}">
+                        </div>
+                        <div class="form-group">
+                            <p class="col-form-label">本人參唔參加？</p>
+                            <div>
+                                <input type="radio" id="join" name="join-group" value="1" checked>
+                                <label for="join">參加</label>
 
-                            <input type="radio" id="no-join" name="join-group" value="0">
-                            <label for="no-join">唔參加</label>
+                                <input type="radio" id="no-join" name="join-group" value="0">
+                                <label for="no-join">唔參加</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">唔開</button>
-                    <button type="submit" class="btn btn-primary">開團！</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="success-create-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                成功開團!
-                5秒後自動更新。。。
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="deleteEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <form id="deleteEventForm">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">刪除活動</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="categoryOption" class="col-form-label">想刪邊個：</label>
-                        <select id="deleteEvents" name="deleteEvents">
-                        </select>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">唔開</button>
+                        <button type="submit" class="btn btn-primary">開團！</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">唔刪</button>
-                    <button type="submit" class="btn btn-primary">刪！</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="success-delete-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                成功刪除!
-                5秒後自動更新。。。
+                </form>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="modal fade" id="success-create-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    成功開團!
+                    5秒後自動更新。。。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="deleteEventForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">刪除活動</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="categoryOption" class="col-form-label">想刪邊個：</label>
+                            <select id="deleteEvents" name="deleteEvents">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">唔刪</button>
+                        <button type="submit" class="btn btn-primary">刪！</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="success-delete-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    成功刪除!
+                    5秒後自動更新。。。
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!-- end of Modal -->
+    <!-- end of Modal -->
 
     <div class="container">
         <form class="searchBarFlex">
@@ -185,9 +185,10 @@
     <!-- todo grid number -->
     <div class="container-fluid d-flex justify-content-between my-4 mx-0">
         <div class="google-map mx-5">
-            
+            <div class="hkMap">
+                <!-- <div id="map"></div> -->
+            </div>
         </div>
-        <div id="map"></div>
 
         <div class="events-container">
             <div class="row">
@@ -199,7 +200,7 @@
 
     </div>
     <footer class="footer">
-        
+
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

@@ -110,6 +110,7 @@ const displayEvents = (events) => {
                 row2JoinButton.innerHTML = '已加入'
                 row2JoinButton.style.backgroundColor = " rgb(4, 102, 214)"
             }
+            loadEvents()
         })
     }
 
@@ -126,6 +127,7 @@ const displayEvents = (events) => {
                 row2UnJoinButton.innerHTML = '加入'
                 row2UnJoinButton.style.backgroundColor = "rgb(20, 54, 92)"
             }
+            loadEvents()
         })
     }
 
