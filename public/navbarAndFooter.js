@@ -10,6 +10,12 @@ function navbarTopic() {
         navbarBrand.innerHTML = `我的活動`
     } else if (location.pathname === `/transport.html`) {
         navbarBrand.innerHTML = `搭車`
+    } else if (location.pathname === `/mostBookmark.html`) {
+        navbarBrand.innerHTML = `熱門活動`
+    } else if (location.pathname === `/mostJoined.html`) {
+        navbarBrand.innerHTML = `就快成團`
+    } else if (location.pathname === `/index.html`) {
+        navbarBrand.innerHTML = `GETLAD`
     }
 }
 

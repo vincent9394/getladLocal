@@ -122,7 +122,7 @@ const displayEvents = (events) => {
         <div id="map"></div>
 
         <div class="card-body">
-            <p class="card-text" id="description">${event.description}</p>
+            <p class="card-text" id="description">${marked(event.description)}</p>
             <!-- change description.innerHTML -->
             <hr>
             <div class="infoBar">

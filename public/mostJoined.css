@@ -1,10 +1,83 @@
 body {
-    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231))  ;
+    background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231));
     height: 100vh;
     /* display: flex; */
     /* position: relative; */
-    margin-top: 0;
-    margin-bottom: 0;
+    /* font-family: ele; */
+}
+
+.getlad, .getlad:hover {
+    font-family: 'Rock Salt', cursive;
+    font-size: xx-large;
+    color: black;
+    text-decoration-line: none;
+}
+
+
+.footer-logo{
+    font-size: xx-large;
+    font-family: 'Rock Salt', cursive;
+    color: black;
+    margin-left: 12px;
+}
+
+#navbar_top {
+    z-index: 1000;
+}
+
+@media screen and (min-width: 400px) and (max-width: 700px)  {
+    body{
+        background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
+        height: 150vh;
+        /* display: flex; */
+        position: relative;
+        font-size: small !important;
+    }
+    #navbar_top{
+        padding: 0;
+        z-index: 999;
+    }
+    .navbar-container{
+        padding-left: 16px !important;
+        padding-top: 0 !important;
+        /* padding-bottom: 0 !important; */
+        padding-right: 0 !important;
+        display: flex !important;
+        align-content: center !important;
+    }
+    .navbar-left img {
+        width: 50%;
+        height: 50%;
+    }
+    .dropdown {
+        margin-top: 15px;
+    }
+    .add{
+        flex-wrap: nowrap !important;
+        padding: 0 !important;
+        align-items: unset !important;
+    }
+    .login, .logout, .loginEdit {
+        font-size: small !important;
+    }
+}
+.logo, .logo:hover{
+    font-family: 'Rock Salt', cursive;
+    font-size: 30px;
+    margin-bottom: 5px;
+    color: black;
+    text-decoration-line: none;
+
+}
+.login, .login:hover, .login::selection, .logout, .logout:hover, .logout::selection, .loginEdit, .loginEdit:hover, .loginEdit::selection{
+    background-color: #14365C ;
+    color: white ;
+    border: none ;
+
+    font-size: 24px;
+}
+.toggle, .toggle::selection{
+    border: none !important;
 }
 .navbar-left{
     display: flex;
@@ -14,14 +87,10 @@ body {
     width:250px;
 }
 
-.navbar {
-    padding: 0!important;
-}
 
 .scrolled-down{
     transform:translateY(0%); transition: all 0.3s ease-in-out;
  }
-
 .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -33,6 +102,12 @@ body {
     padding-right: 16px;
     width: 100%;
 }
+.navbar-brand{
+    font-size: 24px;
+}
+.dropdown-item, .myEvent{
+    font-size: 24px;
+}
 
 .pb-4, .py-4 {
     padding: 15px!important;
@@ -42,6 +117,49 @@ body {
     background-color: #14365C;
     color: white;
     border: none;
+}
+
+.hkMap {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.hkMap #map{
+    border-radius: 15px;
+    height: 78vh;
+    width: 98vw;
+}
+
+.categoryFlexDiv {
+    display: flex;
+    justify-content: space-around;
+    margin: 100px 0 100px 0;
+    flex-wrap: wrap;
+}
+
+.categoryCircle {
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #263250;
+    transition: 300ms;
+    margin: 20px;
+}
+
+.categoryCircle:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.wordInCircle {
+    color: white;
+    font-size: 28px;
 }
 
 .searchBarFlex {
@@ -64,7 +182,7 @@ body {
 }
 
 .searchBar {
-    width: 600px;
+    width: 500px;
 }
 
 .searchButton {
@@ -76,14 +194,17 @@ body {
     width: 100px;
 }
 
+.searchButton:hover {
+    cursor: pointer;
+}
+
 #magnifier {
     transition: 300ms;
     font-size: 20px;
 }
 
 #magnifier:hover {
-    transform: scale(1.2);
-    cursor: pointer;
+    transform: scale(1.15);
 }
 
 .boldHr{
@@ -157,9 +278,9 @@ body {
     margin: 30px 0 0 0;
 }
 
-.row {
+.row, .row2 {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
@@ -171,7 +292,7 @@ body {
 
 .card {
     border-radius: 15px;
-    margin: 60px 20px 60px 20px;
+    margin: 60px 20px 20px 20px;
     border: none;
 }
 
@@ -194,6 +315,16 @@ h5 {
     font-size: 13px;
 }
 
+.infoBar {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
 #participationRate {
     text-align: end;
 }
@@ -209,15 +340,26 @@ h5 {
     border: none;
 }
 
-.fa-bookmark {
+.unJoinButton {
+    background-color: rgb(4, 102, 214);
+    border: none;
+}
+
+.bookmark .fa-bookmark {
     color: #D8D6D9;
     font-size: 24px;
     transition: 200ms;
 }
 
-.fa-bookmark:hover {
+.bookmark .fa-bookmark:hover, .unBookmark .fa-bookmark:hover {
     cursor: pointer;
     transform: scale(1.05);
+}
+
+.unBookmark .fa-bookmark {
+    color: #F3C20C;
+    font-size: 24px;
+    transition: 200ms;
 }
 
 #map {
@@ -247,7 +389,10 @@ html, body {
 
 .showMoreButton:hover {
     cursor: pointer;
+    text-decoration: none;
 }
+
+
 
 footer{
     font-family: "PingFang HK",-apple-system,微軟正黑體,"Microsoft JhengHei",蘋果儷中黑,"Apple LiGothic Medium","儷黑 Pro","LiHei Pro Medium",sans-serif;
@@ -257,8 +402,8 @@ footer{
     /* display: flex; */
     font-weight: 600;
     font-size: .75rem;
-    color: #fff;
-    background-color: #D8D6D9;
+    color: #000000;
+    background-color: #0000004d;
     z-index: 999;
     /* align-self: flex-end; */
     /* position: absolute; */
@@ -271,7 +416,7 @@ footer{
     line-height: normal;
     font-weight: 600;
     font-size: .75rem;
-    color: #fff;
+    color: #000000;
     box-sizing: inherit;
     max-width: 100%;
     margin: 0 auto;
@@ -297,7 +442,7 @@ footer{
     line-height: normal;
     font-weight: 600;
     font-size: .75rem;
-    color: #fff;
+    color: #000000;
     box-sizing: inherit;
     margin: 0;
     padding: 0;
@@ -308,7 +453,7 @@ footer{
     line-height: normal;
     font-weight: 600;
     font-size: .75rem;
-    color: #fff;
+    color: #000000;
     box-sizing: inherit;
     margin: 0;
     padding: 0;
@@ -323,13 +468,49 @@ footer{
     line-height: normal;
     font-weight: 600;
     font-size: .75rem;
-    color: #fff;
+    color: #000000;
     box-sizing: inherit;
     margin: 0;
     padding: 0;
     float: right;
     height: 5.625rem;
 }
+.copyright, .website-intro{
+    color: black;
+    font-size: medium;
+    margin-left: 15px;
+}
+
+
+
+/* innerHTML css */
+.is-loading .logout, .is-guest .logout, .is-loading .loginEdit, .is-guest .loginEdit, .is-loading .myEvent, .is-guest .myEvent{
+    display: none;
+}
+
+
+
+.is-member .login {
+    display: none;
+}
+
+
+.is-loading .joinButton, .is-loading .unJoinButton, .is-loading .bookmark, .is-loading .unBookmark {
+    display: none;
+}
+
+
+
+.is-guest .joinButton, .is-guest .unJoinButton, .is-guest .bookmark, .is-guest .unBookmark {
+    display: none;
+}
+
+
+
+.is-member .joinButton, .is-member .unJoinButton, .is-member .bookmark, .is-member .unBookmark {
+    display: block;
+}
+
 
 .loadingBar {
     display: flex;
@@ -349,3 +530,4 @@ footer{
 .loadingBar.show {
     opacity: 1;
 }
+

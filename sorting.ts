@@ -155,8 +155,8 @@ sortingRoute.get('/sorting_by_successful_rate', async (req, res) => {
 
 
 
-// most bookmarked sorting for mostBookmark page
-sortingRoute.get('/sorting_by_most_bookmarked_mostBookmark_html', async (req, res) => {
+// mostBookmark page
+sortingRoute.get('/mostBookmark_initial', async (req, res) => {
     let sortingResult = await client.query(`
 WITH 
     most_bookmarked_events AS (
@@ -195,18 +195,20 @@ GROUP BY
     most_bookmarked_events.updated_at,
     most_bookmarked_events.bookmark
 ORDER BY 
-    most_bookmarked_events.bookmark DESC,
-    most_bookmarked_events.date DESC
+    most_bookmarked_events.bookmark DESC
 LIMIT 6
-OFFSET 6
-;`)
+OFFSET $1 * 6
+;`,[req.query.counter])
+console.log(req.query.counter)
         res.json(sortingResult.rows)
     })
 
 
-sortingRoute.get('/if_joined_and_bookmarked_mostBookmark_html', async (req, res) => {
+
+// mostBookmark page (if_joined_and_bookmarked)
+sortingRoute.get('/if_joined_and_bookmarked_mostBookmark_initial', async (req, res) => {
     let joinAndBookmark = await client.query (`
-WITH most_bookmarked_events AS (
+    WITH most_bookmarked_events AS (
         SELECT 
         events.*, 
         ( SELECT count(*) 
@@ -214,7 +216,7 @@ WITH most_bookmarked_events AS (
           where bookmark.event_id = events.id ) as bookmark
         FROM events 
     )
-SELECT 
+    SELECT 
     most_bookmarked_events.id, 
     most_bookmarked_events.date, 
     join_group.id as join_group_id,
@@ -229,11 +231,71 @@ SELECT
     bookmark_id,
     most_bookmarked_events.bookmark
 ORDER BY 
-    most_bookmarked_events.bookmark DESC,
-    most_bookmarked_events.date DESC
+    most_bookmarked_events.bookmark DESC
 LIMIT 6
-OFFSET 6
-;`,[req.session['user']])  
+OFFSET $2 * 6
+    ;
+    `,[req.session['user'],req.query.counter])  
     res.json(joinAndBookmark.rows)
-}
-)
+})
+
+
+// mostJoined page
+sortingRoute.get('/mostJoined', async (req, res) => {
+    let sortingResult = await client.query(`
+    WITH 
+        most_joined_events AS (
+            SELECT 
+            id, 
+            ( SELECT count(*) 
+              FROM join_group 
+              where join_group.event_id = events.id ) as join_count
+            FROM events 
+        ), 
+        my_joined_events AS (
+            SELECT 
+            id, 
+            ( SELECT count(*) 
+              FROM join_group 
+              where join_group.event_id = events.id
+              and join_group.participant_id = $1) as has_joined
+            FROM events 
+        ),
+        my_bookmarked_events AS (
+            SELECT 
+            id, 
+            ( SELECT count(*) 
+              FROM bookmark
+              where bookmark.event_id = events.id
+              and bookmark.user_id = $1) as has_bookmarked
+            FROM events 
+        )
+    SELECT 
+        events.id, 
+        events.creator_id, 
+        events.description,
+        events.date, 
+        events.location, 
+        events.topic, 
+        events.prerequisite, 
+        events.event_type_id,
+        events.created_at, 
+        events.updated_at,
+        join_count,
+        has_joined,
+        has_bookmarked,
+        (join_count * 100 / events.prerequisite) as percent  
+    FROM events
+    inner join most_joined_events on most_joined_events.id = events.id
+    inner join my_joined_events on my_joined_events.id = events.id
+    inner join my_bookmarked_events on my_bookmarked_events.id = events.id 
+    where 
+    events.prerequisite > 0
+        and 
+        join_count < events.prerequisite
+    ORDER BY percent desc 
+    LIMIT 6
+    OFFSET $2 * 6;`, [req.session['user'], req.query.counter])
+    console.log(req.query.counter)
+    res.json(sortingResult.rows)
+})
