@@ -1,10 +1,11 @@
 body {
     background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231))  ;
-    height: 100vh;
+    height: 150vh;
     /* display: flex; */
     position: relative;
 }
 .getlad, .getlad:hover{
+    padding: 0 !important;
     font-family: 'Rock Salt', cursive;
     font-size: xx-large;
     color: black;
@@ -361,7 +362,7 @@ color: #000000;
 background-color: #0000004d;
 z-index: 999;
 /* align-self: flex-end; */
-position: absolute;
+position: absolute !important;
 bottom: 0;
 width: 100%;
 }

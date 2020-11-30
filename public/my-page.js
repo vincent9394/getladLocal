@@ -41,17 +41,19 @@ async function googleMapWithPin() {
                 .then(function (response) {
                     // Log full response
                     // console.log(response)
+                    if (response.data.status == "OK") {
 
-                    let latitude = response.data.results[0].geometry.location.lat;
-                    let longitude = response.data.results[0].geometry.location.lng;
+                        let latitude = response.data.results[0].geometry.location.lat;
+                        let longitude = response.data.results[0].geometry.location.lng;
+                        latitudes.push(latitude)
+                        longitudes.push(longitude)
+                        // let marker = new google.maps.Marker({
+                        //     position: { lat: latitude, lng: longitude },
+                        //     map: map,
+                        // });
+                    }
 
-                    latitudes.push(latitude)
-                    longitudes.push(longitude)
 
-                    // let marker = new google.maps.Marker({
-                    //     position: { lat: latitude, lng: longitude },
-                    //     map: map,
-                    // });
                 })
         }
     }
@@ -114,6 +116,7 @@ const loadBookmarked = async () => {
 const displayEvents = (events) => {
     const htmlString = events
         .map((event) => {
+
             return `<div class="card" style="width: 18rem;">
         <h5 class="card-title">${event.topic}</h5> <!-- change card-title.innerHTML -->
         <div id="map"></div>
@@ -132,12 +135,15 @@ const displayEvents = (events) => {
             
         </div>
     </div>
-    `;
+    ` ;
 
         })
         .join('');
+
     if (joinShow === true) {
+        
         joined.innerHTML = htmlString
+        const getMap = document.querySelectorAll('#map')
         axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
             params: {
                 address: location,
@@ -145,14 +151,13 @@ const displayEvents = (events) => {
             }
         })
             .then(function (response) {
+                console.log('map here');
                 // Log full response
                 // console.log(response)
                 // if(response.data.results[0] != undefined){
-                console.log(response.data.results[0]);
                 let latitude = response.data.results[0].geometry.location.lat;
                 let longitude = response.data.results[0].geometry.location.lng;
 
-                let getMap = document.querySelector('#map')
                 map = new google.maps.Map(getMap, {
                     center: { lat: latitude, lng: longitude },
                     zoom: 13,
@@ -164,7 +169,7 @@ const displayEvents = (events) => {
                 });
                 // }
             })
-            ;
+
 
     }
     if (bookmarkShow === true) {
@@ -174,6 +179,8 @@ const displayEvents = (events) => {
     for (let cardTitle of cardTitles) {
         cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
+
+
 
 };
 
