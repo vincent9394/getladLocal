@@ -76,7 +76,7 @@ createEventRoute.post('/createEvent', async (req, res) => {
 
 ////delete event//
 createEventRoute.get('/showDeleteEvent', async (req, res) => {
-    const notes = await client.query('SELECT * FROM events ORDER BY id ASC')
+    const notes = await client.query('SELECT * FROM events WHERE creator_id = $1 ORDER BY id ASC',[req.session['user']])
     res.json(notes.rows);
 });
 createEventRoute.delete('/deleteEvent/:id', async (req, res) => {

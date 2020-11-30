@@ -109,7 +109,8 @@ const displayEvents = (events) => {
     cardFlex.innerHTML = htmlString;
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
-        cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        cardTitle.style.backgroundColor = `${`hsla(${(Math.floor(Math.random() * 360))}, 100%, 75%`}`
+        // cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
 
     let row2JoinButtons = document.querySelectorAll('.joinButton')
