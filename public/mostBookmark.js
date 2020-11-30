@@ -1,7 +1,7 @@
 
 let row = document.querySelector('.row')
 
-async function sendJoinInfo(eventId) {
+async function sendJoinInfo(event, eventId) {
     const res = await fetch('/bottomBarJoin', {
         method: "POST",
         headers: {
@@ -10,9 +10,11 @@ async function sendJoinInfo(eventId) {
         body: JSON.stringify({ eventId: eventId })
     });
     await res.json();
-}
 
-async function sendUnjoinInfo(eventId) {
+ 
+  }
+
+async function sendUnjoinInfo(event, eventId) {
     const res = await fetch('/bottomBarUnjoin', {
         method: "POST",
         headers: {
@@ -21,9 +23,10 @@ async function sendUnjoinInfo(eventId) {
         body: JSON.stringify({ eventId: eventId })
     });
     await res.json();
+
 }
 
-async function sendBookmarkInfo(eventId) {
+async function sendBookmarkInfo(event, eventId) {
     const res = await fetch('/bottomBarBookmark', {
         method: "POST",
         headers: {
@@ -32,9 +35,10 @@ async function sendBookmarkInfo(eventId) {
         body: JSON.stringify({ eventId: eventId })
     });
     await res.json();
+
 }
 
-async function sendUnbookmarkInfo(eventId) {
+async function sendUnbookmarkInfo(event, eventId) {
     const res = await fetch('/bottomBarUnbookmark', {
         method: "POST",
         headers: {
@@ -43,6 +47,7 @@ async function sendUnbookmarkInfo(eventId) {
         body: JSON.stringify({ eventId: eventId })
     });
     await res.json();
+
 }
 
 
@@ -52,7 +57,7 @@ let loading = false
 
 
 let count = 0
-async function mostBookmarked(result1, result2) {
+async function mostBookmarked() {
 
     if (loading) {
         return
@@ -101,7 +106,7 @@ async function mostBookmarked(result1, result2) {
         <div id="map"></div>
         
         <div class="card-body">
-            <p class="card-text" id="description">${description}</p>
+            <p class="card-text" id="description">${marked(description)}</p>
             <hr>
             <div class="infoBar">
                 <p class="card-text" id="eventLocation">地點: ${location}</p>
@@ -110,10 +115,10 @@ async function mostBookmarked(result1, result2) {
             </div>
             <hr>
             <div class="bottomBar">
-                <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
-                <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
-                <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
-                <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
+                <button class="btn btn-primary joinButton" ${joinButton ? "hidden" : ""} onclick = "sendJoinInfo(event,${eventId})">加入</button>
+                <button class="btn btn-primary unJoinButton" ${joinButton == null ? "hidden" : ""} onclick = "sendUnjoinInfo(event,${eventId})">已加入</button>
+                <div class="bookmark" ${bookmarkButton ? "hidden" : ""} onclick = "sendBookmarkInfo(event,${eventId})"><i class="fas fa-bookmark"></i></div>
+                <div class="unBookmark" ${bookmarkButton == null ? "hidden" : ""} onclick = "sendUnbookmarkInfo(event,${eventId})"><i class="fas fa-bookmark"></i></div>
             </div>
         </div>
     </div>
@@ -166,80 +171,80 @@ async function mostBookmarked(result1, result2) {
     }
 
 
-    // let map;
-    // function initMap() {
-    //     let allMap = document.querySelectorAll("#map")
-    //     for (let getMap of allMap) {
-    //         map = new google.maps.Map(getMap, {
-    //             center: { lat: 22.379812, lng: 114.134938 },
-    //             zoom: 13,
-    //         });
-    //     }
+    let map;
+    function initMap() {
+        let allMap = document.querySelectorAll("#map")
+        for (let getMap of allMap) {
+            map = new google.maps.Map(getMap, {
+                center: { lat: 22.379812, lng: 114.134938 },
+                zoom: 13,
+            });
+        }
+    }
+    initMap()
+
+
+    // let joinButtons = document.querySelectorAll('.joinButton')
+    // for (let joinButton of joinButtons) {
+
+    //     joinButton.addEventListener('click', async function (event) {
+    //         event.preventDefault()
+    //         event.target.toggle = !event.target.toggle
+    //         if (event.target.toggle == false) {
+    //             joinButton.innerHTML = '加入'
+    //             joinButton.style.backgroundColor = "rgb(20, 54, 92)"
+    //         } else if (event.target.toggle == true) {
+    //             joinButton.innerHTML = '已加入'
+    //             joinButton.style.backgroundColor = " rgb(4, 102, 214)"
+    //         }
+    //     })
     // }
-    // initMap()
 
+    // let unJoinButtons = document.querySelectorAll('.unJoinButton')
+    // for (let unJoinButton of unJoinButtons) {
 
-    let joinButtons = document.querySelectorAll('.joinButton')
-    for (let joinButton of joinButtons) {
-
-        joinButton.addEventListener('click', async function (event) {
-            event.preventDefault()
-            event.target.toggle = !event.target.toggle
-            if (event.target.toggle == false) {
-                joinButton.innerHTML = '加入'
-                joinButton.style.backgroundColor = "rgb(20, 54, 92)"
-            } else if (event.target.toggle == true) {
-                joinButton.innerHTML = '已加入'
-                joinButton.style.backgroundColor = " rgb(4, 102, 214)"
-            }
-        })
-    }
-
-    let unJoinButtons = document.querySelectorAll('.unJoinButton')
-    for (let unJoinButton of unJoinButtons) {
-
-        unJoinButton.addEventListener('click', async function (event) {
-            event.preventDefault()
-            event.target.toggle = !event.target.toggle
-            if (event.target.toggle == false) {
-                unJoinButton.innerHTML = '已加入'
-                unJoinButton.style.backgroundColor = " rgb(4, 102, 214)"
-            } else if (event.target.toggle == true) {
-                unJoinButton.innerHTML = '加入'
-                unJoinButton.style.backgroundColor = "rgb(20, 54, 92)"
-            }
-        })
-    }
+    //     unJoinButton.addEventListener('click', async function (event) {
+    //         event.preventDefault()
+    //         event.target.toggle = !event.target.toggle
+    //         if (event.target.toggle == false) {
+    //             unJoinButton.innerHTML = '已加入'
+    //             unJoinButton.style.backgroundColor = " rgb(4, 102, 214)"
+    //         } else if (event.target.toggle == true) {
+    //             unJoinButton.innerHTML = '加入'
+    //             unJoinButton.style.backgroundColor = "rgb(20, 54, 92)"
+    //         }
+    //     })
+    // }
 
 
 
-    // hard code bookmark轉色
-    let yellowButtons = document.querySelectorAll('.bookmark .fa-bookmark')
-    for (let yellowButton of yellowButtons) {
-        yellowButton.addEventListener('click', async function (event) {
-            event.target.toggle = !event.target.toggle
-            if (event.target.toggle == false) {
-                yellowButton.style.color = "#D8D6D9"
-            } else if (event.target.toggle == true) {
-                yellowButton.style.color = "#F3C20C"
-            }
-        }
-        )
-    }
+    // // hard code bookmark轉色
+    // let yellowButtons = document.querySelectorAll('.bookmark .fa-bookmark')
+    // for (let yellowButton of yellowButtons) {
+    //     yellowButton.addEventListener('click', async function (event) {
+    //         event.target.toggle = !event.target.toggle
+    //         if (event.target.toggle == false) {
+    //             yellowButton.style.color = "#D8D6D9"
+    //         } else if (event.target.toggle == true) {
+    //             yellowButton.style.color = "#F3C20C"
+    //         }
+    //     }
+    //     )
+    // }
 
 
-    let whiteButtons = document.querySelectorAll('.unBookmark .fa-bookmark')
-    for (let whiteButton of whiteButtons) {
-        whiteButton.addEventListener('click', async function (event) {
-            event.target.toggle = !event.target.toggle
-            if (event.target.toggle == false) {
-                whiteButton.style.color = "#F3C20C"
-            } else if (event.target.toggle == true) {
-                whiteButton.style.color = "#D8D6D9"
-            }
-        }
-        )
-    }
+    // let whiteButtons = document.querySelectorAll('.unBookmark .fa-bookmark')
+    // for (let whiteButton of whiteButtons) {
+    //     whiteButton.addEventListener('click', async function (event) {
+    //         event.target.toggle = !event.target.toggle
+    //         if (event.target.toggle == false) {
+    //             whiteButton.style.color = "#F3C20C"
+    //         } else if (event.target.toggle == true) {
+    //             whiteButton.style.color = "#D8D6D9"
+    //         }
+    //     }
+    //     )
+    // }
 
     loadingBar.classList.remove('show')
     loading = false

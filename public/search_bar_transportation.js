@@ -72,7 +72,7 @@ const displayEvents = (events) => {
             return ` <div class="card">
             <h5 class="card-title">${event.topic}</h5>
             <div class="card-body">
-                <p class="card-text" id="description">${event.description}</p>
+                <p class="card-text" id="description">${marked(event.description)}</p>
                 <hr>
                 <div class="infoBar">
                     <p class="card-text" id="eventLocation">地點: ${event.location}</p>

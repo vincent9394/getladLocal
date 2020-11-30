@@ -92,7 +92,7 @@ async function mostJoined() {
         <div id="map"></div>
         
         <div class="card-body">
-            <p class="card-text" id="description">${description}</p>
+            <p class="card-text" id="description">${marked(description)}</p>
             <hr>
             <div class="infoBar">
                 <p class="card-text" id="eventLocation">地點: ${location}</p>
@@ -101,10 +101,10 @@ async function mostJoined() {
             </div>
             <hr>
             <div class="bottomBar">
-                <button class="btn btn-primary joinButton" ${joinButton > 0 ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
-                <button class="btn btn-primary unJoinButton" ${joinButton == 0 ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
-                <div class="bookmark" ${bookmarkButton > 0 ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
-                <div class="unBookmark" ${bookmarkButton == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
+                <button class="btn btn-primary joinButton" ${joinButton > 0 ? "hidden" : ""} onclick = "sendJoinInfo(event,${eventId})">加入</button>
+                <button class="btn btn-primary unJoinButton" ${joinButton == 0 ? "hidden" : ""} onclick = "sendUnjoinInfo(event,${eventId})">已加入</button>
+                <div class="bookmark" ${bookmarkButton > 0 ? "hidden" : ""} onclick = "sendBookmarkInfo(event,${eventId})"><i class="fas fa-bookmark"></i></div>
+                <div class="unBookmark" ${bookmarkButton == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfo(event,${eventId})"><i class="fas fa-bookmark"></i></div>
             </div>
         </div>
     </div>

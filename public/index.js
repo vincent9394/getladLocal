@@ -164,7 +164,7 @@ async function mostBookmarked() {
         <div id="map"></div>
         
         <div class="card-body">
-            <p class="card-text" id="description">${description}</p>
+            <p class="card-text" id="description">${marked(description)}</p>
             <hr>
             <div class="infoBar">
                 <p class="card-text" id="eventLocation">地點: ${location}</p>
@@ -287,49 +287,49 @@ mostBookmarked()
 
 let row2 = document.querySelector('.row2')
 
-async function sendJoinInfoRow2(eventId) {
-    const res = await fetch('/bottomBarJoinRow2', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ eventId: eventId })
-    });
-    await res.json();
-}
+// async function sendJoinInfoRow2(eventId) {
+//     const res = await fetch('/bottomBarJoinRow2', {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({ eventId: eventId })
+//     });
+//     await res.json();
+// }
 
-async function sendUnjoinInfoRow2(eventId) {
-    const res = await fetch('/bottomBarUnjoinRow2', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ eventId: eventId })
-    });
-    await res.json();
-}
+// async function sendUnjoinInfoRow2(eventId) {
+//     const res = await fetch('/bottomBarUnjoinRow2', {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({ eventId: eventId })
+//     });
+//     await res.json();
+// }
 
-async function sendBookmarkInfoRow2(eventId) {
-    const res = await fetch('/bottomBarBookmarkRow2', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ eventId: eventId })
-    });
-    await res.json();
-}
+// async function sendBookmarkInfoRow2(eventId) {
+//     const res = await fetch('/bottomBarBookmarkRow2', {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({ eventId: eventId })
+//     });
+//     await res.json();
+// }
 
-async function sendUnbookmarkInfoRow2(eventId) {
-    const res = await fetch('/bottomBarUnbookmarkRow2', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ eventId: eventId })
-    });
-    await res.json();
-}
+// async function sendUnbookmarkInfoRow2(eventId) {
+//     const res = await fetch('/bottomBarUnbookmarkRow2', {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({ eventId: eventId })
+//     });
+//     await res.json();
+// }
 
 async function mostSuccessfulRate() {
     let res = await fetch('/sorting_by_successful_rate')
@@ -360,7 +360,7 @@ async function mostSuccessfulRate() {
         <div id="map"></div>
         
         <div class="card-body">
-            <p class="card-text" id="description">${description}</p>
+            <p class="card-text" id="description">${marked(description)}</p>
             <hr>
             <div class="infoBar">
                 <p class="card-text" id="eventLocation">地點: ${location}</p>
@@ -369,7 +369,7 @@ async function mostSuccessfulRate() {
             </div>
             <hr>
             <div class="bottomBar">
-                <button class="btn btn-primary joinButton" ${joinButton>0 ? "hidden" : ""} onclick = "sendJoinInfo(${eventId})">加入</button>
+                <button class="btn btn-primary joinButton" ${joinButton>0 ? "hidden" : ""} onclick = "sendJoinInfo(event,${eventId})">加入</button>
                 <button class="btn btn-primary unJoinButton" ${joinButton == 0 ? "hidden" : ""} onclick = "sendUnjoinInfo(${eventId})">已加入</button>
                 <div class="bookmark" ${bookmarkButton>0 ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
                 <div class="unBookmark" ${bookmarkButton == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="fas fa-bookmark"></i></div>
