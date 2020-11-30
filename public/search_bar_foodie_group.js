@@ -64,11 +64,22 @@ async function sendUnbookmarkInfo(eventId) {
 }
 const loadEvents = async () => {
     const res = await fetch('/search-foodie-group');
-    searchResults = await res.json();
+    FoodieGroupResults = await res.json();
     // console.log(searchResults);
-    displayEvents(searchResults);
+    displayEvents(FoodieGroupResults);
     
 };
+const loadSearchedEvents = async () => {
+    const searchString = searchBar.value.toLowerCase();
+    const res = await fetch('/search-foodie-group')
+    searchResults = await res.json();
+    const filteredEvents = searchResults.filter((event) => {
+        return (
+            event.topic.toLowerCase().includes(searchString)
+        );
+    });
+    displayEvents(filteredEvents);
+}
 const displayEvents = (events) => {
     const htmlString = events
         .map((event) => {
@@ -98,7 +109,8 @@ const displayEvents = (events) => {
     cardFlex.innerHTML = htmlString;
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
-        cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        cardTitle.style.backgroundColor = `${`hsla(${(Math.floor(Math.random() * 360))}, 100%, 75%`}`
+        // cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
 
     let row2JoinButtons = document.querySelectorAll('.joinButton')
@@ -114,7 +126,7 @@ const displayEvents = (events) => {
                 row2JoinButton.innerHTML = '已加入'
                 row2JoinButton.style.backgroundColor = " rgb(4, 102, 214)"
             }
-            loadEvents()
+            loadSearchedEvents()
         })
     }
 
@@ -131,7 +143,7 @@ const displayEvents = (events) => {
                 row2UnJoinButton.innerHTML = '加入'
                 row2UnJoinButton.style.backgroundColor = "rgb(20, 54, 92)"
             }
-            loadEvents()
+            loadSearchedEvents()
         })
     }
 
