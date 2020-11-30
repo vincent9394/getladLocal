@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> 
     <link rel="stylesheet" href="mostBookmark.css">
 </head>
 
@@ -96,10 +97,52 @@
             <div class="modal-content">
                 <div class="modal-body">
                     成功開團!
+                    5秒後自動更新。。。
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="deleteEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="deleteEventForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">刪除活動</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="categoryOption" class="col-form-label">想刪邊個：</label>
+                            <select id="deleteEvents" name="deleteEvents">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">唔刪</button>
+                        <button type="submit" class="btn btn-primary">刪！</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="success-delete-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    成功刪除!
+                    5秒後自動更新。。。
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- end of Modal -->
 
     <article>
@@ -161,7 +204,7 @@
         crossorigin="anonymous"></script>
     <script src="mostBookmark.js"></script>
     <script src="navbarAndFooter.js"></script>
-    <!-- <script src="createEvent.js"></script> -->
+    <script src="createEvent.js"></script>
 </body>
 
 </html>

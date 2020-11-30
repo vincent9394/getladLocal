@@ -1,10 +1,11 @@
 body {
     background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231))  ;
-    height: 100vh;
+    height: 150vh;
     /* display: flex; */
     position: relative;
 }
 .getlad, .getlad:hover{
+    padding: 0 !important;
     font-family: 'Rock Salt', cursive;
     font-size: xx-large;
     color: black;
@@ -16,6 +17,11 @@ body {
     color: black;
     margin-left: 12px;
 }
+
+#navbar_top {
+    z-index: 1000;
+}
+
 @media screen and (min-width: 400px) and (max-width: 700px)  {
     body{
         background: linear-gradient(90deg,#FAB6B1, rgb(254, 232, 231)  )  ;
@@ -361,7 +367,7 @@ color: #000000;
 background-color: #0000004d;
 z-index: 999;
 /* align-self: flex-end; */
-position: absolute;
+position: absolute !important;
 bottom: 0;
 width: 100%;
 }

@@ -177,3 +177,49 @@ select * from join_group where event_id in (1,2,3,4,5);
         and 
         join_count < events.prerequisite
     ORDER BY percent desc LIMIT 5;
+
+
+
+
+
+
+WITH 
+    most_bookmarked_events AS (
+        SELECT 
+        events.*, 
+        ( SELECT count(*) 
+          FROM bookmark 
+          where bookmark.event_id = events.id ) as bookmark
+        FROM events 
+    )
+SELECT 
+    most_bookmarked_events.bookmark,
+    most_bookmarked_events.id, 
+    count(participant_id) as participants, 
+    most_bookmarked_events.creator_id, 
+    most_bookmarked_events.description,
+    most_bookmarked_events.date, 
+    most_bookmarked_events.location, 
+    most_bookmarked_events.topic, 
+    most_bookmarked_events.prerequisite, 
+    most_bookmarked_events.event_type_id, 
+    most_bookmarked_events.created_at, 
+    most_bookmarked_events.updated_at
+FROM most_bookmarked_events 
+left outer join join_group on most_bookmarked_events.id = join_group.event_id  
+GROUP BY 
+    most_bookmarked_events.id, 
+    most_bookmarked_events.creator_id, 
+    most_bookmarked_events.description,
+    most_bookmarked_events.date, 
+    most_bookmarked_events.location, 
+    most_bookmarked_events.topic, 
+    most_bookmarked_events.prerequisite, 
+    most_bookmarked_events.event_type_id, 
+    most_bookmarked_events.created_at, 
+    most_bookmarked_events.updated_at,
+    most_bookmarked_events.bookmark
+ORDER BY 
+    most_bookmarked_events.bookmark DESC,
+    most_bookmarked_events.date DESC
+;

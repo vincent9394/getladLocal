@@ -12,10 +12,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 import grant from 'grant';
 import { client } from './db';
+// const { Client } = require('pg');
 import bcrypt from 'bcryptjs';
 import expressSession from 'express-session';
 import bodyParser from 'body-parser'
-
 
 
 
@@ -55,7 +55,7 @@ app.post('/register', async (req, res) => {
  [ req.body.username,
     await bcrypt.hash(req.body.password,10)
     ])
-    res.redirect('/index')
+    res.redirect('/index.html')
 })
 
 app.post('/login', async (req, res) => {

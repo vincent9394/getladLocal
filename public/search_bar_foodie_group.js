@@ -2,23 +2,25 @@ const cardFlex = document.querySelector("#cardFlex")
 const searchBar = document.querySelector('.searchBar');
 
 let searchResults = [];
-
-
 searchBar.addEventListener('keyup', (e) => {
+    // console.log(searchResults);
     const searchString = e.target.value.toLowerCase();
 
     const filteredEvents = searchResults.filter((event) => {
+        
         return (
             event.topic.toLowerCase().includes(searchString)
             // event.house.toLowerCase().includes(searchString)
         );
     });
+    // console.log(filteredEvents);
     displayEvents(filteredEvents);
 });
 
+
 //foodie group search page
-async function sendJoinInfoRow2(eventId) {
-    const res = await fetch('/bottomBarJoinRow2', {
+async function sendJoinInfo(eventId) {
+    const res = await fetch('/bottomBarJoin', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -28,8 +30,8 @@ async function sendJoinInfoRow2(eventId) {
     await res.json();
 }
 
-async function sendUnjoinInfoRow2(eventId) {
-    const res = await fetch('/bottomBarUnjoinRow2', {
+async function sendUnjoinInfo(eventId) {
+    const res = await fetch('/bottomBarUnjoin', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -39,8 +41,8 @@ async function sendUnjoinInfoRow2(eventId) {
     await res.json();
 }
 
-async function sendBookmarkInfoRow2(eventId) {
-    const res = await fetch('/bottomBarBookmarkRow2', {
+async function sendBookmarkInfo(eventId) {
+    const res = await fetch('/bottomBarBookmark', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -50,8 +52,8 @@ async function sendBookmarkInfoRow2(eventId) {
     await res.json();
 }
 
-async function sendUnbookmarkInfoRow2(eventId) {
-    const res = await fetch('/bottomBarUnbookmarkRow2', {
+async function sendUnbookmarkInfo(eventId) {
+    const res = await fetch('/bottomBarUnbookmark', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -63,8 +65,9 @@ async function sendUnbookmarkInfoRow2(eventId) {
 const loadEvents = async () => {
     const res = await fetch('/search-foodie-group');
     searchResults = await res.json();
+    // console.log(searchResults);
     displayEvents(searchResults);
-
+    
 };
 const displayEvents = (events) => {
     const htmlString = events
@@ -73,7 +76,7 @@ const displayEvents = (events) => {
             <div class="card">
             <h5 class="card-title">${event.topic}</h5>
             <div class="card-body">
-                <p class="card-text" id="description">${event.description}</p>
+                <p class="card-text" id="description">${marked(event.description)}</p>
                 <hr>
                 <div class="infoBar">
                     <p class="card-text" id="eventLocation">地點: ${event.location}</p>
@@ -82,10 +85,10 @@ const displayEvents = (events) => {
                 </div>
                 <hr>
                 <div class="bottomBar">
-                        <button class="btn btn-primary joinButton" ${event.has_joined > 0 ? "hidden" : ""} onclick = "sendJoinInfoRow2(${event.id})">加入</button>
-                        <button class="btn btn-primary unJoinButton" ${event.has_joined == 0 ? "hidden" : ""} onclick = "sendUnjoinInfoRow2(${event.id})">已加入</button>
-                        <div class="bookmark" ${event.has_bookmarked > 0 ? "hidden" : ""} onclick = "sendBookmarkInfoRow2(${event.id})"><i class="fas fa-bookmark"></i></div>
-                        <div class="unBookmark" ${event.has_bookmarked == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfoRow2(${event.id})"><i class="fas fa-bookmark"></i></div>
+                        <button class="btn btn-primary joinButton" ${event.has_joined > 0 ? "hidden" : ""} onclick = "sendJoinInfo(${event.id})">加入</button>
+                        <button class="btn btn-primary unJoinButton" ${event.has_joined == 0 ? "hidden" : ""} onclick = "sendUnjoinInfo(${event.id})">已加入</button>
+                        <div class="bookmark" ${event.has_bookmarked > 0 ? "hidden" : ""} onclick = "sendBookmarkInfo(${event.id})"><i class="fas fa-bookmark"></i></div>
+                        <div class="unBookmark" ${event.has_bookmarked == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${event.id})"><i class="fas fa-bookmark"></i></div>
                     </div>
             </div>
         </div>
@@ -97,6 +100,7 @@ const displayEvents = (events) => {
     for (let cardTitle of cardTitles) {
         cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
     }
+
     let row2JoinButtons = document.querySelectorAll('.joinButton')
     for (let row2JoinButton of row2JoinButtons) {
 
@@ -110,6 +114,7 @@ const displayEvents = (events) => {
                 row2JoinButton.innerHTML = '已加入'
                 row2JoinButton.style.backgroundColor = " rgb(4, 102, 214)"
             }
+            loadEvents()
         })
     }
 
@@ -126,6 +131,7 @@ const displayEvents = (events) => {
                 row2UnJoinButton.innerHTML = '加入'
                 row2UnJoinButton.style.backgroundColor = "rgb(20, 54, 92)"
             }
+            loadEvents()
         })
     }
 
@@ -161,4 +167,5 @@ const displayEvents = (events) => {
 };
 loadEvents();
 //end of entertainment search page
+
 

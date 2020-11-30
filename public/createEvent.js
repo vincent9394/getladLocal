@@ -46,8 +46,8 @@ async function deleteEvents() {
     const deleteEventForm = document.querySelector('#deleteEventForm')
     const loadDeleteEvents = async () => {
         const res = await fetch('/showDeleteEvent');
-        searchResults = await res.json();
-        await displayDeleteEvents(searchResults);
+        deleteEventList = await res.json();
+        await displayDeleteEvents(deleteEventList);
 
     };
     const displayDeleteEvents = (events) => {

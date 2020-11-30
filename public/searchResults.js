@@ -54,18 +54,18 @@ for(let cardTitle of cardTitles){
     cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
 }
 
-let map;
+// let map;
 
-function initMap() {
-    let allMap = document.querySelectorAll("#map")
-    for (let getMap of allMap) {
-        map = new google.maps.Map(getMap, {
-            center: { lat: 22.379812, lng: 114.134938 },
-            zoom: 13,
-        });
-    }
+// function initMap() {
+//     let allMap = document.querySelectorAll("#map")
+//     for (let getMap of allMap) {
+//         map = new google.maps.Map(getMap, {
+//             center: { lat: 22.379812, lng: 114.134938 },
+//             zoom: 13,
+//         });
+//     }
 
-}
+// }
 
 // show more animation
 let showMoreButtons = document.querySelectorAll('.showMoreButton')

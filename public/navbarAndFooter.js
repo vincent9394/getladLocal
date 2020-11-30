@@ -10,6 +10,12 @@ function navbarTopic() {
         navbarBrand.innerHTML = `我的活動`
     } else if (location.pathname === `/transport.html`) {
         navbarBrand.innerHTML = `搭車`
+    } else if (location.pathname === `/mostBookmark.html`) {
+        navbarBrand.innerHTML = `熱門活動`
+    } else if (location.pathname === `/mostJoined.html`) {
+        navbarBrand.innerHTML = `就快成團`
+    } else if (location.pathname === `/index.html`) {
+        navbarBrand.innerHTML = `GETLAD`
     }
 }
 
@@ -152,7 +158,7 @@ if ($(window).width() > 720) {
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: -1rem; left: unset !important;">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: -1rem; left: unset !important; z-index: 900 !important;">
                     <a class="dropdown-item myEvent" href="my-page.html">我的活動</a>
                     <a class="dropdown-item" href="entertainment.html">娛樂</a>
                     <a class="dropdown-item" href="transport.html">交通</a>

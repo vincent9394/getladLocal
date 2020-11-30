@@ -14,9 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS324XkzWyfddSLnfpJzw6elPlctwGjzY&callback=initMap">
-        </script>
-
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g&callback=initMap">
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="./entertainment.css">
     <link rel="stylesheet" href="./cardElement.css">
     <link rel="stylesheet" href="./loginElement.css">
@@ -162,7 +163,7 @@
     </div>
     <!-- todo grid number -->
     <!-- 顯示活動數量 -->
-    <div class="centerGridOption">
+    <!-- <div class="centerGridOption">
         <div class="showGrid">
             <div class="gridOption">顯示活動數量</div>
         </div>
@@ -180,13 +181,14 @@
                 <div class="gridChoiceItem">2</div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- todo grid number -->
     <div class="container-fluid d-flex justify-content-between my-4 mx-0">
         <div class="google-map mx-5">
-            
+            <div class="hkMap">
+                <!-- <div id="map"></div> -->
+            </div>
         </div>
-        <div id="map"></div>
 
         <div class="events-container">
             <div class="row">
