@@ -64,6 +64,7 @@ async function sendUnbookmarkInfo(eventId) {
 
 async function bookmarkColor(event){
     
+    console.log(event.target.classList[0])
     if(event.target.classList.contains('bookmark')) {
         event.target.style.color = 'rgb(243, 194, 12)'
         event.target.classList.remove('bookmark')
