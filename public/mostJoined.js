@@ -1,26 +1,42 @@
 
 let row = document.querySelector('.row')
 
-async function sendJoinInfo(eventId) {
+async function sendJoinInfo(event, eventId) {
     const res = await fetch('/bottomBarJoin', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ eventId: eventId })
+        body: JSON.stringify({ "eventId": eventId })
     });
     await res.json();
+
+    if (event.target.innerHTML == "加入") {
+        event.target.innerHTML = "已加入"
+        event.target.style.backgroundColor = "rgb(4, 102, 214)"
+    } else {
+        event.target.innerHTML = "加入"
+        event.target.style.backgroundColor = "rgb(20, 54, 92)"
+    }
 }
 
-async function sendUnjoinInfo(eventId) {
+async function sendUnjoinInfo(event, eventId) {
     const res = await fetch('/bottomBarUnjoin', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ eventId: eventId })
+        body: JSON.stringify({ "eventId": eventId })
     });
     await res.json();
+
+    if (event.target.innerHTML == "加入") {
+        event.target.innerHTML = "已加入"
+        event.target.style.backgroundColor = " rgb(4, 102, 214)"
+    } else {
+        event.target.innerHTML = "加入"
+        event.target.style.backgroundColor = "rgb(20, 54, 92)"
+    }
 }
 
 async function sendBookmarkInfo(eventId) {
@@ -29,9 +45,10 @@ async function sendBookmarkInfo(eventId) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ eventId: eventId })
+        body: JSON.stringify({ "eventId": eventId })
     });
     await res.json();
+
 }
 
 async function sendUnbookmarkInfo(eventId) {
@@ -40,9 +57,24 @@ async function sendUnbookmarkInfo(eventId) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ eventId: eventId })
+        body: JSON.stringify({ "eventId": eventId })
     });
-    await res.json();
+    await res.json();9
+
+}
+
+async function bookmarkColor(event){
+    
+    if(event.target.classList.contains('bookmark')) {
+        event.target.style.color = 'rgb(243, 194, 12)'
+        event.target.classList.remove('bookmark')
+        event.target.classList.add('unBookmark')
+    } else {
+        event.target.style.color = 'rgb(217, 215, 218)'
+        event.target.classList.remove('unBookmark')
+        event.target.classList.add('bookmark')
+       }
+    
 }
 
 
@@ -103,8 +135,8 @@ async function mostJoined() {
             <div class="bottomBar">
                 <button class="btn btn-primary joinButton" ${joinButton > 0 ? "hidden" : ""} onclick = "sendJoinInfo(event,${eventId})">加入</button>
                 <button class="btn btn-primary unJoinButton" ${joinButton == 0 ? "hidden" : ""} onclick = "sendUnjoinInfo(event,${eventId})">已加入</button>
-                <div class="bookmark" ${bookmarkButton > 0 ? "hidden" : ""} onclick = "sendBookmarkInfo(event,${eventId})"><i class="fas fa-bookmark"></i></div>
-                <div class="unBookmark" ${bookmarkButton == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfo(event,${eventId})"><i class="fas fa-bookmark"></i></div>
+                <div class="bookmark" ${bookmarkButton > 0 ? "hidden" : ""} onclick = "sendBookmarkInfo(${eventId})"><i class="bookmark fas fa-bookmark" onclick = "bookmarkColor(event)"></i></div>
+                <div class="unBookmark" ${bookmarkButton == 0 ? "hidden" : ""} onclick = "sendUnbookmarkInfo(${eventId})"><i class="unBookmark fas fa-bookmark" onclick = "bookmarkColor(event)"></i></div>
             </div>
         </div>
     </div>
