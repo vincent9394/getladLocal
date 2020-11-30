@@ -160,7 +160,7 @@ async function mostJoined() {
     let joinButtons = document.querySelectorAll('.joinButton')
     for (let joinButton of joinButtons) {
 
-        joinButton.addEventListener('click', function (event) {
+        joinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
@@ -176,7 +176,7 @@ async function mostJoined() {
     let unJoinButtons = document.querySelectorAll('.unJoinButton')
     for (let unJoinButton of unJoinButtons) {
 
-        unJoinButton.addEventListener('click', function (event) {
+        unJoinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
@@ -194,7 +194,7 @@ async function mostJoined() {
     // hard code bookmark轉色
     let yellowButtons = document.querySelectorAll('.bookmark .fa-bookmark')
     for (let yellowButton of yellowButtons) {
-        yellowButton.addEventListener('click', function (event) {
+        yellowButton.addEventListener('click', async function (event) {
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
                 yellowButton.style.color = "#D8D6D9"
@@ -208,7 +208,7 @@ async function mostJoined() {
 
     let whiteButtons = document.querySelectorAll('.unBookmark .fa-bookmark')
     for (let whiteButton of whiteButtons) {
-        whiteButton.addEventListener('click', function (event) {
+        whiteButton.addEventListener('click', async function (event) {
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
                 whiteButton.style.color = "#F3C20C"
@@ -235,8 +235,6 @@ let loadingBar = document.querySelector('.loadingBar')
 
 window.addEventListener('scroll', () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-
 
     // console.log({ scrollTop, scrollHeight, clientHeight });
     // clientHeight refers to the area we see ; scrollTop refers to the px we've scrolled ; scrollHeight refers to the sum of both 

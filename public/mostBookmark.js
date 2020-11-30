@@ -50,8 +50,9 @@ let loading = false
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Separation is important ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 let count = 0
-async function mostBookmarked() {
+async function mostBookmarked(result1, result2) {
 
     if (loading) {
         return
@@ -75,9 +76,10 @@ async function mostBookmarked() {
         return;
     }
 
-    let bottomResults = await bottomRes.json()
     let sortingResults = await res.json()
-    // console.log(bottomResults)
+    let bottomResults = await bottomRes.json()
+    console.log(bottomResults)
+
 
     for (let i = 0; i < sortingResults.length; i++) {
         let description = sortingResults[i]["description"]
@@ -180,7 +182,7 @@ async function mostBookmarked() {
     let joinButtons = document.querySelectorAll('.joinButton')
     for (let joinButton of joinButtons) {
 
-        joinButton.addEventListener('click', function (event) {
+        joinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
@@ -196,7 +198,7 @@ async function mostBookmarked() {
     let unJoinButtons = document.querySelectorAll('.unJoinButton')
     for (let unJoinButton of unJoinButtons) {
 
-        unJoinButton.addEventListener('click', function (event) {
+        unJoinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
@@ -214,7 +216,7 @@ async function mostBookmarked() {
     // hard code bookmark轉色
     let yellowButtons = document.querySelectorAll('.bookmark .fa-bookmark')
     for (let yellowButton of yellowButtons) {
-        yellowButton.addEventListener('click', function (event) {
+        yellowButton.addEventListener('click', async function (event) {
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
                 yellowButton.style.color = "#D8D6D9"
@@ -228,7 +230,7 @@ async function mostBookmarked() {
 
     let whiteButtons = document.querySelectorAll('.unBookmark .fa-bookmark')
     for (let whiteButton of whiteButtons) {
-        whiteButton.addEventListener('click', function (event) {
+        whiteButton.addEventListener('click', async function (event) {
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
                 whiteButton.style.color = "#F3C20C"

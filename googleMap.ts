@@ -14,3 +14,23 @@ googleMapRoute.get('/allPin', async (req, res) => {
         res.json(allPin.rows)
     })
 
+googleMapRoute.get('/transportationPin', async (req, res) => {
+    let pin = await client.query(`
+    SELECT location FROM events where event_type_id = 1;
+`)
+        res.json(pin.rows)
+    })  
+
+googleMapRoute.get('/entertainmentPin', async (req, res) => {
+    let pin = await client.query(`
+    SELECT location FROM events where event_type_id = 2;
+`)
+        res.json(pin.rows)
+    })
+
+googleMapRoute.get('/FoodiePin', async (req, res) => {
+    let pin = await client.query(`
+    SELECT location FROM events where event_type_id = 3;
+`)
+        res.json(pin.rows)
+    })

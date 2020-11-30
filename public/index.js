@@ -222,7 +222,7 @@ async function mostBookmarked() {
     let joinButtons = document.querySelectorAll('.joinButton')
     for (let joinButton of joinButtons) {
 
-        joinButton.addEventListener('click', function (event) {
+        joinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
@@ -238,7 +238,7 @@ async function mostBookmarked() {
     let unJoinButtons = document.querySelectorAll('.unJoinButton')
     for (let unJoinButton of unJoinButtons) {
 
-        unJoinButton.addEventListener('click', function (event) {
+        unJoinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
@@ -256,7 +256,7 @@ async function mostBookmarked() {
     // hard code bookmark轉色
     let yellowButtons = document.querySelectorAll('.bookmark .fa-bookmark')
     for (let yellowButton of yellowButtons) {
-        yellowButton.addEventListener('click', function (event) {
+        yellowButton.addEventListener('click', async function (event) {
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
                 yellowButton.style.color = "#D8D6D9"
@@ -270,7 +270,7 @@ async function mostBookmarked() {
 
     let whiteButtons = document.querySelectorAll('.unBookmark .fa-bookmark')
     for (let whiteButton of whiteButtons) {
-        whiteButton.addEventListener('click', function (event) {
+        whiteButton.addEventListener('click', async function (event) {
             event.target.toggle = !event.target.toggle
             if (event.target.toggle == false) {
                 whiteButton.style.color = "#F3C20C"
@@ -416,7 +416,7 @@ async function mostSuccessfulRate() {
     let row2JoinButtons = document.querySelectorAll('.joinButton')
     for (let row2JoinButton of row2JoinButtons) {
 
-        row2JoinButton.addEventListener('click', function (event) {
+        row2JoinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.switch = !event.target.switch
             if (event.target.switch == false) {
@@ -432,7 +432,7 @@ async function mostSuccessfulRate() {
     let row2UnJoinButtons = document.querySelectorAll('.unJoinButton')
     for (let row2UnJoinButton of row2UnJoinButtons) {
 
-        row2UnJoinButton.addEventListener('click', function (event) {
+        row2UnJoinButton.addEventListener('click', async function (event) {
             event.preventDefault()
             event.target.switch = !event.target.switch
             if (event.target.switch == false) {
@@ -450,7 +450,7 @@ async function mostSuccessfulRate() {
     // hard code bookmark轉色
     let row2YellowButtons = document.querySelectorAll('.bookmark .fa-bookmark')
     for (let row2YellowButton of row2YellowButtons) {
-        row2YellowButton.addEventListener('click', function (event) {
+        row2YellowButton.addEventListener('click', async function (event) {
             event.target.switch = !event.target.switch
             if (event.target.switch == false) {
                 row2YellowButton.style.color = "#D8D6D9"
@@ -464,7 +464,7 @@ async function mostSuccessfulRate() {
 
     let row2WhiteButtons = document.querySelectorAll('.unBookmark .fa-bookmark')
     for (let row2WhiteButton of row2WhiteButtons) {
-        row2WhiteButton.addEventListener('click', function (event) {
+        row2WhiteButton.addEventListener('click', async function (event) {
             event.target.switch = !event.target.switch
             if (event.target.switch == false) {
                 row2WhiteButton.style.color = "#F3C20C"
