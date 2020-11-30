@@ -15,7 +15,7 @@ async function googleMapWithPin() {
     }
 
     let pinResults = await res.json()
-    console.log(pinResults)
+    // console.log(pinResults)
     let hkMapDiv = document.querySelector(".hkMap")
     hkMapDiv.innerHTML += `
     <div id="map"></div>
@@ -45,7 +45,7 @@ async function googleMapWithPin() {
                 .then(function (response) {
                     // Log full response
                     // console.log(response)
-
+                    if (response.data.status == "OK") {
                     let latitude = response.data.results[0].geometry.location.lat;
                     let longitude = response.data.results[0].geometry.location.lng;
 
@@ -56,6 +56,7 @@ async function googleMapWithPin() {
                     //     position: { lat: latitude, lng: longitude },
                     //     map: map,
                     // });
+                    }
                     resolve(true)
                 })
 

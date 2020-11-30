@@ -31,29 +31,31 @@ async function googleMapWithPin() {
                 setTimeout(resolve, 0.001)
             })
 
-            let promise1 = new Promise((resolve,reject)=> {
+            let promise1 = new Promise((resolve, reject) => {
                 axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-                params: {
-                    address: location,
-                    key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
-                }
-            })
-                .then(function (response) {
-                    // Log full response
-                    // console.log(response)
-
-                    let latitude = response.data.results[0].geometry.location.lat;
-                    let longitude = response.data.results[0].geometry.location.lng;
-
-                    latitudes.push(latitude)
-                    longitudes.push(longitude)
-
-                    // let marker = new google.maps.Marker({
-                    //     position: { lat: latitude, lng: longitude },
-                    //     map: map,
-                    // });
-                    resolve(true)
+                    params: {
+                        address: location,
+                        key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+                    }
                 })
+                    .then(function (response) {
+                        // Log full response
+                        // console.log(response)
+                        if (response.data.status == "OK") {
+
+                            let latitude = response.data.results[0].geometry.location.lat;
+                            let longitude = response.data.results[0].geometry.location.lng;
+
+                            latitudes.push(latitude)
+                            longitudes.push(longitude)
+
+                            // let marker = new google.maps.Marker({
+                            //     position: { lat: latitude, lng: longitude },
+                            //     map: map,
+                            // });
+                        }
+                        resolve(true)
+                    })
 
             })
 
@@ -83,18 +85,18 @@ async function googleMapWithPin() {
             //     })
         }
     }
-    await Promise.all(promiseList).then((results)=>{
+    await Promise.all(promiseList).then((results) => {
         let hkMap = document.querySelector(".hkMap #map")
-    map = new google.maps.Map(hkMap, {
-        center: { lat: 22.317001, lng: 114.169934 },
-        zoom: 11,
-    });
-    for (let i = 0; i < latitudes.length; i++) {
-        const marker = new google.maps.Marker({
-            position: { lat: latitudes[i], lng: longitudes[i] },
-            map: map,
+        map = new google.maps.Map(hkMap, {
+            center: { lat: 22.317001, lng: 114.169934 },
+            zoom: 11,
         });
-    }
+        for (let i = 0; i < latitudes.length; i++) {
+            const marker = new google.maps.Marker({
+                position: { lat: latitudes[i], lng: longitudes[i] },
+                map: map,
+            });
+        }
     })
 
     // let hkMap = document.querySelector(".hkMap #map")
@@ -114,13 +116,13 @@ googleMapWithPin()
 
 
 let joinButtons = document.querySelectorAll('.joinButton')
-for(let joinButton of joinButtons) {
-    joinButton.addEventListener('click', function(event){
+for (let joinButton of joinButtons) {
+    joinButton.addEventListener('click', function (event) {
         event.preventDefault()
         event.target.toggle = !event.target.toggle
-        if(event.target.toggle == false) {
+        if (event.target.toggle == false) {
             joinButton.innerHTML = '加入'
-        } else if(event.target.toggle == true) {
+        } else if (event.target.toggle == true) {
             joinButton.innerHTML = '已加入'
         }
     })
@@ -140,8 +142,8 @@ for (let bookmarkButton of bookmarkButtons) {
 }
 
 let cardTitles = document.querySelectorAll('.card-title')
-for(let cardTitle of cardTitles){
-    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random()*150))}, ${(Math.floor(Math.random()*115))}, ${(Math.floor(Math.random()*150))}`}`
+for (let cardTitle of cardTitles) {
+    cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
 }
 
 // //grid option
