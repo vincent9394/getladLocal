@@ -1,6 +1,75 @@
 const cardFlex = document.querySelector("#cardFlex")
 const searchBar = document.querySelector('.searchBar');
 
+//google map API
+let map;
+let infoWindow;
+function initMap() {
+}
+
+async function googleMapWithPin() {
+    let res = await fetch('/allPin')
+    if (res.status != 200) {
+        alert('Loading failed, please try again later');
+        return;
+    }
+
+    let pinResults = await res.json()
+
+
+    let latitudes = []
+    let longitudes = []
+
+    for (let i = 0; i < pinResults.length; i++) {
+        let allLocations = pinResults[i]["location"]
+        let locations = allLocations.split('\n')
+        for (let location of locations) {
+            // console.log(location)
+
+            await new Promise((resolve) => {
+                setTimeout(resolve, 0.001)
+            })
+
+            axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                params: {
+                    address: location,
+                    key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+                }
+            })
+                .then(function (response) {
+                    // Log full response
+                    // console.log(response)
+                    if (response.data.status == "OK") {
+
+                        let latitude = response.data.results[0].geometry.location.lat;
+                        let longitude = response.data.results[0].geometry.location.lng;
+                        latitudes.push(latitude)
+                        longitudes.push(longitude)
+                        // let marker = new google.maps.Marker({
+                        //     position: { lat: latitude, lng: longitude },
+                        //     map: map,
+                        // });
+                    }
+
+
+                })
+        }
+    }
+
+    // let hkMap = document.querySelector(".hkMap #map")
+    // map = new google.maps.Map(hkMap, {
+    //     center: { lat: 22.317001, lng: 114.169934 },
+    //     zoom: 12,
+    // });
+    // for (let i = 0; i < latitudes.length; i++) {
+    //     const marker = new google.maps.Marker({
+    //         position: { lat: latitudes[i], lng: longitudes[i] },
+    //         map: map,
+    //     });
+    // }
+
+}
+googleMapWithPin()
 
 let searchResults = [];
 
@@ -66,14 +135,57 @@ const loadEvents = async () => {
     const res = await fetch('/searchResults' + location.search)
     searchResults = await res.json();
     displayEvents(searchResults);
+    for (const searchResult of searchResults) {
+        // console.log(joinedEvent);
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: searchResult.location,
+                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+            }
+        })
+            .then(function (response) {
+                // console.log('map here');
+                const getMap = document.querySelector(`.event${searchResult.id} #map`)
+
+                if (response.data.status == "OK") {
+
+                    let latitude = response.data.results[0].geometry.location.lat;
+                    let longitude = response.data.results[0].geometry.location.lng;
+
+                    // console.log(latitude);
+                    // console.log(longitude);
+                    map = new google.maps.Map(getMap, {
+                        center: { lat: latitude, lng: longitude },
+                        zoom: 13,
+                    });
+
+                    const marker = new google.maps.Marker({
+                        position: { lat: latitude, lng: longitude },
+                        map: map,
+                    });
+                }
+
+            })
+    }
 
 };
+const loadSearchedEvents = async () => {
+    const searchString = searchBar.value.toLowerCase();
+    const res = await fetch('/searchResults' + location.search)
+    searchResults = await res.json();
+    const filteredEvents = searchResults.filter((event) => {
+        return (
+            event.topic.toLowerCase().includes(searchString)
+        );
+    });
+    displayEvents(filteredEvents);
+}
 const displayEvents = (events) => {
     const htmlString = events
         .map((event) => {
             return `<div class="card">
             <h5 class="card-title">${event.topic}</h5>
-            <div id="map"></div>
+            <span class="event${event.id}"><div id="map"></div></span>
             <div class="card-body">
                 <p class="card-text" id="description">${marked(event.description)}</p>
                 <hr>
@@ -97,7 +209,8 @@ const displayEvents = (events) => {
     cardFlex.innerHTML = htmlString;
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
-        cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        // cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        cardTitle.style.backgroundColor = `${`hsla(${(Math.floor(Math.random() * 360))}, 100%, 75%`}`
     }
     let row2JoinButtons = document.querySelectorAll('.joinButton')
     for (let row2JoinButton of row2JoinButtons) {
@@ -112,7 +225,9 @@ const displayEvents = (events) => {
                 row2JoinButton.innerHTML = '已加入'
                 row2JoinButton.style.backgroundColor = " rgb(4, 102, 214)"
             }
-            loadEvents()
+            console.log(searchBar.value);
+            loadSearchedEvents()
+            // loadEvents()
         })
     }
 
@@ -129,7 +244,7 @@ const displayEvents = (events) => {
                 row2UnJoinButton.innerHTML = '加入'
                 row2UnJoinButton.style.backgroundColor = "rgb(20, 54, 92)"
             }
-            loadEvents()
+            loadSearchedEvents()
         })
     };
     // hard code bookmark轉色

@@ -66,6 +66,17 @@ const loadEvents = async () => {
     displayEvents(searchResults);
 
 };
+const loadSearchedEvents = async () => {
+    const searchString = searchBar.value.toLowerCase();
+    const res = await fetch('/search-transportation')
+    searchResults = await res.json();
+    const filteredEvents = searchResults.filter((event) => {
+        return (
+            event.topic.toLowerCase().includes(searchString)
+        );
+    });
+    displayEvents(filteredEvents);
+}
 const displayEvents = (events) => {
     const htmlString = events
         .map((event) => {
@@ -110,7 +121,7 @@ const displayEvents = (events) => {
                 row2JoinButton.innerHTML = '已加入'
                 row2JoinButton.style.backgroundColor = " rgb(4, 102, 214)"
             }
-            loadEvents()
+            loadSearchedEvents()
         })
     }
 
@@ -127,7 +138,7 @@ const displayEvents = (events) => {
                 row2UnJoinButton.innerHTML = '加入'
                 row2UnJoinButton.style.backgroundColor = "rgb(20, 54, 92)"
             }
-            loadEvents()
+            loadSearchedEvents()
         })
     }
 

@@ -131,7 +131,7 @@ const loadJoined = async () => {
                         position: { lat: latitude, lng: longitude },
                         map: map,
                     });
-                }
+                }else { getMap.innerHTML = "google地圖搵唔到呢個地方！" }
 
             })
     }
@@ -171,7 +171,7 @@ const loadBookmarked = async () => {
                         position: { lat: latitude, lng: longitude },
                         map: map,
                     });
-                }
+                } else { getMap.innerHTML = "google地圖搵唔到呢個地方！" }
 
             })
     }
@@ -216,7 +216,8 @@ const displayEvents = (events) => {
     }
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
-        cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        // cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        cardTitle.style.backgroundColor = `${`hsla(${(Math.floor(Math.random() * 360))}, 100%, 75%`}`
     }
 
 

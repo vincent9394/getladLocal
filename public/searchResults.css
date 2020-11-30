@@ -245,8 +245,12 @@ body {
 }
 
 .card {
+    display: flex;
+    justify-content: center;
     border-radius: 15px;
-    margin: 60px 20px 60px 20px;
+    height: max-content;
+    width: 400px;
+    margin: 0px 20px 20px 20px !important;
     border: none;
 }
 
