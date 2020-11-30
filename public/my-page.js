@@ -41,17 +41,19 @@ async function googleMapWithPin() {
                 .then(function (response) {
                     // Log full response
                     // console.log(response)
+                    if (response.data.status == "OK") {
 
-                    let latitude = response.data.results[0].geometry.location.lat;
-                    let longitude = response.data.results[0].geometry.location.lng;
+                        let latitude = response.data.results[0].geometry.location.lat;
+                        let longitude = response.data.results[0].geometry.location.lng;
+                        latitudes.push(latitude)
+                        longitudes.push(longitude)
+                        // let marker = new google.maps.Marker({
+                        //     position: { lat: latitude, lng: longitude },
+                        //     map: map,
+                        // });
+                    }
 
-                    latitudes.push(latitude)
-                    longitudes.push(longitude)
 
-                    // let marker = new google.maps.Marker({
-                    //     position: { lat: latitude, lng: longitude },
-                    //     map: map,
-                    // });
                 })
         }
     }
@@ -100,6 +102,39 @@ const loadJoined = async () => {
     const res = await fetch('/joined');
     joinedEvents = await res.json();
     displayEvents(joinedEvents);
+
+    for (const joinedEvent of joinedEvents) {
+        // console.log(joinedEvent);
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: joinedEvent.location,
+                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+            }
+        })
+            .then(function (response) {
+                // console.log('map here');
+                const getMap = document.querySelector(`.joined .event${joinedEvent.id} #map`)
+
+                if (response.data.status == "OK") {
+
+                    let latitude = response.data.results[0].geometry.location.lat;
+                    let longitude = response.data.results[0].geometry.location.lng;
+
+                    // console.log(latitude);
+                    // console.log(longitude);
+                    map = new google.maps.Map(getMap, {
+                        center: { lat: latitude, lng: longitude },
+                        zoom: 13,
+                    });
+
+                    const marker = new google.maps.Marker({
+                        position: { lat: latitude, lng: longitude },
+                        map: map,
+                    });
+                }else { getMap.innerHTML = "google地圖搵唔到呢個地方！" }
+
+            })
+    }
     joinShow = false
 
 };
@@ -108,15 +143,48 @@ const loadBookmarked = async () => {
     const res = await fetch('/bookmarked');
     bookmarkedEvents = await res.json();
     displayEvents(bookmarkedEvents);
+    for (const bookmarkedEvent of bookmarkedEvents) {
+        // console.log(joinedEvent);
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: bookmarkedEvent.location,
+                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+            }
+        })
+            .then(function (response) {
+                // console.log('map here');
+                const getMap = document.querySelector(`.bookmarked .event${bookmarkedEvent.id} #map`)
+
+                if (response.data.status == "OK") {
+
+                    let latitude = response.data.results[0].geometry.location.lat;
+                    let longitude = response.data.results[0].geometry.location.lng;
+
+                    // console.log(latitude);
+                    // console.log(longitude);
+                    map = new google.maps.Map(getMap, {
+                        center: { lat: latitude, lng: longitude },
+                        zoom: 13,
+                    });
+
+                    const marker = new google.maps.Marker({
+                        position: { lat: latitude, lng: longitude },
+                        map: map,
+                    });
+                } else { getMap.innerHTML = "google地圖搵唔到呢個地方！" }
+
+            })
+    }
     bookmarkShow = false
 
 };
 const displayEvents = (events) => {
     const htmlString = events
         .map((event) => {
+
             return `<div class="card" style="width: 18rem;">
         <h5 class="card-title">${event.topic}</h5> <!-- change card-title.innerHTML -->
-        <div id="map"></div>
+        <span class="event${event.id}"><div id="map"></div></span>
 
         <div class="card-body">
             <p class="card-text" id="description">${marked(event.description)}</p>
@@ -132,39 +200,15 @@ const displayEvents = (events) => {
             
         </div>
     </div>
-    `;
+    ` ;
 
         })
         .join('');
+
     if (joinShow === true) {
         joined.innerHTML = htmlString
-        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-            params: {
-                address: location,
-                key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
-            }
-        })
-            .then(function (response) {
-                // Log full response
-                // console.log(response)
-                // if(response.data.results[0] != undefined){
-                console.log(response.data.results[0]);
-                let latitude = response.data.results[0].geometry.location.lat;
-                let longitude = response.data.results[0].geometry.location.lng;
 
-                let getMap = document.querySelector('#map')
-                map = new google.maps.Map(getMap, {
-                    center: { lat: latitude, lng: longitude },
-                    zoom: 13,
-                });
 
-                const marker = new google.maps.Marker({
-                    position: { lat: latitude, lng: longitude },
-                    map: map,
-                });
-                // }
-            })
-            ;
 
     }
     if (bookmarkShow === true) {
@@ -172,8 +216,11 @@ const displayEvents = (events) => {
     }
     let cardTitles = document.querySelectorAll('.card-title')
     for (let cardTitle of cardTitles) {
-        cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        // cardTitle.style.backgroundColor = `${`rgb(${(Math.floor(Math.random() * 150))}, ${(Math.floor(Math.random() * 115))}, ${(Math.floor(Math.random() * 150))}`}`
+        cardTitle.style.backgroundColor = `${`hsla(${(Math.floor(Math.random() * 360))}, 100%, 75%`}`
     }
+
+
 
 };
 
