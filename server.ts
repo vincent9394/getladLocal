@@ -16,6 +16,7 @@ import { client } from './db';
 import bcrypt from 'bcryptjs';
 import expressSession from 'express-session';
 import bodyParser from 'body-parser'
+// import fetch from 'node-fetch'
 
 
 // const client = new Client({
@@ -97,6 +98,34 @@ app.post('/logout', async (req, res) => {
 
 })
 
+
+app.get('/login/google', async(req,res)=>{
+    const accessToken = req.session?.['grant'].response.access_token;
+    const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
+        headers:{
+            "Authorization":`Bearer ${accessToken}`
+        }
+    });
+    await fetchRes.json()
+    // let users = (await client.query('SELECT * FROM users where login_name = $1', [json.email]))
+    // if(users.length > 0 && req.session != null) {
+    //     req.session["user"] - users[0].id
+    // }
+    res.redirect('/')
+})
+
+// app.get('/currentUser', (req,res)=>{
+//     if(req.session['user'] != null) {
+//         res.json({
+//             result: true,
+//             userId: req.session['user']
+//         })
+//     } else {
+//         res.json({
+//             result: false
+//         })
+//     }
+// })
 
 app.use(searchRoute)
 app.use(sortingRoute)
