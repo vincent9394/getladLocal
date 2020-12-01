@@ -287,50 +287,6 @@ mostBookmarked()
 
 let row2 = document.querySelector('.row2')
 
-// async function sendJoinInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarJoinRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
-// async function sendUnjoinInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarUnjoinRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
-// async function sendBookmarkInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarBookmarkRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
-// async function sendUnbookmarkInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarUnbookmarkRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
 async function mostSuccessfulRate() {
     let res = await fetch('/sorting_by_successful_rate')
     if (res.status != 200) {
@@ -477,27 +433,4 @@ async function mostSuccessfulRate() {
 
 }
 mostSuccessfulRate()
-
-
-
-
-
-    // let map;
-    // function initMap() {
-    //     let allMap = document.querySelectorAll("#map")
-    //     let hkMap = document.querySelector(".hkMap #map")
-    //     for (let getMap of allMap) {
-    //         map = new google.maps.Map(getMap, {
-    //             center: { lat: 22.379812, lng: 114.134938 },
-    //             zoom: 13,
-    //         });
-
-    //         map = new google.maps.Map(hkMap, {
-    //             center: { lat: 22.289437, lng: 113.940938 },
-    //             zoom: 13,
-    //         });
-    //     }
-    // }
-    // initMap()
-
 
