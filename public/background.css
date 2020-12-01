@@ -1,0 +1,42 @@
+#icons {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  
+    /* Center text */
+    /* text-align: center; */
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #icons::before {
+    z-index: -1;
+    background: url("./images/love3.svg") no-repeat center center;
+    background-size: cover;
+    content: "";
+    width: 150vw;
+    height: 150vw;
+    position: absolute;
+    left: -300px;
+    animation: spin 200s linear infinite;
+  }
+  
+  @media screen and (min-width: 400px) and (max-width: 700px)  {
+      #icons{
+        width: 50vw;
+        height: 50vw;
+      }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -226,10 +226,12 @@ body {
 }
 
 .sortingTitle {
+    color: honeydew;
     text-align: center;
     font-size: 30px;
     font-weight: bold;
     margin: 30px 0 0 0;
+    width: 100%;
 }
 
 .row {
@@ -338,6 +340,7 @@ font-weight: 600;
 font-size: .75rem;
 color: #000000;
 background-color: #0000004d;
+/* background-color: #ffffff; */
 z-index: 999;
 /* align-self: flex-end; */
 /* position: absolute; */
