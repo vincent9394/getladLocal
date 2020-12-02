@@ -103,20 +103,20 @@ app.post('/logout', async (req, res) => {
 })
 
 
-app.get('/login/google', async(req,res)=>{
-    const accessToken = req.session?.['grant'].response.access_token;
-    const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
-        headers:{
-            "Authorization":`Bearer ${accessToken}`
-        }
-    });
-    await fetchRes.json()
-    // let users = (await client.query('SELECT * FROM users where login_name = $1', [json.email]))
-    // if(users.length > 0 && req.session != null) {
-    //     req.session["user"] - users[0].id
-    // }
-    res.redirect('/')
-})
+// app.get('/login/google', async(req,res)=>{
+//     const accessToken = req.session?.['grant'].response.access_token;
+//     const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
+//         headers:{
+//             "Authorization":`Bearer ${accessToken}`
+//         }
+//     });
+//     await fetchRes.json()
+//     // let users = (await client.query('SELECT * FROM users where login_name = $1', [json.email]))
+//     // if(users.length > 0 && req.session != null) {
+//     //     req.session["user"] - users[0].id
+//     // }
+//     res.redirect('/')
+// })
 
 // app.get('/currentUser', (req,res)=>{
 //     if(req.session['user'] != null) {
@@ -173,37 +173,37 @@ const grantExpress = grant.express({
   });
   app.use(grantExpress as express.RequestHandler);
 
-//   app.get('/login/google', async (req, res) => {
-//     const accessToken = req.session?.['grant'].response.access_token;
-//     const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
-//       headers:{
-//         "Authorization":`Bearer ${accessToken}`
-//       }
-//     });
-//     const json = await fetchRes.json();
+  app.get('/login/google', async (req, res) => {
+    const accessToken = req.session?.['grant'].response.access_token;
+    const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
+      headers:{
+        "Authorization":`Bearer ${accessToken}`
+      }
+    });
+    const json = await fetchRes.json();
   
-//     const users = (await client.query('SELECT * FROM users WHERE username = $1', [json.email])).rows;
-//     if (users.length > 0 && req.session != null) {
-//       req.session['user'] = users[0].id
-//       res.redirect('/')
-//     } else {
-//       res.redirect('/?error=no_such_user')
-//     }
+    const users = (await client.query('SELECT * FROM users WHERE username = $1', [json.email])).rows;
+    if (users.length > 0 && req.session != null) {
+      req.session['user'] = users[0].id
+      res.redirect('/')
+    } else {
+      res.redirect('/?error=no_such_user')
+    }
     
-//   })
+  })
   
-//   app.get('/currentUser', (req, res) => {
-//     if (req.session['user'] != null) {
-//       res.json({
-//         result: true,
-//         userId: req.session['user']
-//       })
-//     } else {
-//       res.json({
-//         result: false
-//       })
-//     }
-//   })
+  app.get('/currentUser', (req, res) => {
+    if (req.session['user'] != null) {
+      res.json({
+        result: true,
+        userId: req.session['user']
+      })
+    } else {
+      res.json({
+        result: false
+      })
+    }
+  })
 
 
 
