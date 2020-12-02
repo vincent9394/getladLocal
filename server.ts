@@ -16,7 +16,11 @@ import { client } from './db';
 import bcrypt from 'bcryptjs';
 import expressSession from 'express-session';
 import bodyParser from 'body-parser'
+<<<<<<< HEAD
 // import fetch from 'node-fetch'
+=======
+import *as fetch from 'node-fetch'
+>>>>>>> da5f5c2bab6f21d314689072641edbef1ccbd8de
 
 
 // const client = new Client({
@@ -150,6 +154,10 @@ app.use(googleMapRoute)
 
 
 
+  
+
+
+
 const grantExpress = grant.express({
     defaults: {
       origin: 'http://localhost:8080',
@@ -164,6 +172,39 @@ const grantExpress = grant.express({
     },
   });
   app.use(grantExpress as express.RequestHandler);
+
+//   app.get('/login/google', async (req, res) => {
+//     const accessToken = req.session?.['grant'].response.access_token;
+//     const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
+//       headers:{
+//         "Authorization":`Bearer ${accessToken}`
+//       }
+//     });
+//     const json = await fetchRes.json();
+  
+//     const users = (await client.query('SELECT * FROM users WHERE username = $1', [json.email])).rows;
+//     if (users.length > 0 && req.session != null) {
+//       req.session['user'] = users[0].id
+//       res.redirect('/')
+//     } else {
+//       res.redirect('/?error=no_such_user')
+//     }
+    
+//   })
+  
+//   app.get('/currentUser', (req, res) => {
+//     if (req.session['user'] != null) {
+//       res.json({
+//         result: true,
+//         userId: req.session['user']
+//       })
+//     } else {
+//       res.json({
+//         result: false
+//       })
+//     }
+//   })
+
 
 
   let port = 8080
