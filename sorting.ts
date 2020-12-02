@@ -1,9 +1,6 @@
 import { client } from './db'
 import express from 'express'
 
-let app = express()
-
-app.use(express.static('public'))
 
 export const sortingRoute = express.Router();
 
@@ -195,7 +192,8 @@ GROUP BY
     most_bookmarked_events.updated_at,
     most_bookmarked_events.bookmark
 ORDER BY 
-    most_bookmarked_events.bookmark DESC
+    most_bookmarked_events.bookmark DESC,
+    most_bookmarked_events.date ASC
 LIMIT 6
 OFFSET $1 * 6
 ;`,[req.query.counter])
@@ -206,6 +204,7 @@ console.log(req.query.counter)
 
 
 // mostBookmark page (if_joined_and_bookmarked)
+// SERVER SIDE never trust anything from client side
 sortingRoute.get('/if_joined_and_bookmarked_mostBookmark_initial', async (req, res) => {
     let joinAndBookmark = await client.query (`
     WITH most_bookmarked_events AS (
@@ -231,17 +230,23 @@ sortingRoute.get('/if_joined_and_bookmarked_mostBookmark_initial', async (req, r
     bookmark_id,
     most_bookmarked_events.bookmark
 ORDER BY 
-    most_bookmarked_events.bookmark DESC
+    most_bookmarked_events.bookmark DESC,
+    most_bookmarked_events.date ASC
 LIMIT 6
-OFFSET $2 * 6
+OFFSET $2 * 6 
     ;
-    `,[req.session['user'],req.query.counter])  
+    `,[req.session['user'],req.query.counter ])  
     res.json(joinAndBookmark.rows)
 })
 
 
 // mostJoined page
 sortingRoute.get('/mostJoined', async (req, res) => {
+    const counter = parseInt(req.query.counter+"");
+    if(isNaN(counter)){
+        res.status(400).json({msg:"counter not a number"});
+        return 
+    }
     let sortingResult = await client.query(`
     WITH 
         most_joined_events AS (

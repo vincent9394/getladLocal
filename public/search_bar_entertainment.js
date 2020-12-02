@@ -61,14 +61,14 @@ async function sendUnbookmarkInfo(eventId) {
     await res.json();
 }
 const loadEvents = async () => {
-    const res = await fetch('/search-entertainment');
+    const res = await fetch('/search/type/entertainment');
     searchResults = await res.json();
     displayEvents(searchResults);
 
 };
 const loadSearchedEvents = async () => {
     const searchString = searchBar.value.toLowerCase();
-    const res = await fetch('/search-entertainment')
+    const res = await fetch('/search/type/entertainment')
     searchResults = await res.json();
     const filteredEvents = searchResults.filter((event) => {
         return (

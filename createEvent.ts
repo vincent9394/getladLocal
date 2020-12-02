@@ -1,35 +1,26 @@
 import express from 'express'
 import { client } from './db';
-// import path from 'path'
-// import moment from 'moment'
-// // import fs from 'fs'
-import bodyParser from 'body-parser'
-// import multer from 'multer'
-// import expressSession from 'express-session';
-// import pg from 'pg';
-// import dotenv from 'dotenv';
-// dotenv.config()
-// import xlsx from 'xlsx';
-// import http from 'http';
-// import {Server, Socket} from 'socket.io';
-// import bcrypt from 'bcryptjs';
-// import fetch from 'node-fetch';
-// import grant from 'grant';
+import { isLoggedIn } from './guard';
 export let createEventRoute = express.Router();
-createEventRoute.use(bodyParser.urlencoded({ extended: true }))
-createEventRoute.use(bodyParser.json())
 
-
-createEventRoute.post('/createEvent', async (req, res) => {
+createEventRoute.post('/createEvent', isLoggedIn,async (req, res) => {
     const date = req.body.date + " " + req.body.time + ":00"
-    const categoryOption = await parseInt(req.body.categoryOption)
-    const prerequisite = await parseInt(req.body.prerequisite)
-
-
+    const categoryOption =  parseInt(req.body.categoryOption)
+    const prerequisite = parseInt(req.body.prerequisite)
 
     //with user id//
     // const userID = await client.query('SELECT id FROM users WHERE username = $1', [req.session['user']])
-    await client.query('INSERT INTO events(event_type_id,topic,description,prerequisite,location,date,creator_id,created_at,updated_at) VALUES ($1,$2,$3,$4,$5,$6,$7,NOW(),NOW())', [
+    await client.query(`
+        INSERT INTO events(
+                event_type_id,
+                topic,
+                description,
+                prerequisite,
+                location,
+                date,
+                creator_id,
+                created_at,
+                updated_at) VALUES ($1,$2,$3,$4,$5,$6,$7,NOW(),NOW())`, [
         categoryOption,
         req.body.topic,
         req.body.description,
@@ -75,15 +66,21 @@ createEventRoute.post('/createEvent', async (req, res) => {
 });
 
 ////delete event//
+// GET /event
 createEventRoute.get('/showDeleteEvent', async (req, res) => {
     const notes = await client.query('SELECT * FROM events WHERE creator_id = $1 ORDER BY id ASC',[req.session['user']])
     res.json(notes.rows);
 });
+
+// DELETE /event/:id
 createEventRoute.delete('/deleteEvent/:id', async (req, res) => {
+    // update is_deleted to true
     const deleteBookmarked = await client.query('SELECT * FROM bookmark WHERE event_id = $1', [req.params.id])
     console.log(`bookmarked user for event id${req.params.id}: ` + deleteBookmarked.rowCount)
     const deleteJoined = await client.query('SELECT * FROM join_group WHERE event_id = $1', [req.params.id])
-    console.log(`joined user for event id${req.params.id}: ` + deleteJoined.rowCount)
+    console.log(`joined user for event id${req.params.id}: ` + deleteJoined.rowCount);
+
+    // Cascading delete
     if(deleteBookmarked.rowCount > 0){
         await client.query('DELETE FROM bookmark WHERE event_id = $1', [req.params.id])
     }

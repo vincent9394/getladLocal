@@ -8,8 +8,8 @@ export let userRoute = express.Router();
 
 //userRoute.post('/user', signup);
 userRoute.get('/login/google', loginWithGoogle);
-userRoute.post('/login', login);
-userRoute.get('/logout', logout);
+// userRoute.post('/login', login);
+// userRoute.get('/logout', logout);
 userRoute.get('/profile', loadProfile);
 //userRoute.get('/profile.html', isLoggedIn);
 
@@ -29,41 +29,41 @@ userRoute.get('/profile', loadProfile);
 //   res.json({ id });
 // }
 
-async function login(req: Request, res: Response) {
-  let { username, password } = req.body;
-  let userResult = await client.query(
-    `
-select id,password from "user"
-where username = $1
-    `,
-    [username],
-  );
-  let user = userResult.rows[0];
-  if (!user) {
-    // this will leak the existence of the user
-    // res.status(403).json('wrong username');
+// async function login(req: Request, res: Response) {
+//   let { username, password } = req.body;
+//   let userResult = await client.query(
+//     `
+// select id,password from "user"
+// where username = $1
+//     `,
+//     [username],
+//   );
+//   let user = userResult.rows[0];
+//   if (!user) {
+//     // this will leak the existence of the user
+//     // res.status(403).json('wrong username');
 
-    // this will not let the hacker infer if the user exist
-    res.status(403).redirect('/login.html?error=wrong+username+or+password');
+//     // this will not let the hacker infer if the user exist
+//     res.status(403).redirect('/login.html?error=wrong+username+or+password');
 
-    return;
-  }
-  let hashedPassword = user.password;
-  if (!hashedPassword) {
-    res.status(403).redirect('/login.html?error=please+use+google+to+login');
-    return;
-  }
-  let match = await checkPassword(password, hashedPassword);
-  if (!match) {
-    res.status(403).redirect('/login.html?error=wrong+username+or+password');
-    return;
-  }
-  req.session['user'] = {
-    id: user.id,
-    username,
-  };
-  res.redirect('/');
-}
+//     return;
+//   }
+//   let hashedPassword = user.password;
+//   if (!hashedPassword) {
+//     res.status(403).redirect('/login.html?error=please+use+google+to+login');
+//     return;
+//   }
+//   let match = await checkPassword(password, hashedPassword);
+//   if (!match) {
+//     res.status(403).redirect('/login.html?error=wrong+username+or+password');
+//     return;
+//   }
+//   req.session['user'] = {
+//     id: user.id,
+//     username,
+//   };
+//   res.redirect('/');
+// }
 
 async function loginWithGoogle(req: Request, res: Response) {
   const accessToken = req.session?.['grant'].response.access_token;
@@ -116,7 +116,7 @@ function loadProfile(req: Request, res: Response) {
   res.json(req.session['user']);
 }
 
-function logout(req: Request, res: Response) {
-  delete req.session['user'];
-  res.redirect('/');
-}
+// function logout(req: Request, res: Response) {
+//   delete req.session['user'];
+//   res.redirect('/');
+// }

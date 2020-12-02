@@ -63,7 +63,7 @@ async function sendUnbookmarkInfo(eventId) {
     await res.json();
 }
 const loadEvents = async () => {
-    const res = await fetch('/search-foodie-group');
+    const res = await fetch('/search/type/foodie_group');
     FoodieGroupResults = await res.json();
     // console.log(searchResults);
     displayEvents(FoodieGroupResults);
@@ -71,7 +71,7 @@ const loadEvents = async () => {
 };
 const loadSearchedEvents = async () => {
     const searchString = searchBar.value.toLowerCase();
-    const res = await fetch('/search-foodie-group')
+    const res = await fetch('/search/type/foodie_group')
     searchResults = await res.json();
     const filteredEvents = searchResults.filter((event) => {
         return (

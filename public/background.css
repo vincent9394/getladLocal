@@ -31,6 +31,7 @@
         width: 50vw;
         height: 50vw;
       }
+  }
   @keyframes spin {
     0% {
       transform: rotate(0deg);

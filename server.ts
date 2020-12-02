@@ -1,43 +1,22 @@
 import express from 'express'
-import {searchRoute} from './search_bar'
-import {sortingRoute} from './sorting'
+import { searchRoute } from './search_bar';
+import { sortingRoute } from './sorting';
 import {createEventRoute} from './createEvent'
 import {bottomBarRoute} from './bottomBar'
 import {googleMapRoute} from './googleMap'
-
-
 import dotenv from 'dotenv';
-
-
-dotenv.config();
 import grant from 'grant';
 import { client } from './db';
-// const { Client } = require('pg');
 import bcrypt from 'bcryptjs';
 import expressSession from 'express-session';
 import bodyParser from 'body-parser'
-// import *as fetch from 'node-fetch'
-
-
-// const client = new Client({
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: {
-//       rejectUnauthorized: false
-//     }
-//   });
-//   client.connect();
-
+import { logger } from './logger';
+import fetch from 'node-fetch';
+dotenv.config();
 let app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-
-// app.use((req,res,next)=> {
-//     req['session'] = {
-//         user: 15
-//     } as any
-//     next()
-// })
 
 const sessionMiddleware = expressSession({
     secret: 'Tecky cohort-12 group-1',
@@ -59,6 +38,7 @@ app.use(express.static('public'))
 
 
 app.post('/register', async (req, res) => {
+  // check login name exists?
    await client.query('INSERT INTO users (login_name, password) VALUES ($1,$2)', 
  [ req.body.username,
     await bcrypt.hash(req.body.password,10)
@@ -67,27 +47,29 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
+  try{
     const users = (await client.query('SELECT * FROM users WHERE login_name = $1', [
         req.body.username
     ])).rows;
     
-    
     if (users.length == 0 ){
-        res.json({result:false})
-        
+        res.status(400).json({result:false})
     } else {
         console.log('correct user id');
-        // if (await bcrypt.compare(req.body.password, users[0].password)){
+        if (await bcrypt.compare(req.body.password, users[0].password)){
             req.session['user'] = users[0].id
             res.json({result: true})
             console.log(users[0].id)
             
-        // } else {
-        //     res.json({result:false})
-        // }
+        } else {
+            res.status(400).json({result:false})
+        }
 
     }
-
+  }catch(e){
+    logger.error(e.message);
+    res.status(500).json({result:false,msg:"[USER01]:Failed to login",});
+  }
 })
 
 app.post('/logout', async (req, res) => {
@@ -129,10 +111,9 @@ app.post('/logout', async (req, res) => {
 
 app.use(searchRoute)
 app.use(sortingRoute)
-app.use(createEventRoute)
 app.use(bottomBarRoute)
 app.use(googleMapRoute)
-
+app.use(createEventRoute)
 
 // app.post('/login', async (req, res) => {
 //     console.log(req.body)
@@ -156,7 +137,7 @@ app.use(googleMapRoute)
 
 const grantExpress = grant.express({
     defaults: {
-      origin: 'http://localhost:8080',
+      origin: 'http://localhost:8080', /* ideally should in .env */
       transport: 'session',
       state: true,
     },
@@ -166,46 +147,51 @@ const grantExpress = grant.express({
       scope: ['email'],
       callback: '/login/google',
     },
+});
+app.use(grantExpress as express.RequestHandler);
+
+app.get('/login/google', async (req, res) => {
+
+  const accessToken = req.session?.['grant'].response.access_token;
+  const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
+    headers:{
+      "Authorization":`Bearer ${accessToken}`
+    }
   });
-  app.use(grantExpress as express.RequestHandler);
+  const json = await fetchRes.json();
+  console.log(json);
+  const users = (await client.query('SELECT * FROM users WHERE login_name = $1', [json.email])).rows;
 
-//   app.get('/login/google', async (req, res) => {
-//     const accessToken = req.session?.['grant'].response.access_token;
-//     const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo',{
-//       headers:{
-//         "Authorization":`Bearer ${accessToken}`
-//       }
-//     });
-//     const json = await fetchRes.json();
+  if(users.length === 0){
+    // insert user based on fetchRes
+  }
+  if (users.length > 0 && req.session != null) {
+    req.session['user'] = users[0].id
+    res.redirect('/')
+  } else {
+    res.redirect('/?error=no_such_user')
+  }
   
-//     const users = (await client.query('SELECT * FROM users WHERE username = $1', [json.email])).rows;
-//     if (users.length > 0 && req.session != null) {
-//       req.session['user'] = users[0].id
-//       res.redirect('/')
-//     } else {
-//       res.redirect('/?error=no_such_user')
-//     }
-    
-//   })
+})
   
-//   app.get('/currentUser', (req, res) => {
-//     if (req.session['user'] != null) {
-//       res.json({
-//         result: true,
-//         userId: req.session['user']
-//       })
-//     } else {
-//       res.json({
-//         result: false
-//       })
-//     }
-//   })
+  app.get('/currentUser', (req, res) => {
+    if (req.session['user'] != null) {
+      res.json({
+        result: true,
+        userId: req.session['user']
+      })
+    } else {
+      res.json({
+        result: false
+      })
+    }
+  })
 
 
 
-  let port = 8080
+let port = 8080
 app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}/`)
+    logger.info(`Listening at http://localhost:${port}/`)
 })
 
 
