@@ -1,5 +1,6 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import { logger } from './logger';
 dotenv.config();
 
 export let client = new pg.Client({
@@ -12,8 +13,8 @@ export let client = new pg.Client({
 client
   .connect()
   .then(() => {
-    console.log('connected database');
+    logger.info('Connected database');
   })
   .catch((err) => {
-    console.error('failed to connect database:', err);
+    logger.error('failed to connect database:', err);
   });

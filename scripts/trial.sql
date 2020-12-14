@@ -221,3 +221,27 @@ WITH
     where 
         events.event_type_id = 2
     ORDER BY events.created_at ASC;
+
+
+-- Example to illustrate with SQL
+
+-- SELECT t.OrderFileId, t.ItemNumber, t.ItemCost, t.Warehouse
+--     FROM YourTable t
+--         INNER JOIN (SELECT ItemNumber, MAX(OrderFileId) 
+--                 AS MaxOrderId
+--                 FROM YourTable
+--                 GROUP BY ItemNumber) q
+--             ON t.ItemNumber = q.ItemNumber
+--                 AND t.OrderFileId = q.MaxOrderId
+
+-- WITH MaxOrderFile as (
+--     SELECT ItemNumber, MAX(OrderFileId) 
+--     AS MaxOrderId
+--     FROM YourTable
+--     GROUP BY ItemNumber
+-- )
+-- SELECT t.OrderFileId, t.ItemNumber, t.ItemCost, t.Warehouse
+--     FROM YourTable t
+--         INNER JOIN MaxOrderFile q
+--             ON t.ItemNumber = q.ItemNumber
+--                 AND t.OrderFileId = q.MaxOrderId

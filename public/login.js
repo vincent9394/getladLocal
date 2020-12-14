@@ -178,8 +178,8 @@ loginForm.addEventListener('submit', async function (event) {
         login = true
         window.location.replace('./index.html')
     } else {
-        alert('wrong pw')
-
+        alert(json.msg);
+        // alert('wrong pw')
     }
 })
 

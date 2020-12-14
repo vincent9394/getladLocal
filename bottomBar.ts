@@ -1,25 +1,27 @@
 import { client } from './db'
 import express from 'express'
 // import multer from 'multer'
-import bodyParser from 'body-parser'
+// import bodyParser from 'body-parser'
 
-let app = express()
-// let upload = multer()
-app.use(express.static('public'))
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+// let app = express()
+// // let upload = multer()
+// app.use(express.static('public'))
+// app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
 
 export const bottomBarRoute = express.Router();
 
 
 bottomBarRoute.get('/session', async (req, res) => {
-    res.json(req.session['user'])
+    res.json(req.session['user']) // do not send password(even hashed)
 })
 
-
+// Restful API <== no need to have relation with frontend
+// should be a noun
+// toggle
 bottomBarRoute.post('/bottomBarJoin', async (req, res) => {
     try {
-
+        // SQL injection!
         let checkUserJoiningRecord = await client.query(`SELECT * FROM join_group where participant_id = ${req.session['user']} and event_id = ${req.body.eventId}`)
         console.log(checkUserJoiningRecord.rows)
         if (checkUserJoiningRecord.rows.length == 0) {
@@ -41,10 +43,12 @@ bottomBarRoute.post('/bottomBarJoin', async (req, res) => {
         res.json({ result: true })
     } catch (error) {
         console.log(error)
+        res.status(500).json({result:false,msg:"Failed to join"});
     }
 })
 
 
+// redundant
 bottomBarRoute.post('/bottomBarUnjoin', async (req, res) => {
     try {
 
@@ -87,7 +91,7 @@ bottomBarRoute.post('/bottomBarBookmark', async (req, res) => {
     }
 })
 
-
+// redundant
 bottomBarRoute.post('/bottomBarUnbookmark', async (req, res) => {
     try {
         let checkUserBookmarkRecord = await client.query(`SELECT * FROM bookmark where user_id = ${req.session['user']} and event_id = ${req.body.eventId}`)

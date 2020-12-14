@@ -18,6 +18,7 @@ async function googleMapWithPin() {
 
     let latitudes = []
     let longitudes = []
+    let promiseList = []
 
     for (let i = 0; i < pinResults.length; i++) {
         let allLocations = pinResults[i]["location"]
@@ -29,41 +30,50 @@ async function googleMapWithPin() {
                 setTimeout(resolve, 0.001)
             })
 
-            axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-                params: {
-                    address: location,
-                    key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
-                }
-            })
-                .then(function (response) {
-                    // Log full response
-                    // console.log(response)
-
-                    let latitude = response.data.results[0].geometry.location.lat;
-                    let longitude = response.data.results[0].geometry.location.lng;
-
-                    latitudes.push(latitude)
-                    longitudes.push(longitude)
-
-                    // let marker = new google.maps.Marker({
-                    //     position: { lat: latitude, lng: longitude },
-                    //     map: map,
-                    // });
+            let promise1 = new Promise((resolve, reject) => {
+                axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                    params: {
+                        address: location,
+                        key: 'AIzaSyB4L9BXrB0RH_4gQCGGVnSgVmG7f5l1Q_g'
+                    }
                 })
+                    .then(function (response) {
+                        // Log full response
+                        // console.log(response)
+                        if (response.data.status == "OK") {
+                            let latitude = response.data.results[0].geometry.location.lat;
+                            let longitude = response.data.results[0].geometry.location.lng;
+
+                            latitudes.push(latitude)
+                            longitudes.push(longitude)
+
+                            // let marker = new google.maps.Marker({
+                            //     position: { lat: latitude, lng: longitude },
+                            //     map: map,
+                            // });
+                        }
+                        resolve(true)
+                    })
+
+            })
+
+            promiseList.push(promise1)
+
         }
     }
-
-    let hkMap = document.querySelector(".hkMap #map")
-    map = new google.maps.Map(hkMap, {
-        center: { lat: 22.317001, lng: 114.169934 },
-        zoom: 12,
-    });
-    for (let i = 0; i < latitudes.length; i++) {
-        const marker = new google.maps.Marker({
-            position: { lat: latitudes[i], lng: longitudes[i] },
-            map: map,
+    await Promise.all(promiseList).then((results) => {
+        let hkMap = document.querySelector(".hkMap #map")
+        map = new google.maps.Map(hkMap, {
+            center: { lat: 22.317001, lng: 114.169934 },
+            zoom: 11,
         });
-    }
+        for (let i = 0; i < latitudes.length; i++) {
+            const marker = new google.maps.Marker({
+                position: { lat: latitudes[i], lng: longitudes[i] },
+                map: map,
+            });
+        }
+    })
 
 }
 googleMapWithPin()
@@ -287,50 +297,6 @@ mostBookmarked()
 
 let row2 = document.querySelector('.row2')
 
-// async function sendJoinInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarJoinRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
-// async function sendUnjoinInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarUnjoinRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
-// async function sendBookmarkInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarBookmarkRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
-// async function sendUnbookmarkInfoRow2(eventId) {
-//     const res = await fetch('/bottomBarUnbookmarkRow2', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ eventId: eventId })
-//     });
-//     await res.json();
-// }
-
 async function mostSuccessfulRate() {
     let res = await fetch('/sorting_by_successful_rate')
     if (res.status != 200) {
@@ -477,27 +443,4 @@ async function mostSuccessfulRate() {
 
 }
 mostSuccessfulRate()
-
-
-
-
-
-    // let map;
-    // function initMap() {
-    //     let allMap = document.querySelectorAll("#map")
-    //     let hkMap = document.querySelector(".hkMap #map")
-    //     for (let getMap of allMap) {
-    //         map = new google.maps.Map(getMap, {
-    //             center: { lat: 22.379812, lng: 114.134938 },
-    //             zoom: 13,
-    //         });
-
-    //         map = new google.maps.Map(hkMap, {
-    //             center: { lat: 22.289437, lng: 113.940938 },
-    //             zoom: 13,
-    //         });
-    //     }
-    // }
-    // initMap()
-
 
